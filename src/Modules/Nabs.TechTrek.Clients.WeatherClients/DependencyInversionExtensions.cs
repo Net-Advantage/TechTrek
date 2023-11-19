@@ -9,7 +9,7 @@ public static class DependencyInversionExtensions
 	{
 		builder.Services.AddHttpClient<WeatherForecastClient>(c =>
 		{
-			c.BaseAddress = new Uri("http://nabs.techtrek.webapi");
+			c.BaseAddress = new Uri("http://techtrekwebapi");
 		});
 
 		return builder;

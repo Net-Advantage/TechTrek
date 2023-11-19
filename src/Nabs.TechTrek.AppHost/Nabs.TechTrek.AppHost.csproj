@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Nabs.TechTrek.Gateway\Nabs.TechTrek.Gateway.csproj" />
     <ProjectReference Include="..\Nabs.TechTrek.WebApi\Nabs.TechTrek.WebApi.csproj" />
-    <ProjectReference Include="..\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj" />
+    <ProjectReference Include="..\Ui\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj" ExcludeAssets="all" />
   </ItemGroup>
 
 </Project>
