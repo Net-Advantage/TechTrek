@@ -1,0 +1,6 @@
+@Nabs.TechTrek.WebApi_HostAddress = http://localhost:5289
+
+GET {{Nabs.TechTrek.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
