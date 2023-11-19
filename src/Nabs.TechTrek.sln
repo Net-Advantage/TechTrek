@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.WebApp", "Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj", "{25D057EC-68F5-47BE-BF08-3404B7D5C595}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.WebApp.Client", "Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.Client\Nabs.TechTrek.WebApp.Client.csproj", "{059C0F01-7F4B-488E-9277-9F3FF33D70A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.WebApi", "Nabs.TechTrek.WebApi\Nabs.TechTrek.WebApi.csproj", "{8847EB77-1F31-4849-BE3B-AB3020B8C7E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Gateway", "Nabs.TechTrek.Gateway\Nabs.TechTrek.Gateway.csproj", "{066F6870-7901-4472-B540-4048135D437C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{6542B070-F3BC-4522-A34B-71F028B685C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Modules.WeatherModule", "Modules\Nabs.TechTrek.Modules.WeatherModule\Nabs.TechTrek.Modules.WeatherModule.csproj", "{742207DB-31A5-4E15-BF8F-3805614CCBF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.TechTrek.Contracts.WeatherContracts", "Modules\Nabs.TechTrek.Contracts.WeatherContracts\Nabs.TechTrek.Contracts.WeatherContracts.csproj", "{905E0EF3-3847-47F7-9558-B50ABD47F948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.TechTrek.Clients.WeatherClients", "Modules\Nabs.TechTrek.Clients.WeatherClients\Nabs.TechTrek.Clients.WeatherClients.csproj", "{6D73174E-C7CA-48EF-8621-9123612FDA3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.TechTrek.AppHost", "Nabs.TechTrek.AppHost\Nabs.TechTrek.AppHost.csproj", "{B196927F-A938-4289-AA37-F040A33920A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.ServiceDefaults", "Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj", "{27859126-F2CB-4DB4-8E89-0F9779A62AC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25D057EC-68F5-47BE-BF08-3404B7D5C595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D057EC-68F5-47BE-BF08-3404B7D5C595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D057EC-68F5-47BE-BF08-3404B7D5C595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D057EC-68F5-47BE-BF08-3404B7D5C595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{059C0F01-7F4B-488E-9277-9F3FF33D70A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{059C0F01-7F4B-488E-9277-9F3FF33D70A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{059C0F01-7F4B-488E-9277-9F3FF33D70A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{059C0F01-7F4B-488E-9277-9F3FF33D70A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8847EB77-1F31-4849-BE3B-AB3020B8C7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8847EB77-1F31-4849-BE3B-AB3020B8C7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8847EB77-1F31-4849-BE3B-AB3020B8C7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8847EB77-1F31-4849-BE3B-AB3020B8C7E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{066F6870-7901-4472-B540-4048135D437C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{066F6870-7901-4472-B540-4048135D437C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{066F6870-7901-4472-B540-4048135D437C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{066F6870-7901-4472-B540-4048135D437C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{742207DB-31A5-4E15-BF8F-3805614CCBF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{742207DB-31A5-4E15-BF8F-3805614CCBF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{742207DB-31A5-4E15-BF8F-3805614CCBF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{742207DB-31A5-4E15-BF8F-3805614CCBF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{905E0EF3-3847-47F7-9558-B50ABD47F948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{905E0EF3-3847-47F7-9558-B50ABD47F948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{905E0EF3-3847-47F7-9558-B50ABD47F948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{905E0EF3-3847-47F7-9558-B50ABD47F948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D73174E-C7CA-48EF-8621-9123612FDA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D73174E-C7CA-48EF-8621-9123612FDA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D73174E-C7CA-48EF-8621-9123612FDA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D73174E-C7CA-48EF-8621-9123612FDA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B196927F-A938-4289-AA37-F040A33920A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B196927F-A938-4289-AA37-F040A33920A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B196927F-A938-4289-AA37-F040A33920A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B196927F-A938-4289-AA37-F040A33920A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27859126-F2CB-4DB4-8E89-0F9779A62AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27859126-F2CB-4DB4-8E89-0F9779A62AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27859126-F2CB-4DB4-8E89-0F9779A62AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27859126-F2CB-4DB4-8E89-0F9779A62AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{742207DB-31A5-4E15-BF8F-3805614CCBF2} = {6542B070-F3BC-4522-A34B-71F028B685C3}
+		{905E0EF3-3847-47F7-9558-B50ABD47F948} = {6542B070-F3BC-4522-A34B-71F028B685C3}
+		{6D73174E-C7CA-48EF-8621-9123612FDA3D} = {6542B070-F3BC-4522-A34B-71F028B685C3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08540D00-4595-4072-9C7F-4F3BAA45A0D0}
+	EndGlobalSection
+EndGlobal

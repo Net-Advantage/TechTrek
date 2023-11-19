@@ -1,0 +1,6 @@
+@Nabs.TechTrek.Gateway_HostAddress = http://localhost:5047
+
+GET {{Nabs.TechTrek.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
