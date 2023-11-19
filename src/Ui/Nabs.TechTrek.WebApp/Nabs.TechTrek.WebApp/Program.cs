@@ -1,4 +1,3 @@
-using Nabs.TechTrek.WebApp.Client.Pages;
 using Nabs.TechTrek.WebApp.Components;
 using Nabs.TechTrek.Clients.WeatherClients;
 
@@ -10,8 +9,7 @@ builder.AddWeatherForecastClients();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-	.AddInteractiveServerComponents()
-	.AddInteractiveWebAssemblyComponents();
+	.AddInteractiveServerComponents();
 
 var app = builder.Build();
 
@@ -31,8 +29,6 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-	.AddInteractiveServerRenderMode()
-	.AddInteractiveWebAssemblyRenderMode()
-	.AddAdditionalAssemblies(typeof(Counter).Assembly);
+	.AddInteractiveServerRenderMode();
 
 app.Run();
