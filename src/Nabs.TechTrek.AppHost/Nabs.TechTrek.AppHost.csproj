@@ -9,7 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting" Version="8.0.0-preview.1.23557.2" />
+    <PackageReference Include="Aspire.Azure.Security.KeyVault" Version="8.0.0-preview.2.23571.2" />
+    <PackageReference Include="Aspire.Hosting" Version="8.0.0-preview.2.23571.2" />
+	  <PackageReference Include="Aspire.Hosting.Azure" Version="8.0.0-preview.2.23571.2" />
+	  <PackageReference Include="Aspire.Hosting.Azure.Provisioning" Version="8.0.0-preview.2.23571.2" />
+	  <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.2.23571.2" />
   </ItemGroup>
 
   <ItemGroup>
