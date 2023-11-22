@@ -23,6 +23,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{1CB522B1-49DE-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.WebApp", "Ui\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj", "{CC1E4C3B-14CD-414F-B1DD-37D1271DA5B3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scenarios", "Scenarios", "{1BA0E12E-054C-4D41-8A12-4D7E48C152FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{6AE96921-A302-48A4-A05C-F70E1C301311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.TechTrek.Persistence", "Persistence\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj", "{7806B20B-85B6-4754-9942-BE7BDC61750A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +67,10 @@ Global
 		{CC1E4C3B-14CD-414F-B1DD-37D1271DA5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC1E4C3B-14CD-414F-B1DD-37D1271DA5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC1E4C3B-14CD-414F-B1DD-37D1271DA5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7806B20B-85B6-4754-9942-BE7BDC61750A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7806B20B-85B6-4754-9942-BE7BDC61750A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7806B20B-85B6-4754-9942-BE7BDC61750A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7806B20B-85B6-4754-9942-BE7BDC61750A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +80,7 @@ Global
 		{905E0EF3-3847-47F7-9558-B50ABD47F948} = {6542B070-F3BC-4522-A34B-71F028B685C3}
 		{6D73174E-C7CA-48EF-8621-9123612FDA3D} = {6542B070-F3BC-4522-A34B-71F028B685C3}
 		{CC1E4C3B-14CD-414F-B1DD-37D1271DA5B3} = {1CB522B1-49DE-493C-AC49-BB1B15DF5419}
+		{7806B20B-85B6-4754-9942-BE7BDC61750A} = {6AE96921-A302-48A4-A05C-F70E1C301311}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08540D00-4595-4072-9C7F-4F3BAA45A0D0}
