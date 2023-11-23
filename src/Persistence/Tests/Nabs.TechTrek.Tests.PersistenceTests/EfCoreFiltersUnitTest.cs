@@ -23,14 +23,17 @@ public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
         });
     }
 
-    [Fact]
-    public void CheckThatTheFilterIsApplied()
+    [Theory]
+    [InlineData(true, 1)]
+    [InlineData(false, 2)]
+    public void WithFilters(bool withTenantFilter, int countOfResults)
     {
         ApplicationContextFactory = () => new ApplicationContext()
         {
             TenantContext = new TenantContext()
             {
-                TenantId = _fkIds[0].tenantId
+                TenantId = _fkIds[0].tenantId,
+                WithTenantFilter = withTenantFilter
             }
         };
 
@@ -45,33 +48,7 @@ public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
             .ToArray();
 
         // Assert
-        Assert.Single(tenantComments);
-    }
-
-    [Fact]
-    public void CheckThatTheFilterIsIgnored()
-    {
-        ApplicationContextFactory = () => new ApplicationContext()
-        {
-            TenantContext = new TenantContext()
-            {
-                TenantId = Guid.Empty,
-                WithTenantFilter = false
-            }
-        };
-
-        ResetDatabase();
-
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
-        var dbContext = dbContextFactory.CreateDbContext();
-
-        // Act
-        var tenantComments = dbContext.WeatherForecastComments
-            .AsNoTracking()
-            .ToArray();
-
-        // Assert
-        Assert.Equal(2, tenantComments.Length);
+        Assert.Equal(countOfResults, tenantComments.Length);
     }
 
     private void ResetDatabase()
