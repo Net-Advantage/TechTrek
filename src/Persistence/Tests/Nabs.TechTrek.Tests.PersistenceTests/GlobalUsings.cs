@@ -1,0 +1,14 @@
+global using Xunit;
+global using Microsoft.EntityFrameworkCore;
+global using Nabs.TechTrek.Persistence;
+global using Microsoft.Extensions.DependencyInjection;
+global using Nabs.TechTrek.Contracts.WeatherContracts;
+global using Microsoft.Data.Sqlite;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using Microsoft.Extensions.Logging;
+global using Nabs.TechTrek.Core.ApplicationContext.Abstractions;
+global using Nabs.TechTrek.Persistence.Entities;
+global using System;
+global using Xunit.Abstractions;
+global using Xunit.Sdk;
+global using Nabs.TechTrek.Core.Tests.Abstractions;
