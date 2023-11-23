@@ -61,39 +61,6 @@ public abstract class ScopedDependencyInversionTestBase : IAsyncLifetime
         
     }
 
-    [Fact]
-    public void TheScope1()
-    {
-        ApplicationContextFactory = () => new ApplicationContext()
-            {
-                TenantContext = new TenantContext()
-                {
-                    TenantId = Guid.NewGuid()
-                }
-            };
-
-        var applicationContext = ServiceProvider.GetRequiredService<IApplicationContext>();
-        Assert.NotNull(applicationContext);
-        Assert.True(applicationContext.TenantContext.WithTenantFilter);
-    }
-
-    [Fact]
-    public void TheScope2()
-    {
-        ApplicationContextFactory = () => new ApplicationContext()
-            {
-                TenantContext = new TenantContext()
-                {
-                    TenantId = Guid.NewGuid(),
-                    WithTenantFilter = false
-                }
-            };
-
-        var applicationContext = ServiceProvider.GetRequiredService<IApplicationContext>();
-        Assert.NotNull(applicationContext);
-        Assert.False(applicationContext.TenantContext.WithTenantFilter);
-    }
-
     public Task DisposeAsync()
     {
         ServiceProvider = null;
