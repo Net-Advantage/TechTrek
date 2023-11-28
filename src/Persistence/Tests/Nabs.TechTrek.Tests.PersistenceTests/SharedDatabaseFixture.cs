@@ -60,7 +60,6 @@ public sealed class SharedDatabaseFixture : IDisposable
         {
             Id = Guid.NewGuid(),
             WeatherForecastId = id,
-            TenantId = fkId.tenantId,
             UserId = fkId.userId,
             Comment = $"Test comment from {fkId.tenantId} - {fkId.userId}"
         });

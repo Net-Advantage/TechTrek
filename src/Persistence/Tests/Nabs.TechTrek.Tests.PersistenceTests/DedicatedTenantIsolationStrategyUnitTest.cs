@@ -1,6 +1,7 @@
 namespace Nabs.TechTrek.Tests.PersistenceTests;
 
-public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
+public class DedicatedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputHelper) 
+    : ScopedDependencyInversionTestBase(testOutputHelper)
 {
     private readonly (Guid tenantId, Guid userId)[] _fkIds = 
         [
@@ -8,14 +9,9 @@ public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
             (Guid.NewGuid(), Guid.NewGuid())
         ];
 
-    public EfCoreFiltersUnitTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    {
-        
-    }
-
     public override void ConfigureService(ServiceCollection services)
     {
-        services.AddDbContextFactory<TechTrekDbContext>(options =>
+        services.AddDbContextFactory<TechTrekDedicatedTenantDbContext>(options =>
         {
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
@@ -23,23 +19,21 @@ public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
         });
     }
 
-    [Theory]
-    [InlineData(true, 1)]
-    [InlineData(false, 2)]
-    public void WithFilters(bool withTenantFilter, int countOfResults)
+    [Fact]
+    public void RunTest()
     {
         ApplicationContextFactory = () => new ApplicationContext()
         {
+            TenantIsolationStrategy = TenantIsolationStrategy.SharedDedicated,
             TenantContext = new TenantContext()
             {
-                TenantId = _fkIds[0].tenantId,
-                WithTenantFilter = withTenantFilter
+                TenantId = _fkIds[0].tenantId
             }
         };
 
         ResetDatabase();
 
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
+        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDedicatedTenantDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
 
         // Act
@@ -48,13 +42,13 @@ public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
             .ToArray();
 
         // Assert
-        Assert.Equal(countOfResults, tenantComments.Length);
+        Assert.Equal(2, tenantComments.Length);
     }
 
     private void ResetDatabase()
     {
         // Arrange
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
+        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDedicatedTenantDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
         dbContext.Database.EnsureCreated();
 
@@ -73,7 +67,6 @@ public class EfCoreFiltersUnitTest : ScopedDependencyInversionTestBase
         {
             Id = Guid.NewGuid(),
             WeatherForecastId = id,
-            TenantId = fkId.tenantId,
             UserId = fkId.userId,
             Comment = $"Test comment from {fkId.tenantId} - {fkId.userId}"
         });

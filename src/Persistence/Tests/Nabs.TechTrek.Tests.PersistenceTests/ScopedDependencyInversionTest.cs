@@ -1,4 +1,6 @@
-﻿namespace Nabs.TechTrek.Tests.PersistenceTests;
+﻿using System.Diagnostics;
+
+namespace Nabs.TechTrek.Tests.PersistenceTests;
 
 public abstract class ScopedDependencyInversionTestBase : IAsyncLifetime
 {
@@ -28,13 +30,8 @@ public abstract class ScopedDependencyInversionTestBase : IAsyncLifetime
         });
         
         services.TryAddScoped<IApplicationContext>((sp) => {
-            var result = ApplicationContextFactory?.Invoke() ?? new ApplicationContext()
-            {
-                TenantContext = new TenantContext()
-                {
-                    TenantId = Guid.NewGuid()
-                }
-            };
+            var result = ApplicationContextFactory?.Invoke() ?? 
+                throw new UnreachableException();
             return result;
         });
 

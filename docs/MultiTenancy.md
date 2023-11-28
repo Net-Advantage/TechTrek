@@ -1,8 +1,26 @@
-# Multi-Tenancy
+# Multi-Tenancy in TechTrek
 
-Multi-tenancy is the concept of having multiple tenants or customers make use of an application. This project is designed to be multi-tenant. This section will discuss the concept of multi-tenancy and how it is implemented in this project.
+Multi-tenancy is the concept of having multiple tenants or customers make use of an application. TechTrek is designed to be multi-tenant. This section will discuss the concept of multi-tenancy and how it is implemented.
 
-This section will discuss the concept of multi-tenancy and how it is implemented in this project.
+TechTrek support three types of multi-tenancy:
+
+Option | Application Isolation | Storage Isolation | Infrastructure | Description
+--------------------- | --------------------- | ----------------- | -------------- | -----------
+#1 | Shared | Shared | Shared | All tenants share the same application, storage, and infrastructure.
+#2 | Shared | Dedicated | Shared | All tenants share the same application and infrastructure, but have dedicated storage.
+#3 | Dedicated | Dedicated | Dedicated | Each tenant has their own application, storage, and infrastructure.
+
+Customers can choose which option they want to use. The option is chosen when the customer signs up for the service. The option can be changed at any time. However, the change will only take effect at the end of the current billing cycle. It also involves down-time as the application will need to be re-deployed and the data migrated. This is not a free service and will incur a cost.
+
+Each option has some considerations for the customer:
+
+- __Option 1__. Only customers that do not have a requirement for data isolation should choose this option. This option is also ideal for customers who want to get started easily or trial the product.
+- __Option 2__. Customers that have a requirement for data isolation should choose this option. Currently only Australia and New Zealand regions are supported for this option. We are able to support other regions, but this will incur a cost.
+- __Option 3__. Customers that have a requirement for data isolation and have a requirement for dedicated infrastructure should choose this option. This option is also ideal for customers who have a requirement for customisation. Customisation should not directly modify TechTrek code. Instead, customisation should be done via the extension points provided by TechTrek.
+
+# Multi-Tenancy Theory
+
+This section will discuss the concept of multi-tenancy and how it is implemented in TechTrek.
 
 ## Logical Separation
 
