@@ -10,7 +10,7 @@ internal static class TenantQueryExtensions
         var methodToCall = typeof(TenantQueryExtensions)
                .GetMethod(nameof(SetupTenantQueryFilter),
                    BindingFlags.NonPublic | BindingFlags.Static)!
-                .MakeGenericMethod(entityType.ClrType);
+               .MakeGenericMethod(entityType.ClrType);
 
         var filter = methodToCall.Invoke(null, [tenantableDbContext]);
 
@@ -20,7 +20,7 @@ internal static class TenantQueryExtensions
     private static LambdaExpression SetupTenantQueryFilter<TEntity>(ITenantableDbContext tenantableDbContext)
            where TEntity : class, ITenantEntity
     {
-        Expression<Func<TEntity, bool>> filter = entity => 
+        Expression<Func<TEntity, bool>> filter = entity =>
             EF.Property<Guid>(entity, "TenantId") == tenantableDbContext.TenantId;
 
         return filter;

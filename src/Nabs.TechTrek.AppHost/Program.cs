@@ -3,22 +3,17 @@ using Nabs.TechTrek.ServiceDefaults;
 var builder = DistributedApplication
 	.CreateBuilder(args);
 
-builder
-	.AddAzureProvisioning();
+//builder
+//	.AddAzureProvisioning();
 
-var keyVault = builder
-	.AddAzureKeyVault(Strings.TechTrekKeyVault);
+//var keyVault = builder
+//	.AddAzureKeyVault(Strings.TechTrekKeyVault);
 
-var appConfig = builder
-	.AddAzureAppConfiguration(Strings.TechTrekAppConfig);
-
-var sqlDb = builder
-	.AddSqlServerConnection(Strings.TechTrekSqlServer);
+//var appConfig = builder
+//	.AddAzureAppConfiguration(Strings.TechTrekAppConfig);
 
 var api = builder
-	.AddProject<Projects.Nabs_TechTrek_WebApi>(Strings.TechTrekWebApi)
-	.WithReference(sqlDb)
-	.WithReference(appConfig);
+	.AddProject<Projects.Nabs_TechTrek_WebApi>(Strings.TechTrekWebApi);
 
 var ui = builder
 	.AddProject<Projects.Nabs_TechTrek_WebApp>(Strings.TechTrekWebApp)
@@ -27,8 +22,7 @@ var ui = builder
 builder
 	.AddProject<Projects.Nabs_TechTrek_Gateway>(Strings.TechTrekGateway)
 	.WithReference(api)
-	.WithReference(ui)
-	.WithReference(appConfig);
+	.WithReference(ui);
 
 builder
 	.Build()
