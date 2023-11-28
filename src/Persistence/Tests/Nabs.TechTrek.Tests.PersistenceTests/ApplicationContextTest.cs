@@ -7,23 +7,23 @@ public sealed class ApplicationContextTest : ScopedDependencyInversionTestBase
     }
 
     [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void TheScopedApplicationContext(bool withTenantFilter)
+    [InlineData(TenantIsolationStrategy.SharedShared)]
+    [InlineData(TenantIsolationStrategy.SharedDedicated)]
+    public void TheScopedApplicationContext(TenantIsolationStrategy tenantIsolationStrategy)
     {
         var tenantId = Guid.NewGuid();
         ApplicationContextFactory = () => new ApplicationContext()
+        {
+            TenantIsolationStrategy = tenantIsolationStrategy,
+            TenantContext = new TenantContext()
             {
-                TenantContext = new TenantContext()
-                {
-                    TenantId = tenantId,
-                    WithTenantFilter = withTenantFilter
-                }
-            };
+                TenantId = tenantId
+            }
+        };
 
         var applicationContext = ServiceProvider.GetRequiredService<IApplicationContext>();
         Assert.NotNull(applicationContext);
         Assert.Equal(tenantId, applicationContext.TenantContext.TenantId);
-        Assert.Equal(withTenantFilter, applicationContext.TenantContext.WithTenantFilter);
+        Assert.Equal(tenantIsolationStrategy, applicationContext.TenantIsolationStrategy);
     }
 }

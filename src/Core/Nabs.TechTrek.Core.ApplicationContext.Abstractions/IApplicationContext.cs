@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace Nabs.TechTrek.Core.ApplicationContext.Abstractions;
+﻿namespace Nabs.TechTrek.Core.ApplicationContext.Abstractions;
 
 public sealed class ApplicationContext : IApplicationContext
 {
@@ -10,37 +8,43 @@ public sealed class ApplicationContext : IApplicationContext
         UserContext = new UserContext();
     }
 
+    public TenantIsolationStrategy TenantIsolationStrategy { get; init; }
     public ITenantContext TenantContext { get; init; }
     public IUserContext UserContext { get; init; }
+
+    public bool IsTenant(Guid tenantId)
+    {
+        return TenantContext.TenantId == tenantId;
+    }
 }
 
 public sealed class TenantContext : ITenantContext
 {
     public Guid TenantId { get; init; }
-    public bool WithTenantFilter { get; init; } = true;
 }
 
 public sealed class UserContext : IUserContext
 {
     public Guid UserId { get; init; }
-    public bool WithUserFilter { get; init; } = true;
 }
 
 
 public interface IApplicationContext
 {
+    TenantIsolationStrategy TenantIsolationStrategy { get; init; }
+
     ITenantContext TenantContext { get; init; }
     IUserContext UserContext { get; init; }
+
+    public bool IsTenant(Guid tenantId);
 }
 
 public interface ITenantContext
 {
     Guid TenantId { get; init; }
-    bool WithTenantFilter { get; init; }
 }
 
 public interface IUserContext
 {
     Guid UserId { get; init; }
-    bool WithUserFilter { get; init; }
 }
