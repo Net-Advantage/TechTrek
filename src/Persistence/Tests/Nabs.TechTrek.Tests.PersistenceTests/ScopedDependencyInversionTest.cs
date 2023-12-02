@@ -48,19 +48,19 @@ public abstract class ScopedDependencyInversionTestBase : IAsyncLifetime
         return Task.CompletedTask;
     }
 
-    public virtual void ConfigureService(ServiceCollection services)
+    protected virtual void ConfigureService(ServiceCollection services)
     {
         
     }
 
-    public virtual void BeforeTestRun()
+    protected virtual void BeforeTestRun()
     {
         
     }
 
     public Task DisposeAsync()
     {
-        ServiceProvider = null;
+        ServiceProvider = default!;
         _serviceScope.Dispose();
 
         return Task.CompletedTask;

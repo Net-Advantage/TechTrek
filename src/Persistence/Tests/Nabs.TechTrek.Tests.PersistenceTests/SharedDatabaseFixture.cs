@@ -2,7 +2,7 @@
 
 public sealed class SharedDatabaseFixture : IDisposable
 {
-    private IServiceCollection _services = new ServiceCollection();
+    private readonly IServiceCollection _services = new ServiceCollection();
 
     public SharedDatabaseFixture(IMessageSink messageSink)
     {

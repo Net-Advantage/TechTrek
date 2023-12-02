@@ -8,9 +8,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Core\Nabs.Ui.Shell\Nabs.Ui.Shell.csproj" />
 		<ProjectReference Include="..\..\..\Modules\Nabs.TechTrek.Clients.WeatherClients\Nabs.TechTrek.Clients.WeatherClients.csproj" />
 		<ProjectReference Include="..\..\..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
 	</ItemGroup>
 
 </Project>

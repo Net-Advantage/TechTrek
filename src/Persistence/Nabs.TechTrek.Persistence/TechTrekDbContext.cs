@@ -16,14 +16,11 @@ public abstract class TechTrekDbContext : DbContext
     public DbSet<WeatherForecastCommentEntity> WeatherForecastComments => Set<WeatherForecastCommentEntity>();
 }
 
-public sealed class TechTrekDedicatedTenantDbContext : TechTrekDbContext
+public sealed class TechTrekDedicatedTenantDbContext(
+    DbContextOptions<TechTrekDedicatedTenantDbContext> options,
+    IApplicationContext applicationContext) 
+    : TechTrekDbContext(options, applicationContext)
 {
-    public TechTrekDedicatedTenantDbContext(
-        DbContextOptions<TechTrekDedicatedTenantDbContext> options,
-        IApplicationContext applicationContext)
-        : base(options, applicationContext)
-    {
-    }
 }
 
 public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantableDbContext
@@ -82,7 +79,7 @@ public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantab
 
         foreach (var entry in entries)
         {
-            entry.Property("TenantId").CurrentValue = ApplicationContext.TenantContext.TenantId;
+            entry.Property(nameof(TenantId)).CurrentValue = ApplicationContext.TenantContext.TenantId;
         }
     }
 }

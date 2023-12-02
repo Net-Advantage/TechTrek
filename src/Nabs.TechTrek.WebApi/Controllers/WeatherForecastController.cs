@@ -10,20 +10,9 @@ namespace Nabs.TechTrek.WebApi.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-	private readonly WeatherService _weatherService;
-	private readonly ILogger<WeatherForecastController> _logger;
-
-	public WeatherForecastController(
-		WeatherService weatherService, 
-		ILogger<WeatherForecastController> logger)
-	{
-		_weatherService = weatherService;
-		_logger = logger;
-	}
-
 	[HttpGet(Name = "GetWeatherForecast")]
 	public async Task<WeatherForecastResponse> Get()
 	{
-		return await _weatherService.GetWeatherForecast();
+		return await GetWeatherForecastHandler.Handle();
 	}
 }

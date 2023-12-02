@@ -9,7 +9,7 @@ public class DedicatedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutp
             (Guid.NewGuid(), Guid.NewGuid())
         ];
 
-    public override void ConfigureService(ServiceCollection services)
+    protected override void ConfigureService(ServiceCollection services)
     {
         services.AddDbContextFactory<TechTrekDedicatedTenantDbContext>(options =>
         {

@@ -3,7 +3,7 @@ namespace Nabs.TechTrek.Tests.PersistenceTests;
 public class SharedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputHelper) 
     : ScopedDependencyInversionTestBase(testOutputHelper)
 {
-    public override void ConfigureService(ServiceCollection services)
+    protected override void ConfigureService(ServiceCollection services)
     {
         services.AddDbContextFactory<TechTrekSharedTenantDbContext>(options =>
         {
@@ -38,7 +38,7 @@ public class SharedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputH
             .ToListAsync();
 
         // Assert
-        Assert.Equal(1, tenantComments.Count);
+        Assert.Single(tenantComments);
     }
 
     private void ResetDatabase(Guid tenantId, Guid userId)

@@ -17,7 +17,7 @@ internal static class TenantQueryExtensions
         entityType.SetQueryFilter((LambdaExpression)filter!);
     }
 
-    private static LambdaExpression SetupTenantQueryFilter<TEntity>(ITenantableDbContext tenantableDbContext)
+    private static Expression<Func<TEntity, bool>> SetupTenantQueryFilter<TEntity>(ITenantableDbContext tenantableDbContext)
            where TEntity : class, ITenantEntity
     {
         Expression<Func<TEntity, bool>> filter = entity =>

@@ -15,4 +15,12 @@
     {
         currentCount++;
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var globalPageContext = TheGlobalPageContext as GlobalPageContext;
+        globalPageContext!.HeadingText = "Reactive Counter Page";
+    }
 }

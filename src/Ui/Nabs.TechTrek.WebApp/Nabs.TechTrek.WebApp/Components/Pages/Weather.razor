@@ -10,7 +10,7 @@
 
 <p>This component demonstrates showing data.</p>
 
-@if (_weatherForcaseResponse == null)
+@if (_weatherForcastResponse == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -26,7 +26,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in _weatherForcaseResponse.Items)
+            @foreach (var forecast in _weatherForcastResponse.Items)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
@@ -40,10 +40,15 @@ else
 }
 
 @code {
-    private WeatherForecastResponse? _weatherForcaseResponse;
+    private WeatherForecastResponse? _weatherForcastResponse;
 
     protected override async Task OnInitializedAsync()
     {
-        _weatherForcaseResponse = await _weatherForecastClient.GetWeatherForecast();
+        await base.OnInitializedAsync();
+
+        var globalPageContext = TheGlobalPageContext as GlobalPageContext;
+        globalPageContext!.HeadingText = "Reactive Weather Page";
+
+        _weatherForcastResponse = await _weatherForecastClient.GetWeatherForecast();
     }
 }
