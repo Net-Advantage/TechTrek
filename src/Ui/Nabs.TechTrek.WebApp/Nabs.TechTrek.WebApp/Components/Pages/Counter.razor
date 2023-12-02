@@ -20,7 +20,6 @@
     {
         await base.OnInitializedAsync();
 
-        var globalPageContext = TheGlobalPageContext as GlobalPageContext;
-        globalPageContext!.HeadingText = "Reactive Counter Page";
+        ShellLayoutViewModel.HeadingText = "Reactive Counter Page Heading";
     }
 }

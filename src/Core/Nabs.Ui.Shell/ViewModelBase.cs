@@ -1,6 +1,6 @@
 ﻿namespace Nabs.Ui.Shell;
 
-public abstract class GlobalPageContextBase : IGlobalPageContext
+public abstract class ViewModelBase : IViewModel
 {
     private readonly Subject<string> _propertyChanged = new();
 

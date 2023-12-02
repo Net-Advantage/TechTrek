@@ -1,8 +1,8 @@
 ﻿using Nabs.Ui.Shell;
 
-namespace Nabs.TechTrek.WebApp.Components.Pages;
+namespace Nabs.TechTrek.WebApp.Components.Layout;
 
-public partial class GlobalPageContext : GlobalPageContextBase
+public partial class ShellLayoutViewModel : ViewModelBase
 {
     private string _headingText = "Loading ...";
     public string HeadingText

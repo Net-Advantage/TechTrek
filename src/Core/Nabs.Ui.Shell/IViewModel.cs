@@ -1,6 +1,6 @@
 ﻿namespace Nabs.Ui.Shell;
 
-public interface IGlobalPageContext
+public interface IViewModel
 {
 	IObservable<string> PropertyChanged {get;}
 

@@ -46,8 +46,7 @@ else
     {
         await base.OnInitializedAsync();
 
-        var globalPageContext = TheGlobalPageContext as GlobalPageContext;
-        globalPageContext!.HeadingText = "Reactive Weather Page";
+        ShellLayoutViewModel.HeadingText = "Reactive Weather Page Heading";
 
         _weatherForcastResponse = await _weatherForecastClient.GetWeatherForecast();
     }
