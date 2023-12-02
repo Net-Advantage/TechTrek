@@ -1,25 +1,13 @@
 ﻿namespace Nabs.Ui.Shell;
 
-public abstract class ShellBase<TGlobalPageContext> : LayoutComponentBase
-    where TGlobalPageContext : IGlobalPageContext
+public abstract class ShellLayoutBase<TViewModel> : LayoutComponentBase
+    where TViewModel : IViewModel
 {
     private IDisposable? _subscription;
     private string[]? _propertyNames;
 
     [Inject]
-    private IGlobalPageContext TheGlobalPageContext { get; set; } = default!;
-
-    public TGlobalPageContext GlobalPageContext
-    {
-        get
-        {
-            return (TGlobalPageContext)TheGlobalPageContext;
-        }
-        set
-        {
-            _ = value;
-        }
-    }
+    private TViewModel ViewModel { get; set; } = default!;
 
     protected override void OnInitialized()
     {
@@ -42,9 +30,9 @@ public abstract class ShellBase<TGlobalPageContext> : LayoutComponentBase
             return;
         }
 
-        _propertyNames ??= GlobalPageContext.GetPropertyNames();
+        _propertyNames ??= ViewModel.GetPropertyNames();
 
-        _subscription = GlobalPageContext.PropertyChanged.Subscribe(async propertyName =>
+        _subscription = ViewModel.PropertyChanged.Subscribe(async propertyName =>
         {
             if (_propertyNames.Contains(propertyName))
             {

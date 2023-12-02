@@ -1,7 +1,7 @@
 using Nabs.TechTrek.WebApp.Components;
 using Nabs.TechTrek.Clients.WeatherClients;
 using Nabs.Ui.Shell;
-using Nabs.TechTrek.WebApp.Components.Pages;
+using Nabs.TechTrek.WebApp.Components.Layout;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,8 @@ builder.AddServiceDefaults();
 
 builder.AddWeatherForecastClients();
 
-builder.Services.AddScoped<IGlobalPageContext, GlobalPageContext>();
+//builder.Services.AddScoped<IViewModel, MainLayoutViewModel>();
+builder.Services.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

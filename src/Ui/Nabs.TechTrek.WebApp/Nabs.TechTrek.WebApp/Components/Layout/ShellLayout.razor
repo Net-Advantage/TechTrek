@@ -1,6 +1,6 @@
-﻿@inherits ShellBase<GlobalPageContext>
+﻿@inherits ShellLayoutBase<ShellLayoutViewModel>
 
-@if(GlobalPageContext is null)
+@if (ShellLayoutViewModel is null)
 {
     <p>Loading ...</p>
     return;
@@ -16,7 +16,7 @@
         </div>
 
         <article class="content px-4">
-            <h1>@GlobalPageContext.HeadingText</h1>
+            <h1>@ShellLayoutViewModel.HeadingText</h1>
             @Body
         </article>
     </main>

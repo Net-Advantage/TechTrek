@@ -12,7 +12,6 @@ Welcome to your new app.
 	{
 		await base.OnInitializedAsync();
 
-		var globalPageContext = TheGlobalPageContext as GlobalPageContext;
-		globalPageContext!.HeadingText = "Reactive Home Page";
+		ShellLayoutViewModel!.HeadingText = "Reactive Home Page Heading";
 	}
 }
