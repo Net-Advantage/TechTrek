@@ -3,14 +3,11 @@ using Xunit.Abstractions;
 
 namespace Nabs.TechTrek.Core.Tests.Abstractions;
 
-public sealed class XUnitTestOutputLoggerProvider : ILoggerProvider
+public sealed class XUnitTestOutputLoggerProvider(
+    ITestOutputHelper testOutputHelper) 
+    : ILoggerProvider
 {
-    private readonly ITestOutputHelper _testOutputHelper;
-
-    public XUnitTestOutputLoggerProvider(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-    }
+    private readonly ITestOutputHelper _testOutputHelper = testOutputHelper;
 
     public ILogger CreateLogger(string categoryName)
     {
@@ -21,15 +18,12 @@ public sealed class XUnitTestOutputLoggerProvider : ILoggerProvider
     {
     }
 
-    private class XUnitTestOutputLogger : ILogger
+    private class XUnitTestOutputLogger(
+        ITestOutputHelper testOutputHelper) 
+        : ILogger
     {
-        private readonly ITestOutputHelper _testOutputHelper;
-        private readonly List<LogEvent> _logEvents = new();
-
-        public XUnitTestOutputLogger(ITestOutputHelper testOutputHelper)
-        {
-            _testOutputHelper = testOutputHelper;
-        }
+        private readonly ITestOutputHelper _testOutputHelper = testOutputHelper;
+        private readonly List<LogEvent> _logEvents = [];
 
         public IDisposable? BeginScope<TState>(TState state)
             where TState : notnull

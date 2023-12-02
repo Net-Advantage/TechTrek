@@ -1,11 +1,9 @@
 ﻿namespace Nabs.TechTrek.Tests.PersistenceTests;
 
-public sealed class ApplicationContextTest : ScopedDependencyInversionTestBase
+public sealed class ApplicationContextTest(
+    ITestOutputHelper testOutputHelper) 
+    : ScopedDependencyInversionTestBase(testOutputHelper)
 {
-    public ApplicationContextTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    {
-    }
-
     [Theory]
     [InlineData(TenantIsolationStrategy.SharedShared)]
     [InlineData(TenantIsolationStrategy.SharedDedicated)]

@@ -1,5 +1,10 @@
-﻿@inherits LayoutComponentBase
+﻿@inherits ShellBase<GlobalPageContext>
 
+@if(GlobalPageContext is null)
+{
+    <p>Loading ...</p>
+    return;
+}
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -11,6 +16,7 @@
         </div>
 
         <article class="content px-4">
+            <h1>@GlobalPageContext.HeadingText</h1>
             @Body
         </article>
     </main>

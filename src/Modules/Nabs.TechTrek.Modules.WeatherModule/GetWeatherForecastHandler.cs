@@ -2,9 +2,9 @@
 
 namespace Nabs.TechTrek.Modules.WeatherModule;
 
-public class WeatherService
+public static class GetWeatherForecastHandler
 {
-	private static readonly string[] Summaries = [
+	private static readonly string[] _summaries = [
 		"Freezing", 
 		"Bracing", 
 		"Chilly", 
@@ -17,13 +17,13 @@ public class WeatherService
 		"Scorching"
 	];
 
-	public async Task<WeatherForecastResponse> GetWeatherForecast()
+	public static async Task<WeatherForecastResponse> Handle()
 	{
 		var items = Enumerable.Range(1, 5).Select(index => new WeatherForecast
 		{
 			Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
 			TemperatureC = Random.Shared.Next(-20, 55),
-			Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+			Summary = _summaries[Random.Shared.Next(_summaries.Length)]
 		})
 			.ToArray();
 

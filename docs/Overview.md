@@ -3,6 +3,7 @@
 The official docs for .NET Aspire is here: https://learn.microsoft.com/en-gb/dotnet/aspire/
 
 Things to learn:
+- What is service discovery?
 - How to structure the application?
 - How to structure the application so that multiple team can work on it?
 - How to build the application?
@@ -10,6 +11,10 @@ Things to learn:
 - How to configure the application?
 - How to deploy the application?
 - How to deploy the application to different environments?
+
+## What is service discovery?
+
+According to the documentation, service discovery applies a development and testing time. 
 
 ## How to structure the application?
 
@@ -24,6 +29,8 @@ Things to learn:
 
 
 ## How to configure the application?
+
+
 
 
 ## How to deploy the application?
