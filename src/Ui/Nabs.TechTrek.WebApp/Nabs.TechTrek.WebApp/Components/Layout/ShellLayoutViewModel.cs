@@ -14,4 +14,21 @@ public partial class ShellLayoutViewModel : ViewModelBase
             NotifyPropertyChanged(nameof(HeadingText));
         }
     }
+
+    private string _username = "anon";
+
+    public string Username
+    {
+        get { return _username; }
+        set { _username = value; }
+    }
+
+    private string _displayFullName = "Anon";
+
+    public string DisplayFullName
+    {
+        get { return _displayFullName; }
+        set { _displayFullName = value; }
+    }
+
 }
