@@ -21,8 +21,4 @@
 		<ProjectReference Include="..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
-	</ItemGroup>
-
 </Project>

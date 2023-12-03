@@ -1,41 +1,29 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity.Web;
-using Nabs.TechTrek.Gateway.Middlewares;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Nabs.TechTrek.Gateway.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
-
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-builder.Services
-	.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-	.AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+builder
+	.AddServiceDefaults();
 
 builder.Services
-	.AddAuthorization();
+	.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services
-	.AddReverseProxy()
-	.LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
-	.AddServiceDiscoveryDestinationResolver();
+builder
+	.AddIdentity()
+	.AddYarp();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.MapDefaultEndpoints();
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<TechTrekCookieAuthMiddleware>();
-
 app.MapReverseProxy();
 
 app.Run();
-
-
-class TechTrekUser : IdentityUser;
