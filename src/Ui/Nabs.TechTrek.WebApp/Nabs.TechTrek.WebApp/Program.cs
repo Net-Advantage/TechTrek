@@ -9,6 +9,8 @@ builder.AddServiceDefaults();
 
 builder.AddWeatherForecastClients();
 
+builder.Services.AddHttpContextAccessor();
+
 //builder.Services.AddScoped<IViewModel, MainLayoutViewModel>();
 builder.Services.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
 

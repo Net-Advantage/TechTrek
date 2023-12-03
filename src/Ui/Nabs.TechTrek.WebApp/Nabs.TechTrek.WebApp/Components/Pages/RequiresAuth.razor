@@ -1,0 +1,17 @@
+﻿@page "/RequiresAuth"
+
+<PageTitle>Requires Auth</PageTitle>
+
+<h1>@ShellLayoutViewModel.HeadingText</h1>
+<p>Username: @ShellLayoutViewModel.Username</p>
+<p>Full Name: @ShellLayoutViewModel.DisplayFullName</p>
+
+@code
+{
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		ShellLayoutViewModel!.HeadingText = "Reactive Requires Auth Heading";
+	}
+}
