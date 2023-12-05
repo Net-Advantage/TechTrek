@@ -1,9 +1,7 @@
 using Nabs.TechTrek.WebApp.Components;
 using Nabs.TechTrek.Clients.WeatherClients;
-using Nabs.Ui.Shell;
 using Nabs.TechTrek.WebApp.Components.Layout;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Nabs.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -62,7 +60,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
+builder.Services
+	.AddRazorComponents()
 	.AddInteractiveServerComponents();
 
 var app = builder.Build();
