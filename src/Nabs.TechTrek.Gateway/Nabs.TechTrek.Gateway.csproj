@@ -10,14 +10,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="8.0.0-preview.2.23577.10" />
+		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="8.0.0-preview.2.23604.7" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="2.16.0" />
-		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.16.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Nabs.Identity\Nabs.Identity.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
 	</ItemGroup>
 
