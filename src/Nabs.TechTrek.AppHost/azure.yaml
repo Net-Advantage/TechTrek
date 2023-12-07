@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: src
+name: Nabs.TechTrek.AppHost
 services:  
   app:
     language: dotnet
-    project: .\Nabs.TechTrek.AppHost\Nabs.TechTrek.AppHost.csproj
+    project: .\Nabs.TechTrek.AppHost.csproj
     host: containerapp
