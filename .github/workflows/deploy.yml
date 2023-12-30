@@ -1,0 +1,97 @@
+name: techTrekWorkflow
+
+on:
+  worflow_dispatch:
+    inputs:
+      deployInfrastructure:
+        description: 'Deploy Infrastructure'
+        type: boolean
+        required: true
+        default: 'false'
+    push:
+      branches:
+      - main
+    pull_request:
+      branches:
+      - main
+env:
+  AppVersion: ${{ github.run_number}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v3
+        if: github.event_name == 'pull_request'
+
+      - name: Build TechTrek Gateway
+        run: docker build . --file Nabs.TechTrek.Gateway/Dockerfile --tag "nabs.techtrek.gateway:$AppVersion"
+
+      - name: Build TechTrek Web Api
+        run: docker build . --file Nabs.TechTrek.WebApi/Dockerfile --tag "nabs.techtrek.webapi:$AppVersion"
+
+      - name: Build TechTrek Web App
+        run: docker build . --file Ui/Nabs.TechTrek.WebApp/Dockerfile --tag "nabs.techtrek.webapp:$AppVersion"
+
+      - name: Azure Container Registry Login
+        uses: Azure/docker-login@v1
+        with:
+          username: nabs.techtrek
+          password: ${{ secrets.ACR_PASSWORD }}
+          login-server: nabs.techtrek.azurecr.io
+
+      - name: Push TechTrek Gateway
+        run: docker push "nabs.techtrek.gateway:$AppVersion"
+
+      - name: Push TechTrek Web Api
+        run: docker push "nabs.techtrek.webapi:$AppVersion"
+
+      - name: Push TechTrek Web App
+        run: docker push "nabs.techtrek.webapp:$AppVersion"
+
+  deployStagingSlot:
+    name: Deploy to staging slot
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    environment:
+      name: dev
+    env:
+      resourceGroup: rg-techtrek-dev-aueast-001
+      location: australiaeast
+      logAnalyticsWorkspaceName: law-techtrek-dev-aueast-001
+      containerAppEnvironment: nabs.techtrek.dev
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: sandersaares-actions/expand-tokens@master
+        env:
+          COSMOSURL: "https://daprstate.documents.azure.com:443/"
+          COSMOSMASTERKEY: ${{ secrets.COSMOS_MASTERKEY }}
+          COSMOSCOLLECTION: techtrekdocs
+          COSMOSDATABASE: cdb-techtrek-dev-aueast-001
+          PUBSUBCONNECTIONSTRING: "${{ secrets.PUBSUB_CONNECTIONSTRING }}"
+        with:
+          path: deployment/containerapps/bicep
+
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true 
+                
+      - name: Deploy infrastructure
+        uses: azure/arm-deploy@v1
+        if: ${{ inputs.deployInfrastructure }} 
+        with:
+          deploymentName: ${{ env.AppVersion }}
+          resourceGroupName: ${{ env.resourceGroup}}
+          scope: resourcegroup
+          template: ./deployment/containerapps/bicep/main.bicep
+          deploymentMode: Incremental
+          failOnStdErr: false
+          parameters: version=${{ env.AppVersion }} location=${{ env.location }} environment_name=${{ env.containerAppEnvironment }}
