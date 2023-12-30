@@ -8,13 +8,20 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
+builder
+	.AddServiceDefaults();
 
-builder.AddWeatherForecastClients();
+builder.Services
+	.AddDaprClient();
 
-builder.Services.AddHttpContextAccessor();
+builder
+	.AddWeatherForecastClients();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services
+	.AddHttpContextAccessor();
+
+builder.Services
+	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
 	{
 		var bearerTokenSettingsSection = builder.Configuration.GetRequiredSection("BearerTokenSettings");
@@ -57,7 +64,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 		};
 	});
 
-builder.Services.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
+builder.Services
+	.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
 
 // Add services to the container.
 builder.Services

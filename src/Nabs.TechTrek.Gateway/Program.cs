@@ -6,6 +6,9 @@ builder
 	.AddServiceDefaults();
 
 builder.Services
+	.AddDaprClient();
+
+builder.Services
 	.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder
