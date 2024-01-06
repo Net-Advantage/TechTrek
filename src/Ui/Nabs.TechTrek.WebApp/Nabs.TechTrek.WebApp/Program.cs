@@ -11,15 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder
 	.AddServiceDefaults();
 
-builder.Services
-	.AddDaprClient();
-
 builder
 	.AddWeatherForecastClients();
 
 builder.Services
 	.AddHttpContextAccessor();
 
+
+//TODO: DWS: Abstract this.
 builder.Services
 	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
@@ -67,16 +66,13 @@ builder.Services
 builder.Services
 	.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
 
-// Add services to the container.
 builder.Services
 	.AddRazorComponents()
-	.AddInteractiveServerComponents();
+	.AddInteractiveServerComponents()
+	.AddInteractiveWebAssemblyComponents();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.UseWebAssemblyDebugging();
@@ -94,5 +90,7 @@ app.UseAuthorization();
 
 app.MapRazorComponents<App>()
 	.AddInteractiveServerRenderMode();
+
+app.MapDefaultEndpoints();
 
 app.Run();

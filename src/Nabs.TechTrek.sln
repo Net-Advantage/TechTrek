@@ -47,11 +47,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.Ui.Shell", "Core\Nabs.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceGenerators", "SourceGenerators", "{FFFB3183-733E-4745-9F80-8DBF931DDB6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.Identity", "Nabs.Identity\Nabs.Identity.csproj", "{51867493-1F9E-4681-BD80-BF83C1AB1D94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.Identity", "Nabs.Identity\Nabs.Identity.csproj", "{51867493-1F9E-4681-BD80-BF83C1AB1D94}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8C23E362-D963-4EA0-9442-C99B0F661104}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.Tests.IdentityTests", "Core\Tests\Nabs.Tests.IdentityTests\Nabs.Tests.IdentityTests.csproj", "{8B7D7E81-9F31-422F-AFB9-191625599AF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.Tests.IdentityTests", "Core\Tests\Nabs.Tests.IdentityTests\Nabs.Tests.IdentityTests.csproj", "{8B7D7E81-9F31-422F-AFB9-191625599AF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{25D7E9D1-D1CA-4773-A355-72E92FDDA509}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Packages.props = Directory.Packages.props
+		NuGet.config = NuGet.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

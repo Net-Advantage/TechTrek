@@ -1,17 +1,19 @@
-﻿using Nabs.TechTrek.Contracts.WeatherContracts;
-using System.Net.Http.Json;
+﻿using Dapr.Client;
+using Nabs.TechTrek.Contracts.WeatherContracts;
 
 namespace Nabs.TechTrek.Clients.WeatherClients;
 
 //TODO: DWS: This is where the Code Generator will generate the client code.
 
-public class WeatherForecastClient(HttpClient httpClient)
+public class WeatherForecastClient(DaprClient client)
 {
-	private readonly HttpClient _httpClient = httpClient;
+	private readonly DaprClient _client = client;
 
 	public async Task<WeatherForecastResponse> GetWeatherForecast()
 	{
-		var result = await _httpClient.GetFromJsonAsync<WeatherForecastResponse>("WeatherForecast");
+		var result = await _client
+			.InvokeMethodAsync<WeatherForecastResponse>(HttpMethod.Get, "techTrekWebApi", "WeatherForecast");
+
 		return result!;
 	}
 }

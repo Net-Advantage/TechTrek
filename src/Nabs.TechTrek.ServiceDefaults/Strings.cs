@@ -4,6 +4,8 @@
 
 public static class Strings
 {
+    public const string TechTrekStateStore = "statestore";
+    public const string TechTrekPubSub = "pubsub";
     public const string TechTrekAppConfig = "techTrekAppConfig";
     public const string TechTrekKeyVault = "techTrekKeyVault";
     public const string TechTrekSqlServer = "techTrekSqlServer";
