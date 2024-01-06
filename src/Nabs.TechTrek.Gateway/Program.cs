@@ -8,6 +8,9 @@ builder
 builder.Services
 	.AddDaprClient();
 
+//builder.Services
+//	.AddHttpForwarderWithServiceDiscovery();
+
 builder.Services
 	.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -30,3 +33,5 @@ app.UseAuthorization();
 app.MapReverseProxy();
 
 app.Run();
+
+

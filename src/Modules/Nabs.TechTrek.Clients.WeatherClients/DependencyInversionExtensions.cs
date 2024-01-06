@@ -7,10 +7,9 @@ public static class DependencyInversionExtensions
 {
 	public static IHostApplicationBuilder AddWeatherForecastClients(this IHostApplicationBuilder builder)
 	{
-		builder.Services.AddHttpClient<WeatherForecastClient>(c =>
-		{
-			c.BaseAddress = new Uri("http://techTrekWebApi");
-		});
+		builder.Services.AddDaprClient();
+
+		builder.Services.AddTransient<WeatherForecastClient>();
 
 		return builder;
 	}
