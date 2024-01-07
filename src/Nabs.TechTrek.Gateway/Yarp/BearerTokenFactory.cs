@@ -1,10 +1,9 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security;
 using System.Security.Claims;
 using System.Text;
 
-namespace Nabs.Identity;
+namespace Nabs.TechTrek.Gateway.Yarp;
 
 public sealed class BearerTokenFactory(BearerTokenSettings bearerTokenSettings)
 {

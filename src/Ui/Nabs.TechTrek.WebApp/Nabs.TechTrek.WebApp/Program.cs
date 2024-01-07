@@ -1,85 +1,55 @@
 using Nabs.TechTrek.WebApp.Components;
 using Nabs.TechTrek.Clients.WeatherClients;
 using Nabs.TechTrek.WebApp.Components.Layout;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Nabs.Identity;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Nabs.TechTrek.Identity.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder
-	.AddServiceDefaults();
+    .AddServiceDefaults();
 
 builder
-	.AddWeatherForecastClients();
+    .AddWeatherForecastClients();
 
 builder.Services
-	.AddHttpContextAccessor();
+    .AddHttpContextAccessor();
 
 
-//TODO: DWS: Abstract this.
-builder.Services
-	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-	.AddJwtBearer(options =>
-	{
-		var bearerTokenSettingsSection = builder.Configuration.GetRequiredSection("BearerTokenSettings");
-		var bearerTokenSettings = new BearerTokenSettings();
-		bearerTokenSettingsSection.Bind(bearerTokenSettings);
+builder.AddServiceAuthentication(context =>
+{
+    var isAuthenticated = context.Principal?.Identity?.IsAuthenticated ?? false;
 
-		options.TokenValidationParameters = new()
-		{
-			ValidateIssuer = true,
-			ValidIssuer = bearerTokenSettings.Issuer,
-			ValidateAudience = true,
-			ValidAudience = bearerTokenSettings.Audience,
-			ValidateIssuerSigningKey = true,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(bearerTokenSettings.Secret)),
-			ValidateLifetime = true,
-			ClockSkew = TimeSpan.FromMinutes(1)
-		};
+    if (!isAuthenticated)
+    {
+        return Task.CompletedTask;
+    }
 
-		options.Events = new()
-		{
-			OnTokenValidated = context =>
-			{
-				var isAuthenticated = context.Principal?.Identity?.IsAuthenticated ?? false;
+    var shellLayoutViewModel = context.HttpContext.RequestServices.GetRequiredService<ShellLayoutViewModel>();
+    shellLayoutViewModel.DisplayFullName = context.Principal!.Claims
+        .Where(claim => claim.Type == "name")
+        .Select(claim => claim.Value)
+        .FirstOrDefault()!;
 
-				if(!isAuthenticated)
-				{
-					//TODO: DWS: Decide what to do here.
-
-					return Task.CompletedTask;
-				}
-
-				var shellLayoutViewModel = context.HttpContext.RequestServices.GetRequiredService<ShellLayoutViewModel>();
-				shellLayoutViewModel.DisplayFullName = context.Principal!.Claims
-					.Where(claim => claim.Type == "name")
-					.Select(claim => claim.Value)
-					.FirstOrDefault()!;
-
-				return Task.CompletedTask;
-			}
-		};
-	});
+    return Task.CompletedTask;
+});
 
 builder.Services
-	.AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
+    .AddScoped<ShellLayoutViewModel, ShellLayoutViewModel>();
 
 builder.Services
-	.AddRazorComponents()
-	.AddInteractiveServerComponents()
-	.AddInteractiveWebAssemblyComponents();
+    .AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddInteractiveWebAssemblyComponents();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseWebAssemblyDebugging();
+    app.UseWebAssemblyDebugging();
 }
 else
 {
-	app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
 app.UseStaticFiles();
@@ -89,7 +59,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorComponents<App>()
-	.AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode();
 
 app.MapDefaultEndpoints();
 
