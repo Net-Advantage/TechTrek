@@ -16,7 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Nabs.Identity\Nabs.Identity.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
 	</ItemGroup>
 

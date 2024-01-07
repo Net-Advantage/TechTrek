@@ -21,4 +21,9 @@
 		<ProjectReference Include="..\Ui\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj" ExcludeAssets="all" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="DaprComponents\Aws\" />
+	  <Folder Include="DaprComponents\Azure\" />
+	</ItemGroup>
+
 </Project>

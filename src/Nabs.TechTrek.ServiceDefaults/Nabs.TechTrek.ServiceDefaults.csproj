@@ -19,4 +19,8 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" />
+	</ItemGroup>
+
 </Project>

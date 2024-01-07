@@ -5,4 +5,8 @@
 		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Nabs.TechTrek\Nabs.TechTrek.csproj" />
+	</ItemGroup>
+
 </Project>

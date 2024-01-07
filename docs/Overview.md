@@ -2,6 +2,10 @@
 
 The official docs for .NET Aspire is here: https://learn.microsoft.com/en-gb/dotnet/aspire/
 
+The Github repo is at: https://github.com/dotnet/aspire
+
+More updated samples are here: https://github.com/dotnet/aspire-samples
+
 Things to learn:
 - What is service discovery?
 - How to structure the application?

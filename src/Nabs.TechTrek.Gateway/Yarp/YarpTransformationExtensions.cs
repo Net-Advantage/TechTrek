@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Nabs.Identity;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Security;
-using System.Security.Claims;
 using Yarp.ReverseProxy.Transforms;
 using Yarp.ReverseProxy.Transforms.Builder;
 
