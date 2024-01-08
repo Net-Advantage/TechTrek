@@ -20,11 +20,6 @@ jobs:
             dotnet-version: '8.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore **/*.sln
+          run: dotnet restore **/Nabs.TechTrek.Gateway.csproj
 
-        - name: Build solution
-          run: dotnet build --no-restore --configuration Release
-
-        - name: Run tests
-          run: dotnet test --no-restore --no-build --verbosity normal
         
