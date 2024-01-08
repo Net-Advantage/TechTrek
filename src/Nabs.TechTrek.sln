@@ -55,7 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		Directory.Packages.props = Directory.Packages.props
-		NuGet.config = NuGet.config
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Identity.Abstractions", "Core\Nabs.TechTrek.Identity.Abstractions\Nabs.TechTrek.Identity.Abstractions.csproj", "{647AE425-B78A-4DF4-BDFC-07DF4587FDFA}"
