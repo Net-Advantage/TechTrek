@@ -14,7 +14,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
-		<InvariantGlobalization>true</InvariantGlobalization>
+		<!--InvariantGlobalization>true</InvariantGlobalization-->
 	</PropertyGroup>
 
 

@@ -1,12 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Cocona" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>

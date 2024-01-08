@@ -10,6 +10,16 @@ jobs:
 
         runs-on: ubuntu-latest
 
+        services:
+            sql-server:
+                image: mcr.microsoft.com/mssql/server:2019-latest
+                env:
+                    SA_PASSWORD: "Password123"
+                    ACCEPT_EULA: "Y"
+                ports:
+                    - 1433:1433
+                options: --health-cmd "SELECT 1" --health-interval 10s --health-timeout 5s --health-retries 5
+
         steps:
 
         - name: Checkout source
@@ -19,9 +29,9 @@ jobs:
           run: | 
               echo "Workspace directory: $GITHUB_WORKSPACE"
 
-        - name: List files and directories
+        - name: List files in /src directory
           run: |
-            echo "Listing files and directories in the workspace:"
+            echo "Listing files and directories in the workspace /src directory:"
             ls -alh "${GITHUB_WORKSPACE}/src"
   
         - name: Setup .NET 8.0
@@ -34,7 +44,17 @@ jobs:
             dotnet workload install aspire --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
             # Add more as needed
 
-        - name: Restore dependencies
+        - name: Restore dependencies using nuget.config
           run: dotnet restore src/Nabs.TechTrek.sln --configfile src/nuget.config
 
+        - name: Build Solution
+          run: dotnet build src/Nabs.TechTrek.sln --configuration Release --no-restore
+
+        - name: Initialise the Test Scenario Database
+          run: dotnet run --project src/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- --env Workflow
+
+        #- name: Run Solution Tests with code coverage
+        #  run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage"
+
         
+          
