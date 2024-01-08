@@ -29,6 +29,11 @@ jobs:
           with:
             dotnet-version: '8.0.x'
 
+        - name: Install required workloads
+          run: |
+            dotnet workload install aspire --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
+            # Add more as needed
+
         - name: Restore dependencies
           run: dotnet restore src/Nabs.TechTrek.sln --configfile src/NuGet.config
 
