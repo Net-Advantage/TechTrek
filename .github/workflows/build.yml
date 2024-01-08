@@ -35,6 +35,6 @@ jobs:
             # Add more as needed
 
         - name: Restore dependencies
-          run: dotnet restore src/Nabs.TechTrek.sln --configfile src/NuGet.config
+          run: dotnet restore src/Nabs.TechTrek.sln --configfile src/nuget.config
 
         
