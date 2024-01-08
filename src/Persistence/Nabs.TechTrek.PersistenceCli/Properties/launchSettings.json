@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Nabs.TechTrek.PersistenceCli": {
+      "commandName": "Project",
+      "commandLineArgs": "--env Localhost"
+    }
+  }
+}

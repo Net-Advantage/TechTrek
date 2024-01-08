@@ -129,6 +129,18 @@ Disconnect from the container:
 exit
 ```
 
+### Playing with Sql Server container
+Installing Sql Server container:
+```powershell
+docker run --name dapr-sqlserver -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Password123" -p 14331:1433 mcr.microsoft.com/mssql/server:2019-latest
+```
+Connect to the sql server instance:
+```powershell
+docker exec -it dapr-sqlserver "bash"
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Password123"
+```
+
+
 ### Playing with a ASP.Net Core container
 
 See the official docs for [Docker images for ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-8.0).

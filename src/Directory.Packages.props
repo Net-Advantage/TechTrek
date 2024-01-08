@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<AspireVersion>8.0.0-preview.3.24055.2</AspireVersion>
+		<EfCoreVersion>8.0.0</EfCoreVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- microsoft asp net dependencies -->
@@ -25,11 +26,11 @@
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.0" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.7.0" />
 		<!-- efcore dependencies -->
-		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Cosmos" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfCoreVersion)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EfCoreVersion)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Cosmos" Version="$(EfCoreVersion)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EfCoreVersion)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfCoreVersion)" />
 		<!-- aspire dependencies -->
 		<PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Hosting.Dapr" Version="$(AspireVersion)" />
@@ -46,6 +47,7 @@
 		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
 		<PackageVersion Include="System.Reactive" Version="6.0.0" />
+		<PackageVersion Include="Cocona" Version="2.2.0" />
 		<!-- xUnit dependencies -->
 		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
 		<PackageVersion Include="xunit" Version="2.6.5" />
