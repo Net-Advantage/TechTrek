@@ -8,6 +8,9 @@ jobs:
     build:
 
         runs-on: ubuntu-latest
+        defaults:
+      run:
+        working-directory: app
 
         steps:
 
@@ -20,6 +23,6 @@ jobs:
             dotnet-version: '8.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore ../../**/Nabs.TechTrek.Gateway.csproj
+          run: dotnet restore app/Nabs.TechTrek.sln
 
         
