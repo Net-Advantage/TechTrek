@@ -30,6 +30,6 @@ jobs:
             dotnet-version: '8.0.x'
 
         - name: Restore dependencies
-          run: dotnet restore src/Nabs.TechTrek.Gateway/Nabs.TechTrek.Gateway.csproj --configfile src/NuGet.config
+          run: dotnet restore src/Nabs.TechTrek.sln --configfile src/NuGet.config --prerelease
 
         
