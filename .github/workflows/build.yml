@@ -51,7 +51,7 @@ jobs:
           run: dotnet build src/Nabs.TechTrek.sln --configuration Release --no-restore
 
         - name: Initialise the Test Scenario Database
-          run: dotnet run --project src/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- --env Workflow
+          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- --env Workflow
 
         #- name: Run Solution Tests with code coverage
         #  run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage"
