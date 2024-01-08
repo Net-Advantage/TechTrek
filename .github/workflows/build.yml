@@ -22,7 +22,7 @@ jobs:
         - name: List files and directories
           run: |
             echo "Listing files and directories in the workspace:"
-            ls -alh "src/${GITHUB_WORKSPACE}"
+            ls -alh "${GITHUB_WORKSPACE}/src"
   
         - name: Setup .NET 8.0
           uses: actions/setup-dotnet@v3
