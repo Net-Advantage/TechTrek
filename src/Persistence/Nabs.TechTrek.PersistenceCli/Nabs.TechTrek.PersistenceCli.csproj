@@ -6,12 +6,23 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="ScenarioData\WeatherForecastCommentEntityItems.json" />
+	  <None Remove="ScenarioData\WeatherForecastEntityItems.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="ScenarioData\WeatherForecastCommentEntityItems.json" />
+	  <EmbeddedResource Include="ScenarioData\WeatherForecastEntityItems.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Cocona" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Nabs.TechTrek\Nabs.TechTrek.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj" />
 	</ItemGroup>
 

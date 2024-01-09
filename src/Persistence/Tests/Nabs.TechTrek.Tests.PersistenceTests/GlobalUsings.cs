@@ -3,7 +3,6 @@ global using Microsoft.EntityFrameworkCore;
 global using Nabs.TechTrek.Persistence;
 global using Microsoft.Extensions.DependencyInjection;
 global using Nabs.TechTrek.Contracts.WeatherContracts;
-global using Microsoft.Data.Sqlite;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Logging;
 global using Nabs.TechTrek.Core.ApplicationContext.Abstractions;
