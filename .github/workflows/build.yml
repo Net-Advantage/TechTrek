@@ -41,8 +41,8 @@ jobs:
 
         - name: Install required Aspire workloads
           run: |
-            dotnet workload update --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
-            dotnet workload install aspire --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
+            dotnet workload update --source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" --skip-sign-check
+            dotnet workload install aspire --source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" --skip-sign-check 
             # Add more as needed
 
         - name: Restore dependencies using nuget.config
