@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Nabs.TechTrek.Core.ApplicationContext.Abstractions;
 using Nabs.TechTrek.Persistence;
 using Nabs.TechTrek.Persistence.Entities;
 
@@ -7,6 +8,7 @@ namespace Nabs.TechTrek.PersistenceCli;
 internal interface IDataLoader
 {
     Task EnsureDatabaseCreatedAsync();
+    Task<TenantEntity> EnsureValidTenantExistsAsync(TenantIsolationStrategy isolationStrategy, Guid tenantId);
     Task LoadGeneralScenarioDataAsync();
     Task LoadTenantScenarioDataAsync(Guid tenantId);
 }
@@ -24,6 +26,33 @@ internal sealed class DataLoader<TDbContext>(IDbContextFactory<TDbContext> dbCon
         await dbContext.Database.EnsureCreatedAsync();
     }
 
+    public async Task<TenantEntity> EnsureValidTenantExistsAsync(TenantIsolationStrategy isolationStrategy, Guid tenantId)
+    {
+        var dbContext = _dbContextFactory.CreateDbContext();
+
+        var tenantEntity = await dbContext.Tenants
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == tenantId);
+
+        if (tenantEntity is not null)
+        {
+            throw new Exception("This tenant has already been loaded.");
+        }
+
+        tenantEntity = new TenantEntity()
+        {
+            Id = tenantId,
+            Name = $"Tenant_{tenantId}",
+            IsolationStrategy = isolationStrategy
+        };
+
+        dbContext.Tenants.Add(tenantEntity);
+
+        await dbContext.SaveChangesAsync();
+        
+        return tenantEntity;
+    }
+
     public async Task LoadGeneralScenarioDataAsync()
     {
         var dbContext = _dbContextFactory.CreateDbContext();
@@ -32,7 +61,7 @@ internal sealed class DataLoader<TDbContext>(IDbContextFactory<TDbContext> dbCon
         {
             dbContext.AddItemsFromResourceFile<WeatherForecastEntity>(".WeatherForecastEntityItems.json");
         }
-        
+
         await dbContext.SaveChangesAsync();
     }
 

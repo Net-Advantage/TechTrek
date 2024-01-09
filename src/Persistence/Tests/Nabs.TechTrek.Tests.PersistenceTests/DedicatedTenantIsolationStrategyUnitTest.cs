@@ -11,7 +11,7 @@ public class DedicatedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutp
 
     protected override void ConfigureService(ServiceCollection services)
     {
-        services.AddDbContextFactory<TechTrekDedicatedTenantDbContext>(options =>
+        services.AddDbContextFactory<TechTrekDbContext>(options =>
         {
             var connectionString = "Server=localhost,14331;Database=TechTrekDb_Dedicated;User Id=sa;Password=Password123;TrustServerCertificate=True;";
             options.UseSqlServer(connectionString);
@@ -32,7 +32,7 @@ public class DedicatedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutp
 
         ResetDatabase();
 
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDedicatedTenantDbContext>>();
+        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
 
         // Act
@@ -47,7 +47,7 @@ public class DedicatedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutp
     private void ResetDatabase()
     {
         // Arrange
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDedicatedTenantDbContext>>();
+        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
         dbContext.Database.EnsureCreated();
 

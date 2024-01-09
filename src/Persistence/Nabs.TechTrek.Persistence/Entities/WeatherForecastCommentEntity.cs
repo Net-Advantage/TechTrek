@@ -1,5 +1,4 @@
-﻿
-namespace Nabs.TechTrek.Persistence.Entities;
+﻿namespace Nabs.TechTrek.Persistence.Entities;
 
 public sealed class WeatherForecastCommentEntity : ITenantEntity
 {

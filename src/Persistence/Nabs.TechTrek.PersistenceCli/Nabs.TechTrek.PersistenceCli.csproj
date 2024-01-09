@@ -19,8 +19,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Cocona" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -5,7 +5,7 @@ public class SharedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputH
 {
     protected override void ConfigureService(ServiceCollection services)
     {
-        services.AddDbContextFactory<TechTrekSharedTenantDbContext>(options =>
+        services.AddDbContextFactory<TechTrekDbContext>(options =>
         {
             var connectionString = "Server=localhost,14331;Database=TechTrekDb_Shared;User Id=sa;Password=Password123;TrustServerCertificate=True;";
             options.UseSqlServer(connectionString);
@@ -28,7 +28,7 @@ public class SharedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputH
 
         ResetDatabase(tenantId, userId);
 
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekSharedTenantDbContext>>();
+        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
 
         // Act
@@ -43,7 +43,7 @@ public class SharedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputH
     private void ResetDatabase(Guid tenantId, Guid userId)
     {
         // Arrange
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekSharedTenantDbContext>>();
+        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
         dbContext.Database.EnsureCreated();
 

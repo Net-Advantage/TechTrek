@@ -8,118 +8,56 @@ using Nabs.TechTrek.PersistenceCli;
 var builder = CoconaApp.CreateBuilder();
 
 // Set up DI
-
 Func<IServiceProvider, IApplicationContext>? ApplicationContextFactory = null;
-
-const string ConnectionString = "Server=localhost,14331;Database={0};User Id=sa;Password=Password123;TrustServerCertificate=True;";
 
 builder.Services.AddScoped<IApplicationContext>(sp =>
 {
-    ApplicationContextFactory ??= (sp) => new ApplicationContext()
-        {
-            TenantContext = new TenantContext()
-            {
-                TenantId = Guid.Empty
-            },
-            TenantIsolationStrategy = TenantIsolationStrategy.SharedShared
-        };
-
+    ApplicationContextFactory ??= Helpers
+        .CreateApplicationContextFactory(TenantIsolationStrategy.SharedShared, Guid.Empty);
+    
     return ApplicationContextFactory.Invoke(sp);
 });
 
-builder.Services.AddDbContextFactory<TechTrekDedicatedTenantDbContext>((sp, options) =>
-{
-    var applicationContext = sp.GetRequiredService<IApplicationContext>();
-    var databaseName = $"TechTrekDb_{applicationContext.TenantIsolationStrategy}_{applicationContext.TenantContext.TenantId}";
-    var connectionString = string.Format(ConnectionString, databaseName);
-    options.UseSqlServer(connectionString);
-});
+builder.Services.AddPersistence(builder.Configuration);
 
-builder.Services.AddDbContextFactory<TechTrekSharedTenantDbContext>((sp, options) =>
+builder.Services.AddSingleton<DataLoader<TechTrekDbContext>>(sp =>
 {
-    var applicationContext = sp.GetRequiredService<IApplicationContext>();
-    var databaseName = $"TechTrekDb_{applicationContext.TenantIsolationStrategy}";
-    var connectionString = string.Format(ConnectionString, databaseName);
-    options.UseSqlServer(connectionString);
-});
-
-builder.Services.AddSingleton<DataLoader<TechTrekDedicatedTenantDbContext>>(sp =>
-{
-    var dbContextFactory = sp.GetRequiredService<IDbContextFactory<TechTrekDedicatedTenantDbContext>>();
-    return new DataLoader<TechTrekDedicatedTenantDbContext>(dbContextFactory!);
-});
-
-builder.Services.AddSingleton<DataLoader<TechTrekSharedTenantDbContext>>(sp =>
-{
-    var dbContextFactory = sp.GetRequiredService<IDbContextFactory<TechTrekSharedTenantDbContext>>();
-    return new DataLoader<TechTrekSharedTenantDbContext>(dbContextFactory!);
+    var dbContextFactory = sp.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
+    return new DataLoader<TechTrekDbContext>(dbContextFactory!);
 });
 
 var app = builder.Build();
 
-app.AddCommand("SharedSharedReset", async () =>
+app.AddCommand("Reset", async ([Option('i')]TenantIsolationStrategy isolation, [Option('t')]Guid tenantId) =>
 {
-    ApplicationContextFactory = (sp) =>
+    if(isolation == TenantIsolationStrategy.SharedShared)
     {
-        return new ApplicationContext()
-        {
-            TenantContext = new TenantContext()
-            {
-                TenantId = Guid.Empty
-            },
-            TenantIsolationStrategy = TenantIsolationStrategy.SharedShared
-        };
-    };
+        Console.WriteLine("SharedShared requires the tenantId to be Empty when the database is reset.");
+        tenantId = Guid.Empty;
+    }
 
-    IDataLoader dataLoader = app.Services.GetRequiredService<DataLoader<TechTrekSharedTenantDbContext>>();
+    ApplicationContextFactory = Helpers
+        .CreateApplicationContextFactory(isolation, tenantId);
+
+    var dataLoader = app.Services.GetRequiredService<DataLoader<TechTrekDbContext>>();
+
     await dataLoader.EnsureDatabaseCreatedAsync();
     await dataLoader.LoadGeneralScenarioDataAsync();
-});
+})
+.WithDescription("Reset command");
 
-app.AddCommand("SharedShared", async (Guid tenantId) =>
+
+app.AddCommand("Load", async ([Option('i')]TenantIsolationStrategy isolation, [Option('t')]Guid tenantId) =>
 {
-    ApplicationContextFactory = (sp) =>
-    {
-        return new ApplicationContext()
-        {
-            TenantContext = new TenantContext()
-            {
-                TenantId = tenantId
-            },
-            TenantIsolationStrategy = TenantIsolationStrategy.SharedShared
-        };
-    };
+    ApplicationContextFactory = Helpers
+        .CreateApplicationContextFactory(isolation, tenantId);
 
-    IDataLoader dataLoader = app.Services.GetRequiredService<DataLoader<TechTrekSharedTenantDbContext>>();
+    var dataLoader = app.Services.GetRequiredService<DataLoader<TechTrekDbContext>>();
+
+    var tenantEntity = await dataLoader.EnsureValidTenantExistsAsync(isolation, tenantId);
 
     await dataLoader.LoadTenantScenarioDataAsync(tenantId);
-});
-
-//app.AddCommand(async (TenantIsolationStrategy isolation, Guid tenantId) =>
-//{
-//    _isolation = isolation;
-
-//    _tenantId = isolation switch
-//    {
-//        TenantIsolationStrategy.SharedDedicated => tenantId,
-//        TenantIsolationStrategy.SharedShared => tenantId,
-//        _ => Guid.Empty
-//    };
-
-//    IDataLoader dataLoader = isolation switch
-//    {
-//        TenantIsolationStrategy.DedicatedDedicated => app.Services.GetRequiredService<DataLoader<TechTrekDedicatedTenantDbContext>>(),
-//        TenantIsolationStrategy.SharedDedicated => app.Services.GetRequiredService<DataLoader<TechTrekDedicatedTenantDbContext>>(),
-//        TenantIsolationStrategy.SharedShared => app.Services.GetRequiredService<DataLoader<TechTrekSharedTenantDbContext>>(),
-//        _ => throw new NotSupportedException($"TenantIsolationStrategy {isolation} is not supported.")
-//    };
-
-//    Console.WriteLine($"Processing TenantIsolationStrategy: {isolation} ...");
-
-//    await dataLoader.EnsureDatabaseCreatedAsync();
-//    await dataLoader.LoadScenarioDataAsync();
-
-//    await Task.CompletedTask;
-//});
+})
+.WithDescription("Load command");
 
 await app.RunAsync();
