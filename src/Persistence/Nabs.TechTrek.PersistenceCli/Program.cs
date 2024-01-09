@@ -4,12 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Nabs.TechTrek.Core.ApplicationContext.Abstractions;
 using Nabs.TechTrek.Persistence;
 using Nabs.TechTrek.PersistenceCli;
-using System.Runtime.InteropServices;
 
 var builder = CoconaApp.CreateBuilder();
 
 // Set up DI
 var _tenantId = Guid.Empty;
+var _isolation = TenantIsolationStrategy.SharedShared;
 const string ConnectionString = "Server=localhost,14331;Database=TechTrekDb_{0};User Id=sa;Password=Password123;TrustServerCertificate=True;";
 
 builder.Services.AddSingleton<IApplicationContext>((sp) => new ApplicationContext()
@@ -22,13 +22,13 @@ builder.Services.AddSingleton<IApplicationContext>((sp) => new ApplicationContex
 
 builder.Services.AddDbContextFactory<TechTrekDedicatedTenantDbContext>(options =>
 {
-    var connectionString = string.Format(ConnectionString, "TechTrekDb_Dedicated");
+    var connectionString = string.Format(ConnectionString, $"TechTrekDb_{_isolation}_{_tenantId}");
     options.UseSqlServer(connectionString);
 });
 
 builder.Services.AddDbContextFactory<TechTrekSharedTenantDbContext>(options =>
 {
-    var connectionString = string.Format(ConnectionString, "TechTrekDb_Shared");
+    var connectionString = string.Format(ConnectionString, $"TechTrekDb_{_isolation}");
     options.UseSqlServer(connectionString);
 });
 
@@ -48,6 +48,8 @@ var app = builder.Build();
 
 app.AddCommand(async (TenantIsolationStrategy isolation, Guid tenantId) =>
 {
+    _isolation = isolation;
+
     _tenantId = isolation switch
     {
         TenantIsolationStrategy.SharedDedicated => tenantId,
