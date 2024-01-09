@@ -39,8 +39,9 @@ jobs:
           with:
             dotnet-version: '8.0.x'
 
-        - name: Install required workloads
+        - name: Install required Aspire workloads
           run: |
+            dotnet workload update --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
             dotnet workload install aspire --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
             # Add more as needed
 
