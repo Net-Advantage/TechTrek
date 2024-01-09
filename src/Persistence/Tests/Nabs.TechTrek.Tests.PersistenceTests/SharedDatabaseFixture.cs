@@ -8,9 +8,8 @@ public sealed class SharedDatabaseFixture : IDisposable
     {
         _services.AddDbContextFactory<TechTrekDbContext>(options =>
         {
-            var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-            options.UseSqlite(connection);
+            var connectionString = "Server=localhost,14331;Database=TechTrekDb;User Id=sa;Password=Password123;TrustServerCertificate=True;";
+            options.UseSqlServer(connectionString);
 
             options.LogTo(s =>
             {

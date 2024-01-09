@@ -14,11 +14,18 @@ public abstract class TechTrekDbContext : DbContext
 
     public DbSet<WeatherForecastEntity> WeatherForecasts => Set<WeatherForecastEntity>();
     public DbSet<WeatherForecastCommentEntity> WeatherForecastComments => Set<WeatherForecastCommentEntity>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TechTrekDbContext).Assembly);
+    }
 }
 
 public sealed class TechTrekDedicatedTenantDbContext(
     DbContextOptions<TechTrekDedicatedTenantDbContext> options,
-    IApplicationContext applicationContext) 
+    IApplicationContext applicationContext)
     : TechTrekDbContext(options, applicationContext)
 {
 }
@@ -30,12 +37,12 @@ public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantab
         IApplicationContext applicationContext)
         : base(options, applicationContext)
     {
-        if(ApplicationContext.TenantContext.TenantId == Guid.Empty)
+        if (ApplicationContext.TenantContext.TenantId == Guid.Empty)
         {
             throw new InvalidOperationException("TenantId is not set.");
         }
 
-        if(ApplicationContext.TenantIsolationStrategy is not TenantIsolationStrategy.SharedShared)
+        if (ApplicationContext.TenantIsolationStrategy is not TenantIsolationStrategy.SharedShared)
         {
             throw new InvalidOperationException("TenantIsolationStrategy is not SharedShared.");
         }
@@ -73,8 +80,8 @@ public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantab
     private void SetTenantId()
     {
         var entries = ChangeTracker.Entries()
-                        .Where(e => e.Entity is ITenantEntity && 
-                                    e.State == EntityState.Added || 
+                        .Where(e => e.Entity is ITenantEntity &&
+                                    e.State == EntityState.Added ||
                                     e.State == EntityState.Modified);
 
         foreach (var entry in entries)

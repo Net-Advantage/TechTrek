@@ -7,9 +7,8 @@ public class SharedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputH
     {
         services.AddDbContextFactory<TechTrekSharedTenantDbContext>(options =>
         {
-            var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-            options.UseSqlite(connection);
+            var connectionString = "Server=localhost,14331;Database=TechTrekDb_Shared;User Id=sa;Password=Password123;TrustServerCertificate=True;";
+            options.UseSqlServer(connectionString);
         });
     }
 
