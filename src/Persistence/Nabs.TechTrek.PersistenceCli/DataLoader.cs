@@ -7,7 +7,8 @@ namespace Nabs.TechTrek.PersistenceCli;
 internal interface IDataLoader
 {
     Task EnsureDatabaseCreatedAsync();
-    Task LoadScenarioDataAsync();
+    Task LoadGeneralScenarioDataAsync();
+    Task LoadTenantScenarioDataAsync(Guid tenantId);
 }
 
 internal sealed class DataLoader<TDbContext>(IDbContextFactory<TDbContext> dbContextFactory)
@@ -23,17 +24,24 @@ internal sealed class DataLoader<TDbContext>(IDbContextFactory<TDbContext> dbCon
         await dbContext.Database.EnsureCreatedAsync();
     }
 
-    public async Task LoadScenarioDataAsync()
+    public async Task LoadGeneralScenarioDataAsync()
     {
         var dbContext = _dbContextFactory.CreateDbContext();
 
-        var weatherForecastEntityItems = "WeatherForecastEntityItems.json"
-            .LoadResource<WeatherForecastEntity[]>();
-        dbContext.AddRange(weatherForecastEntityItems);
+        if (!dbContext.WeatherForecasts.Any())
+        {
+            dbContext.AddItemsFromResourceFile<WeatherForecastEntity>(".WeatherForecastEntityItems.json");
+        }
+        
+        await dbContext.SaveChangesAsync();
+    }
 
-        var weatherForecastCommentEntityItems = "WeatherForecastCommentEntityItems.json"
-            .LoadResource<WeatherForecastCommentEntity[]>();
-        dbContext.AddRange(weatherForecastCommentEntityItems);
+    public async Task LoadTenantScenarioDataAsync(Guid tenantId)
+    {
+        var dbContext = _dbContextFactory.CreateDbContext();
+
+        var tenantIdSegment = tenantId.ToString().Replace('-', '_');
+        dbContext.AddItemsFromResourceFile<WeatherForecastCommentEntity>($".Tenants._{tenantIdSegment}.WeatherForecastCommentEntityItems.json");
 
         await dbContext.SaveChangesAsync();
     }

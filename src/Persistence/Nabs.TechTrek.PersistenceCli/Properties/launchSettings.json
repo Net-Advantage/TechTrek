@@ -1,8 +1,8 @@
 {
   "profiles": {
     "Nabs.TechTrek.PersistenceCli": {
-      "commandName": "Project",
-      "commandLineArgs": "--isolation SharedShared --tenant-id 0d27a2ac-7911-4bb7-87fa-06db7b1ac46a"
+        "commandName": "Project",
+        "commandLineArgs": "shared-shared --tenant-id 731724a1-9b57-46ce-baaf-7325bc8711c0"
     }
   }
 }

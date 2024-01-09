@@ -37,11 +37,6 @@ public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantab
         IApplicationContext applicationContext)
         : base(options, applicationContext)
     {
-        if (ApplicationContext.TenantContext.TenantId == Guid.Empty)
-        {
-            throw new InvalidOperationException("TenantId is not set.");
-        }
-
         if (ApplicationContext.TenantIsolationStrategy is not TenantIsolationStrategy.SharedShared)
         {
             throw new InvalidOperationException("TenantIsolationStrategy is not SharedShared.");
@@ -83,6 +78,14 @@ public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantab
                         .Where(e => e.Entity is ITenantEntity &&
                                     e.State == EntityState.Added ||
                                     e.State == EntityState.Modified);
+        if(entries.Any())
+        {
+            if (ApplicationContext.TenantContext.TenantId == Guid.Empty)
+            {
+                throw new InvalidOperationException("TenantId is not set.");
+            }
+        }
+
 
         foreach (var entry in entries)
         {

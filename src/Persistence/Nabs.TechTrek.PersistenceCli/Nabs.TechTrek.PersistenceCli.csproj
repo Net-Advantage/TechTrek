@@ -6,12 +6,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="ScenarioData\Tenants\_931d3b9a_4931_4577_bbe0_dc913db3d3c9\WeatherForecastCommentEntityItems.json" />
 	  <None Remove="ScenarioData\WeatherForecastCommentEntityItems.json" />
 	  <None Remove="ScenarioData\WeatherForecastEntityItems.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="ScenarioData\WeatherForecastCommentEntityItems.json" />
+	  <EmbeddedResource Include="ScenarioData\Tenants\_731724a1_9b57_46ce_baaf_7325bc8711c0\WeatherForecastCommentEntityItems.json" />
+	  <EmbeddedResource Include="ScenarioData\Tenants\_931d3b9a_4931_4577_bbe0_dc913db3d3c9\WeatherForecastCommentEntityItems.json" />
 	  <EmbeddedResource Include="ScenarioData\WeatherForecastEntityItems.json" />
 	</ItemGroup>
 

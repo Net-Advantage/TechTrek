@@ -51,13 +51,13 @@ jobs:
           run: dotnet build src/Nabs.TechTrek.sln --configuration Release --no-restore
 
         - name: Initialise the SharedShared Test Scenario Database
-          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- --isolation SharedShared --tenant-id 931d3b9a-4931-4577-bbe0-dc913db3d3c9
+          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- shared-shared-reset
 
-        - name: Initialise the SharedDedicated Test Scenario Database
-          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- --isolation SharedDedicated --tenant-id a5d4ea43-841b-42ae-b143-3627ce1dbcaa
+        - name: Load the SharedShared Test Tenant Scenario Data for 731724a1-9b57-46ce-baaf-7325bc8711c0
+          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- shared-shared --tenant-id 731724a1-9b57-46ce-baaf-7325bc8711c0
 
-        - name: Initialise the DedicatedDedicated Test Scenario Database
-          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- --isolation DedicatedDedicated --tenant-id 00000000-0000-0000-0000-000000000000
+        - name: Load the SharedShared Test Tenant Scenario Data for 931d3b9a-4931-4577-bbe0-dc913db3d3c9
+          run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- shared-shared --tenant-id 931d3b9a-4931-4577-bbe0-dc913db3d3c9
           
         #- name: Run Solution Tests with code coverage
         #  run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage"
