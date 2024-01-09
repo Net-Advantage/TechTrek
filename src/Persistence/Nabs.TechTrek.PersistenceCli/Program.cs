@@ -46,21 +46,21 @@ builder.Services.AddSingleton<DataLoader<TechTrekSharedTenantDbContext>>(sp =>
 
 var app = builder.Build();
 
-app.AddCommand(async (TenantIsolationStrategy isolation, Guid tenantId = new Guid()) =>
+app.AddCommand(async (TenantIsolationStrategy isolation, Guid tenantId) =>
 {
+    _tenantId = isolation switch
+    {
+        TenantIsolationStrategy.SharedDedicated => tenantId,
+        TenantIsolationStrategy.SharedShared => tenantId,
+        _ => Guid.Empty
+    };
+
     IDataLoader dataLoader = isolation switch
     {
         TenantIsolationStrategy.DedicatedDedicated => app.Services.GetRequiredService<DataLoader<TechTrekDedicatedTenantDbContext>>(),
         TenantIsolationStrategy.SharedDedicated => app.Services.GetRequiredService<DataLoader<TechTrekDedicatedTenantDbContext>>(),
         TenantIsolationStrategy.SharedShared => app.Services.GetRequiredService<DataLoader<TechTrekSharedTenantDbContext>>(),
         _ => throw new NotSupportedException($"TenantIsolationStrategy {isolation} is not supported.")
-    };
-
-    _tenantId = isolation switch
-    {
-        TenantIsolationStrategy.SharedDedicated => tenantId,
-        TenantIsolationStrategy.SharedShared => tenantId,
-        _ => Guid.Empty
     };
 
     Console.WriteLine($"Processing TenantIsolationStrategy: {isolation} ...");
