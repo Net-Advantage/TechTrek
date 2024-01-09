@@ -12,7 +12,7 @@ var builder = CoconaApp.CreateBuilder();
 var _tenantId = Guid.Empty;
 const string ConnectionString = "Server=localhost,14331;Database=TechTrekDb_{0};User Id=sa;Password=Password123;TrustServerCertificate=True;";
 
-builder.Services.AddSingleton<IApplicationContext>(new ApplicationContext()
+builder.Services.AddSingleton<IApplicationContext>((sp) => new ApplicationContext()
 {
     TenantContext = new TenantContext()
     {
