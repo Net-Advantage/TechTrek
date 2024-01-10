@@ -5,11 +5,10 @@
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
           <Include>
-            <Include>[MyApp*]*</Include> <!-- Include all types in MyApp namespace -->
+            <Include>[Nabs*]*</Include> <!-- Include all types in MyApp namespace -->
           </Include>
           <Exclude>
             <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute> <!-- Exclude code marked as generated -->
-            <ExcludeByFile>**/*Designer.cs</ExcludeByFile> <!-- Exclude designer files -->
           </Exclude>
           <Threshold>80</Threshold>
           <ThresholdType>line</ThresholdType>
