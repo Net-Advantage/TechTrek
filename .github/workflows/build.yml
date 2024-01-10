@@ -52,6 +52,7 @@ jobs:
           run: dotnet build src/Nabs.TechTrek.sln --configuration Release --no-restore
 
         - name: Reset the Test Scenario Databases
+          shell: pwsh
           run: src/Persistence/Nabs.TechTrek.PersistenceCli/ResetDatabases.ps1
           
         - name: Run Solution Tests with code coverage
