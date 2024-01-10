@@ -4,21 +4,20 @@
 		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
+		<ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettings.json" />
+		<None Remove="appsettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="appsettings.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
@@ -34,12 +33,22 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
+		<PackageReference Include="coverlet.msbuild">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\Core\Nabs.TechTrek.Core.Tests.Abstractions\Nabs.TechTrek.Core.Tests.Abstractions.csproj" />
-		<ProjectReference Include="..\..\..\Modules\Nabs.TechTrek.Modules.WeatherModule\Nabs.TechTrek.Modules.WeatherModule.csproj" />
-		<ProjectReference Include="..\..\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj" />
+		<ProjectReference Include="..\..\Core\Nabs.TechTrek.Core.Tests.Abstractions\Nabs.TechTrek.Core.Tests.Abstractions.csproj" />
+		<ProjectReference Include="..\..\Modules\Nabs.TechTrek.Modules.WeatherModule\Nabs.TechTrek.Modules.WeatherModule.csproj" />
+		<ProjectReference Include="..\..\Persistence\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<CollectCoverage>true</CollectCoverage>
+		<CoverletOutputFormat>lcov</CoverletOutputFormat>
+		<CoverletOutput>../coverage/</CoverletOutput>
+	</PropertyGroup>
 
 </Project>

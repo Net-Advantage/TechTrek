@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Include>
+            <Include>[MyApp*]*</Include> <!-- Include all types in MyApp namespace -->
+          </Include>
+          <Exclude>
+            <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute> <!-- Exclude code marked as generated -->
+            <ExcludeByFile>**/*Designer.cs</ExcludeByFile> <!-- Exclude designer files -->
+          </Exclude>
+          <Threshold>80</Threshold>
+          <ThresholdType>line</ThresholdType>
+          <ThresholdStat>total</ThresholdStat>
+          <ReportFormat>lcov</ReportFormat>
+          <ReportDirectory>./TestResults/CoverageReports</ReportDirectory>
+          <SingleHit>true</SingleHit>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

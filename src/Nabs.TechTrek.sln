@@ -37,10 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{988C7FDB-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Core.ApplicationContext.Abstractions", "Core\Nabs.TechTrek.Core.ApplicationContext.Abstractions\Nabs.TechTrek.Core.ApplicationContext.Abstractions.csproj", "{88752FDD-35E6-4679-B1B3-30E319ADB2BD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ADC6F8BE-5E1D-402F-8D5E-97A3A2B56B0F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Tests.PersistenceTests", "Persistence\Tests\Nabs.TechTrek.Tests.PersistenceTests\Nabs.TechTrek.Tests.PersistenceTests.csproj", "{D5073C2B-E52D-4645-88D7-5D2A887726ED}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Core.Tests.Abstractions", "Core\Nabs.TechTrek.Core.Tests.Abstractions\Nabs.TechTrek.Core.Tests.Abstractions.csproj", "{12B5862E-DEF8-45B9-BB18-A9C35CB391FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.Ui.Shell", "Core\Nabs.Ui.Shell\Nabs.Ui.Shell.csproj", "{3267E8AA-1ADE-4235-B725-B081FF0E9667}"
@@ -54,13 +50,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{25D7E9D1-D1CA-4773-A355-72E92FDDA509}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		..\.gitignore = ..\.gitignore
+		coverlet.runsettings = coverlet.runsettings
 		Directory.Packages.props = Directory.Packages.props
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Identity.Abstractions", "Core\Nabs.TechTrek.Identity.Abstractions\Nabs.TechTrek.Identity.Abstractions.csproj", "{647AE425-B78A-4DF4-BDFC-07DF4587FDFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabs.TechTrek", "Nabs.TechTrek\Nabs.TechTrek.csproj", "{E275342D-AA69-45BE-9676-15025F114EB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek", "Nabs.TechTrek\Nabs.TechTrek.csproj", "{E275342D-AA69-45BE-9676-15025F114EB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{50A3D143-66E3-4A1B-BE4F-E031F9ABAD8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.TechTrek.Tests.PersistenceTests", "tests\Nabs.TechTrek.Tests.PersistenceTests\Nabs.TechTrek.Tests.PersistenceTests.csproj", "{51365125-65C1-4BF0-B45D-7355A26E85CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabs.ReportsTests", "tests\Nabs.ReportsTests\Nabs.ReportsTests.csproj", "{F05D8977-2D7E-4FBB-87F2-850F13CD187C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,10 +120,6 @@ Global
 		{88752FDD-35E6-4679-B1B3-30E319ADB2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88752FDD-35E6-4679-B1B3-30E319ADB2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88752FDD-35E6-4679-B1B3-30E319ADB2BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5073C2B-E52D-4645-88D7-5D2A887726ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5073C2B-E52D-4645-88D7-5D2A887726ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5073C2B-E52D-4645-88D7-5D2A887726ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5073C2B-E52D-4645-88D7-5D2A887726ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12B5862E-DEF8-45B9-BB18-A9C35CB391FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12B5862E-DEF8-45B9-BB18-A9C35CB391FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B5862E-DEF8-45B9-BB18-A9C35CB391FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -140,6 +140,14 @@ Global
 		{E275342D-AA69-45BE-9676-15025F114EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E275342D-AA69-45BE-9676-15025F114EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E275342D-AA69-45BE-9676-15025F114EB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51365125-65C1-4BF0-B45D-7355A26E85CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51365125-65C1-4BF0-B45D-7355A26E85CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51365125-65C1-4BF0-B45D-7355A26E85CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51365125-65C1-4BF0-B45D-7355A26E85CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05D8977-2D7E-4FBB-87F2-850F13CD187C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05D8977-2D7E-4FBB-87F2-850F13CD187C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05D8977-2D7E-4FBB-87F2-850F13CD187C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05D8977-2D7E-4FBB-87F2-850F13CD187C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,12 +161,12 @@ Global
 		{BF8F5F3D-CB4B-4BB7-B417-6ABC427E9401} = {6AE96921-A302-48A4-A05C-F70E1C301311}
 		{D5B13033-711E-4653-8608-1F2E5F86D7EB} = {6AE96921-A302-48A4-A05C-F70E1C301311}
 		{88752FDD-35E6-4679-B1B3-30E319ADB2BD} = {988C7FDB-0B9C-4ACF-BF44-FCB1B0AF37B2}
-		{ADC6F8BE-5E1D-402F-8D5E-97A3A2B56B0F} = {6AE96921-A302-48A4-A05C-F70E1C301311}
-		{D5073C2B-E52D-4645-88D7-5D2A887726ED} = {ADC6F8BE-5E1D-402F-8D5E-97A3A2B56B0F}
 		{12B5862E-DEF8-45B9-BB18-A9C35CB391FF} = {988C7FDB-0B9C-4ACF-BF44-FCB1B0AF37B2}
 		{3267E8AA-1ADE-4235-B725-B081FF0E9667} = {988C7FDB-0B9C-4ACF-BF44-FCB1B0AF37B2}
 		{8C23E362-D963-4EA0-9442-C99B0F661104} = {988C7FDB-0B9C-4ACF-BF44-FCB1B0AF37B2}
 		{647AE425-B78A-4DF4-BDFC-07DF4587FDFA} = {988C7FDB-0B9C-4ACF-BF44-FCB1B0AF37B2}
+		{51365125-65C1-4BF0-B45D-7355A26E85CA} = {50A3D143-66E3-4A1B-BE4F-E031F9ABAD8E}
+		{F05D8977-2D7E-4FBB-87F2-850F13CD187C} = {50A3D143-66E3-4A1B-BE4F-E031F9ABAD8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08540D00-4595-4072-9C7F-4F3BAA45A0D0}

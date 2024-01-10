@@ -2,18 +2,18 @@
 	<PropertyGroup>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<AspireVersion>8.0.0-preview.3.24059.2</AspireVersion>
-		<EfCoreVersion>8.0.0</EfCoreVersion>
+		<EfCoreVersion>8.0.1</EfCoreVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- microsoft asp net dependencies -->
-		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
+		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
 		<!-- microsoft identity dependencies -->
-		<PackageVersion Include="Microsoft.Identity.Web" Version="2.16.0" />
+		<PackageVersion Include="Microsoft.Identity.Web" Version="2.16.1" />
 		<PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
 		<!-- microsoft extensions dependencies -->
-		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.0.0" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.1.0" />
 		<PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
 		<PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
 		<PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
@@ -57,6 +57,8 @@
 		<PackageVersion Include="xunit" Version="2.6.5" />
 		<PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
 		<PackageVersion Include="coverlet.collector" Version="6.0.0" />
+		<PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
 		<PackageVersion Include="xunit.abstractions" Version="2.0.3" />
+		<PackageVersion Include="ReportGenerator" Version="5.2.0" />
 	</ItemGroup>
 </Project>

@@ -10,6 +10,18 @@
 *.userosscache
 *.sln.docstates
 
+# Aspire files
+.azure
+
+# Code coverage files
+lcov.info
+coverage
+coverage\*
+coveragereport
+coveragereport\*
+TestResults
+TestResults\*
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
