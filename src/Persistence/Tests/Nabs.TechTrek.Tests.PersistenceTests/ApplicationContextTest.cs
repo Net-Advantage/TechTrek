@@ -1,8 +1,9 @@
 ﻿namespace Nabs.TechTrek.Tests.PersistenceTests;
 
 public sealed class ApplicationContextTest(
-    ITestOutputHelper testOutputHelper) 
-    : ScopedDependencyInversionTestBase(testOutputHelper)
+    ITestOutputHelper testOutputHelper, 
+    DatabaseFixture fixture) 
+    : DatabaseTestBase(testOutputHelper, fixture)
 {
     [Theory]
     [InlineData(TenantIsolationStrategy.SharedShared)]
@@ -10,7 +11,7 @@ public sealed class ApplicationContextTest(
     public void TheScopedApplicationContext(TenantIsolationStrategy tenantIsolationStrategy)
     {
         var tenantId = Guid.NewGuid();
-        ApplicationContextFactory = () => new ApplicationContext()
+        Fixture.ApplicationContextFactory = () => new ApplicationContext()
         {
             TenantIsolationStrategy = tenantIsolationStrategy,
             TenantContext = new TenantContext()
@@ -19,7 +20,7 @@ public sealed class ApplicationContextTest(
             }
         };
 
-        var applicationContext = ServiceProvider.GetRequiredService<IApplicationContext>();
+        var applicationContext = Fixture.ServiceScope.ServiceProvider.GetRequiredService<IApplicationContext>();
         Assert.NotNull(applicationContext);
         Assert.Equal(tenantId, applicationContext.TenantContext.TenantId);
         Assert.Equal(tenantIsolationStrategy, applicationContext.TenantIsolationStrategy);

@@ -53,11 +53,6 @@ public abstract class TenantableDbContext : DbContext, ITenantableDbContext
 
     private void SetTenantId()
     {
-        if (ApplicationContext.TenantIsolationStrategy == TenantIsolationStrategy.DedicatedDedicated)
-        {
-            return;
-        }
-
         var entries = ChangeTracker.Entries()
                         .Where(e => e.Entity is ITenantEntity &&
                                     e.State == EntityState.Added ||
@@ -94,77 +89,3 @@ public class TechTrekDbContext(
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TechTrekDbContext).Assembly);
     }
 }
-
-//public sealed class TechTrekDedicatedTenantDbContext(
-//    DbContextOptions<TechTrekDedicatedTenantDbContext> options,
-//    IApplicationContext applicationContext)
-//    : TechTrekDbContext(options, applicationContext)
-//{
-//}
-
-//public sealed class TechTrekSharedTenantDbContext : TechTrekDbContext, ITenantableDbContext
-//{
-//    public TechTrekSharedTenantDbContext(
-//        DbContextOptions<TechTrekSharedTenantDbContext> options,
-//        IApplicationContext applicationContext)
-//        : base(options, applicationContext)
-//    {
-//        if (ApplicationContext.TenantIsolationStrategy is not TenantIsolationStrategy.SharedShared)
-//        {
-//            throw new InvalidOperationException("TenantIsolationStrategy is not SharedShared.");
-//        }
-
-//        TenantId = applicationContext.TenantContext.TenantId;
-//    }
-
-//    public Guid TenantId { get; }
-
-//    protected override void OnModelCreating(ModelBuilder modelBuilder)
-//    {
-//        base.OnModelCreating(modelBuilder);
-
-//        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-//        {
-//            if (typeof(ITenantEntity).IsAssignableFrom(entityType.ClrType))
-//            {
-//                entityType.AddTenantEntityQueryFilter(this);
-//            }
-//        }
-//    }
-
-//    public override int SaveChanges()
-//    {
-//        SetTenantId();
-//        return base.SaveChanges();
-//    }
-
-//    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-//    {
-//        SetTenantId();
-//        return await base.SaveChangesAsync(cancellationToken);
-//    }
-
-//    private void SetTenantId()
-//    {
-
-
-
-//        var entries = ChangeTracker.Entries()
-//                        .Where(e => e.Entity is ITenantEntity &&
-//                                    e.State == EntityState.Added ||
-//                                    e.State == EntityState.Modified);
-//        if(entries.Any())
-//        {
-//            if (ApplicationContext.TenantContext.TenantId == Guid.Empty)
-//            {
-//                throw new InvalidOperationException("TenantId is not set.");
-//            }
-//        }
-
-
-//        foreach (var entry in entries)
-//        {
-//            entry.Property(nameof(TenantId)).CurrentValue = ApplicationContext.TenantContext.TenantId;
-//        }
-//    }
-//}

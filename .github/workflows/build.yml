@@ -60,8 +60,8 @@ jobs:
         - name: Load the SharedShared Test Tenant Scenario Data for 931d3b9a-4931-4577-bbe0-dc913db3d3c9
           run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- Load -i SharedShared -t 931d3b9a-4931-4577-bbe0-dc913db3d3c9
           
-        #- name: Run Solution Tests with code coverage
-        #  run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage"
+        - name: Run Solution Tests with code coverage
+          run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build #--collect:"XPlat Code Coverage"
 
         
           

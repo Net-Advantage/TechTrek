@@ -1,6 +1,5 @@
 using Aspire.Hosting.Dapr;
 using Nabs.TechTrek;
-using System.Collections.Immutable;
 
 var builder = DistributedApplication
 	.CreateBuilder(args);

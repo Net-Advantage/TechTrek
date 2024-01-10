@@ -39,7 +39,7 @@ public static class DependencyInversionExtensions
 
             options.UseSqlServer(connectionString);
 
-        });
+        }, ServiceLifetime.Scoped);
 
         return services;
     }

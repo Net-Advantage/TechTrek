@@ -1,77 +1,36 @@
 namespace Nabs.TechTrek.Tests.PersistenceTests;
 
-public class DedicatedTenantIsolationStrategyUnitTest(ITestOutputHelper testOutputHelper) 
-    : ScopedDependencyInversionTestBase(testOutputHelper)
+public class DedicatedTenantIsolationStrategyUnitTest(
+    ITestOutputHelper testOutputHelper, 
+    DatabaseFixture fixture) 
+    : DatabaseTestBase(testOutputHelper, fixture)
 {
-    private readonly (Guid tenantId, Guid userId)[] _fkIds = 
-        [
-            (Guid.NewGuid(), Guid.NewGuid()),
-            (Guid.NewGuid(), Guid.NewGuid())
-        ];
-
-    protected override void ConfigureService(ServiceCollection services)
-    {
-        services.AddDbContextFactory<TechTrekDbContext>(options =>
-        {
-            var connectionString = "Server=localhost,14331;Database=TechTrekDb_Dedicated;User Id=sa;Password=Password123;TrustServerCertificate=True;";
-            options.UseSqlServer(connectionString);
-        });
-    }
-
     [Fact]
-    public void RunTest()
+    public async Task RunTest()
     {
-        ApplicationContextFactory = () => new ApplicationContext()
+        var tenantId = new Guid("731724a1-9b57-46ce-baaf-7325bc8711c0");
+        Fixture.ApplicationContextFactory = () => new ApplicationContext()
         {
-            TenantIsolationStrategy = TenantIsolationStrategy.SharedDedicated,
+            TenantIsolationStrategy = TenantIsolationStrategy.DedicatedDedicated,
             TenantContext = new TenantContext()
             {
-                TenantId = _fkIds[0].tenantId
+                TenantId = tenantId
             }
         };
 
-        ResetDatabase();
-
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
+        var dbContextFactory = Fixture.ServiceScope.ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
         var dbContext = dbContextFactory.CreateDbContext();
 
         // Act
-        var tenantComments = dbContext.WeatherForecastComments
+        var tenantComments = await dbContext.WeatherForecastComments
             .AsNoTracking()
-            .ToArray();
+            .ToListAsync();
 
         // Assert
-        Assert.Equal(2, tenantComments.Length);
-    }
+        Assert.Single(tenantComments);
 
-    private void ResetDatabase()
-    {
-        // Arrange
-        var dbContextFactory = ServiceProvider.GetRequiredService<IDbContextFactory<TechTrekDbContext>>();
-        var dbContext = dbContextFactory.CreateDbContext();
-        dbContext.Database.EnsureCreated();
-
-        var date = DateOnly.FromDateTime(DateTime.Now);
-        var id = (date.Year * 10000) + (date.Month * 100) + date.Day;
-
-        dbContext.WeatherForecasts.Add(new WeatherForecastEntity
-        {
-            Id = id,
-            Date = date,
-            TemperatureC = 20,
-            Summary = "Warm"
-        });
-
-        var comments = _fkIds.Select(fkId => new WeatherForecastCommentEntity
-        {
-            Id = Guid.NewGuid(),
-            WeatherForecastId = id,
-            UserId = fkId.userId,
-            Comment = $"Test comment from {fkId.tenantId} - {fkId.userId}"
-        });
-        dbContext.WeatherForecastComments.AddRange(comments);
-
-        dbContext.SaveChanges();
-        dbContext.ChangeTracker.Clear();
+        var connectionString = dbContext.Database.GetConnectionString()!;
+        WriteLine($"ConnectionString: {connectionString}");
+        Assert.Contains($"Database=TechTrekDb_DedicatedDedicated_{tenantId};", connectionString);
     }
 }
