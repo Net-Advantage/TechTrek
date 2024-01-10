@@ -67,7 +67,7 @@ jobs:
           run: dotnet run --project src/Persistence/Nabs.TechTrek.PersistenceCli/Nabs.TechTrek.PersistenceCli.csproj -- Load -i DedicatedDedicated -t 731724a1-9b57-46ce-baaf-7325bc8711c0
           
         - name: Run Solution Tests with code coverage
-          run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build #--collect:"XPlat Code Coverage"
+          run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" #--collect:"XPlat Code Coverage"
 
         
           
