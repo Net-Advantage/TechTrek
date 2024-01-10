@@ -2,6 +2,7 @@
 using Nabs.TechTrek.Core.ApplicationContext.Abstractions;
 using Nabs.TechTrek.Persistence;
 using Nabs.TechTrek.Persistence.Entities;
+using System.Globalization;
 
 namespace Nabs.TechTrek.PersistenceCli;
 
@@ -49,7 +50,7 @@ internal sealed class DataLoader<TDbContext>(IDbContextFactory<TDbContext> dbCon
         dbContext.Tenants.Add(tenantEntity);
 
         await dbContext.SaveChangesAsync();
-        
+
         return tenantEntity;
     }
 

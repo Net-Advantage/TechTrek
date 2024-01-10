@@ -1,8 +1,7 @@
 ﻿namespace Nabs.TechTrek.Persistence.Entities;
 
-public sealed class TenantEntity
+public sealed class TenantEntity : EntityBase<Guid>
 {
-    public Guid Id { get; set; }
     public string Name { get; set; } = default!;
     public TenantIsolationStrategy IsolationStrategy { get; set; }
 }
