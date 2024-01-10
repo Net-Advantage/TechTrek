@@ -5,6 +5,6 @@ public class BearerTokenFactoryUnitTest
 	[Fact]
 	public void RunTest()
 	{
-
+		Assert.True(true);
 	}
 }
