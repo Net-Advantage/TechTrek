@@ -1,6 +1,4 @@
-﻿using RetailSample.Activities.RegistrationScenario.ActivityStates;
-
-namespace RetailSample.Activities.RegistrationScenario.ActivityFeatures;
+﻿namespace RetailSample.Activities.RegistrationScenario;
 
 public sealed class RegistrationStateFactory
     : ActivityStateFactory<RegistrationActivityState>

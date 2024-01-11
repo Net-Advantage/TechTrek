@@ -13,7 +13,6 @@ public class RegistrationScenarioTests
         await activity.RunAsync();
 
         // Assert
-        activity.ActivityState.Should().NotBeNull();
-        activity.ActivityState!.Id.Should().NotBeEmpty();
+        activity.ValidationResult.IsValid.Should().BeTrue();
     }
 }
