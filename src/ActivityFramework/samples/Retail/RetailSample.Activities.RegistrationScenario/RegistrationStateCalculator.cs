@@ -1,12 +1,13 @@
 ﻿
 namespace RetailSample.Activities.RegistrationScenario;
 
-public class RegistrationStateCalculator : ActivityStateCalculator<RegistrationActivityState>
+public class RegistrationStateCalculator(
+    RegistrationActivityState activityState) 
+    : ActivityStateCalculator<RegistrationActivityState>(activityState)
 {
-    public override Task RunAsync(RegistrationActivityState activityState)
+    public override Task RunAsync()
     {
-
-        ActivityState = activityState  with
+        ActivityState = ActivityState with
         { 
             ProcessedOn = DateTime.UtcNow
         };

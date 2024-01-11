@@ -1,12 +1,11 @@
 ﻿namespace RetailSample.Activities.RegistrationScenario;
 
-public class RegistrationActivity : Activity<RegistrationActivityState>
+public class RegistrationActivity 
+    : Activity<
+        RegistrationActivityState,
+        RegistrationStateFactory,
+        RegistrationStateCalculator,
+        RegistrationStateValidator>
 {
-    public RegistrationActivity()
-    {
-        FeatureBuilder
-            .AddFactory<RegistrationStateFactory>()
-            .AddCalculator<RegistrationStateCalculator>()
-            .AddValidator<RegistrationStateValidator>();
-    }
+    
 }

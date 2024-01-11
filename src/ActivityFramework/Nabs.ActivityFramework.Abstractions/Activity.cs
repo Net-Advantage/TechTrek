@@ -2,70 +2,82 @@
 
 namespace Nabs.ActivityFramework.Abstractions;
 
+public interface IActivity;
+
 public abstract class Activity<TActivityState>
     : IActivity
-    where TActivityState : IActivityState, new()
+    where TActivityState : class, IActivityState
 {
-    public Activity()
-    {
-        FeatureBuilder = new(this);
-    }
+    public TActivityState ActivityState { get; set; } = default!;
 
-    public ActivityFeatureBuilder<TActivityState> FeatureBuilder { get; set; }
     public ValidationResult ValidationResult { get; set; } = default!;
 
     public async Task RunAsync()
     {
-        var featureBuilder = FeatureBuilder;
-        await featureBuilder.Factory.RunAsync();
-        await featureBuilder.Calculator.RunAsync(featureBuilder.Factory.ActivityState);
-        ValidationResult = featureBuilder.Validator.Validate(featureBuilder.Calculator.ActivityState);
-
-
+        ActivityState = (TActivityState)Activator.CreateInstance(typeof(TActivityState))!;
+        
+        await Task.CompletedTask;
     }
 }
 
-public sealed class ActivityFeatureBuilder<TActivityState>
-    where TActivityState : IActivityState, new()
+public abstract class Activity<
+    TActivityState, 
+    TActivityStateFactory>
+    : Activity<TActivityState>
+    where TActivityState : class, IActivityState
+    where TActivityStateFactory : class, IActivityFeature<TActivityState>
 {
-    private readonly Activity<TActivityState> _activity;
-    private TActivityState _activityState = default!;
-
-    public ActivityFeatureBuilder(Activity<TActivityState> activity)
+    public new async Task RunAsync()
     {
-        _activity = activity;
+        ActivityState = (TActivityState)Activator.CreateInstance(typeof(TActivityState))!;
+        var factory = (TActivityStateFactory)Activator.CreateInstance(typeof(TActivityStateFactory), ActivityState)!;
+        await factory.RunAsync();
     }
+}
 
-    public ActivityStateFactory<TActivityState> Factory { get; private set; } = default!;
-    public ActivityStateCalculator<TActivityState> Calculator { get; private set; } = default!;
-    public ActivityStateValidator<TActivityState> Validator { get; private set; } = default!;
-
-    public TActivityState ActivityState => _activityState;
-
-    public void AutoAddFeatures()
+public abstract class Activity<
+    TActivityState, 
+    TActivityStateFactory,
+    TActivityStateCalculator>
+    : Activity<TActivityState, TActivityStateFactory>
+    where TActivityState : class, IActivityState
+    where TActivityStateFactory : class, IActivityStateFactory<TActivityState>
+    where TActivityStateCalculator : class, IActivityStateCalculator<TActivityState>
+{
+    public new async Task RunAsync()
     {
-        //TODO: DWS: Add all the feature by scanning this assembly.
-    }
+        var factory = (TActivityStateFactory)Activator.CreateInstance(typeof(TActivityStateFactory))!;
+        await factory.RunAsync();
 
-    public ActivityFeatureBuilder<TActivityState> AddFactory<TStateFactory>()
-        where TStateFactory : ActivityStateFactory<TActivityState>, new()
+        var calculator = (TActivityStateCalculator)Activator.CreateInstance(typeof(TActivityStateCalculator), factory.ActivityState)!;
+        ActivityState = calculator.ActivityState;
+    }
+}
+
+public abstract class Activity<
+    TActivityState, 
+    TActivityStateFactory,
+    TActivityStateCalculator,
+    TActivityStateValidator>
+    : Activity<TActivityState, TActivityStateFactory, TActivityStateCalculator>
+    where TActivityState : class, IActivityState
+    where TActivityStateFactory : class, IActivityStateFactory<TActivityState>
+    where TActivityStateCalculator : class, IActivityStateCalculator<TActivityState>
+    where TActivityStateValidator : class, IActivityStateValidator<TActivityState>
+{
+    public new async Task RunAsync()
     {
-        Factory = new TStateFactory();
-        return this;
-    }
+        var factory = (TActivityStateFactory)Activator.CreateInstance(typeof(TActivityStateFactory))!;
+        await factory.RunAsync();
 
-    public ActivityFeatureBuilder<TActivityState> AddCalculator<TStateCalculator>()
-        where TStateCalculator : ActivityStateCalculator<TActivityState>, new()
-    {
-        Calculator = new TStateCalculator();
-        return this;
-    }
+        var calculator = (TActivityStateCalculator)Activator.CreateInstance(typeof(TActivityStateCalculator), factory.ActivityState)!;
+        ActivityState = calculator.ActivityState;
 
-    public ActivityFeatureBuilder<TActivityState> AddValidator<TStateValidator>()
-        where TStateValidator : ActivityStateValidator<TActivityState>, new()
-    {
-        Validator = new TStateValidator();
-        return this;
-    }
+        var validator = (TActivityStateValidator)Activator.CreateInstance(typeof(TActivityStateValidator), calculator.ActivityState)!;
+        await validator.RunAsync();
 
+        ValidationResult = validator.ValidationResult;
+
+        await Task.CompletedTask;
+    }
 }

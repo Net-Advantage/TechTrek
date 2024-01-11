@@ -6,9 +6,8 @@ public interface IActivityFeature
 }
 
 public interface IActivityFeature<TActivityState>
-    where TActivityState : IActivityState
+    : IActivityFeature
+    where TActivityState : class, IActivityState
 {
     TActivityState ActivityState { get; }
-
-    Task RunAsync(TActivityState activityState);
 }

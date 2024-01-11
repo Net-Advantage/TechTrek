@@ -1,16 +1,16 @@
-﻿
+﻿using System.Diagnostics;
+
 namespace Nabs.ActivityFramework.Abstractions;
 
-public interface IActivityStateFactory : IActivityFeature
-{
-    
-}
+public interface IActivityStateFactory<TActivityState>
+    : IActivityFeature<TActivityState>
+    where TActivityState : class, IActivityState;
 
 public abstract class ActivityStateFactory<TActivityState>
-    : IActivityStateFactory
-    where TActivityState : IActivityState, new()
+    : IActivityStateFactory<TActivityState>
+    where TActivityState : class, IActivityState
 {
-    public TActivityState ActivityState { get; protected set; } = new();
+    public TActivityState ActivityState { get; protected set; } = default!;
 
     public abstract Task RunAsync();
 }

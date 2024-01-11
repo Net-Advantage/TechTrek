@@ -1,7 +1,7 @@
 ﻿namespace RetailSample.Activities.RegistrationScenario;
 
-public sealed class RegistrationStateFactory
-    : ActivityStateFactory<RegistrationActivityState>
+public sealed class RegistrationStateFactory()
+    : ActivityStateFactory<RegistrationActivityState>()
 {
     public override Task RunAsync()
     {
