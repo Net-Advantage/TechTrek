@@ -4,4 +4,8 @@
     <TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Nabs.ActivityFramework.Abstractions\Nabs.ActivityFramework.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
-  <DataCollectionRunSettings>
-    <DataCollectors>
-      <DataCollector friendlyName="XPlat code coverage">
-        <Configuration>
-          <Include>
-            <Include>[Nabs*]*</Include> <!-- Include all types in MyApp namespace -->
-          </Include>
-          <Exclude>
-            <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute> <!-- Exclude code marked as generated -->
-          </Exclude>
-          <Threshold>80</Threshold>
-          <ThresholdType>line</ThresholdType>
-          <ThresholdStat>total</ThresholdStat>
-          <ReportFormat>lcov</ReportFormat>
-          <ReportDirectory>./TestResults/CoverageReports</ReportDirectory>
-          <SingleHit>true</SingleHit>
-        </Configuration>
-      </DataCollector>
-    </DataCollectors>
-  </DataCollectionRunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="XPlat code coverage">
+				<Configuration>
+					<Include>
+						<Include>[Nabs*]*</Include>
+						<!-- Include all types in MyApp namespace -->
+						<Include>[RetailSample*]*</Include>
+						<!-- Include all types in RetailSample namespace -->
+					</Include>
+					<Exclude>
+						<ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
+						<!-- Exclude code marked as generated -->
+					</Exclude>
+					<Threshold>80</Threshold>
+					<ThresholdType>line</ThresholdType>
+					<ThresholdStat>total</ThresholdStat>
+					<ReportFormat>lcov</ReportFormat>
+					<ReportDirectory>./TestResults/CoverageReports</ReportDirectory>
+					<SingleHit>true</SingleHit>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
 </RunSettings>
