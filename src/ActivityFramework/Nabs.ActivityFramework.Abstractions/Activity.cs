@@ -71,6 +71,7 @@ public abstract class Activity<
         await factory.RunAsync();
 
         var calculator = (TActivityStateCalculator)Activator.CreateInstance(typeof(TActivityStateCalculator), factory.ActivityState)!;
+        await calculator.RunAsync();
         ActivityState = calculator.ActivityState;
 
         var validator = (TActivityStateValidator)Activator.CreateInstance(typeof(TActivityStateValidator), calculator.ActivityState)!;
