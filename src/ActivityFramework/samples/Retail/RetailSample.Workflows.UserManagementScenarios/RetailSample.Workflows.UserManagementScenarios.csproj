@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RetailSample.Activities.RegistrationScenario\RetailSample.Activities.RegistrationScenario.csproj" />
+	</ItemGroup>
+
+</Project>

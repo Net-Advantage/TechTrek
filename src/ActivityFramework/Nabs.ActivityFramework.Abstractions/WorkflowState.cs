@@ -1,11 +1,11 @@
 ﻿namespace Nabs.ActivityFramework.Abstractions;
 
-public interface IActivityState
+public interface IWorkflowState
 {
     Guid Id { get; set; }
 }
 
-public abstract record ActivityState : IActivityState
+public abstract class WorkflowState : IWorkflowState
 {
     public Guid Id { get; set; }
 }

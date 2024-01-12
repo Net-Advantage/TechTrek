@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\RetailSample.Activities.RegistrationScenario\RetailSample.Activities.RegistrationScenario.csproj" />
+	  <ProjectReference Include="..\RetailSample.Workflows.UserManagementScenarios\RetailSample.Workflows.UserManagementScenarios.csproj" />
 	</ItemGroup>
 
 </Project>

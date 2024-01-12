@@ -2,23 +2,17 @@ namespace RetailSample.ScenarioUnitTests;
 
 public class RegistrationScenarioTests
 {
-    [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    [InlineData(4)]
-    [InlineData(5)]
-    public async Task RunTest(int index)
+    [Fact]
+    public async Task RunTest()
     {
-        _ = index;
         // Arrange
         var activity = new RegistrationActivity();
-
 
         // Act
         await activity.RunAsync();
 
         // Assert
+        activity.ActivityState.Should().NotBeNull();
         activity.ValidationResult.IsValid.Should().BeTrue();
     }
 }

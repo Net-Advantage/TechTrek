@@ -81,6 +81,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSample.Activities.Reg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSample.ScenarioUnitTests", "ActivityFramework\samples\Retail\RetailSample.ScenarioUnitTests\RetailSample.ScenarioUnitTests.csproj", "{175A2807-DA57-4C1D-B735-760E5BD4F9EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailSample.Workflows.UserManagementScenarios", "ActivityFramework\samples\Retail\RetailSample.Workflows.UserManagementScenarios\RetailSample.Workflows.UserManagementScenarios.csproj", "{2752C353-0F0F-4A02-A62D-A7745E90E440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,10 @@ Global
 		{175A2807-DA57-4C1D-B735-760E5BD4F9EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{175A2807-DA57-4C1D-B735-760E5BD4F9EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{175A2807-DA57-4C1D-B735-760E5BD4F9EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2752C353-0F0F-4A02-A62D-A7745E90E440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2752C353-0F0F-4A02-A62D-A7745E90E440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2752C353-0F0F-4A02-A62D-A7745E90E440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2752C353-0F0F-4A02-A62D-A7745E90E440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +210,7 @@ Global
 		{9081DD99-B513-4A89-B048-5659729D0C96} = {F0F53A02-528E-4256-8F14-57680C49C9CC}
 		{C9212751-A8E0-4DC1-8E28-5F96158E42DD} = {9081DD99-B513-4A89-B048-5659729D0C96}
 		{175A2807-DA57-4C1D-B735-760E5BD4F9EF} = {9081DD99-B513-4A89-B048-5659729D0C96}
+		{2752C353-0F0F-4A02-A62D-A7745E90E440} = {9081DD99-B513-4A89-B048-5659729D0C96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08540D00-4595-4072-9C7F-4F3BAA45A0D0}

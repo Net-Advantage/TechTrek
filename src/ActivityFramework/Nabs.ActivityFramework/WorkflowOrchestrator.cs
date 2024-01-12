@@ -2,7 +2,7 @@
 
 namespace Nabs.ActivityFramework;
 
-public sealed class ActivityOrchestrator
+public abstract class WorkflowOrchestrator
 {
     public List<IActivity> Activities {get; } = [];
 
