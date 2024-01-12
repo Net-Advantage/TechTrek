@@ -9,8 +9,6 @@ public sealed class NewUserWorkflow : Workflow<NewUserWorkflowState>
         AddActivity(new RegistrationActivity(), ActivityPostProcessor);
     }
 
-    public List<IActivityState> ChangedActivityStates { get; } = [];
-
     private void ActivityPostProcessor(IActivity activity)
     {
         switch (activity)
