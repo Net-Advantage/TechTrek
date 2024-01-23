@@ -1,7 +1,7 @@
 using Nabs.TechTrek.WebApp.Components;
 using Nabs.TechTrek.Clients.WeatherClients;
 using Nabs.TechTrek.WebApp.Components.Layout;
-using Nabs.TechTrek.Identity.Abstractions;
+using Nabs.Core.Application.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 

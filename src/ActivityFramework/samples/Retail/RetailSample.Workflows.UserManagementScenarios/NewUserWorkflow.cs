@@ -4,31 +4,38 @@ namespace RetailSample.Workflows.UserManagementScenarios;
 
 public sealed class NewUserWorkflow : Workflow<NewUserWorkflowState>
 {
-    public NewUserWorkflow() : base(new NewUserWorkflowState())
-    {
-        AddActivity(new RegistrationActivity(), ActivityPostProcessor);
-    }
+	private readonly NewUserWorkflowParameters _workflowParameters;
+	private readonly NewUserWorkflowRepository _workflowRepository;
 
-    private void ActivityPostProcessor(IActivity activity)
-    {
-        switch (activity)
-        {
-            case RegistrationActivity typedActivity:
-                PostProcessRegistrationActivity(typedActivity);
-                break;
+	public NewUserWorkflow(
+		NewUserWorkflowParameters workflowParameters,
+		NewUserWorkflowRepository workflowRepository)
+	{
+		_workflowParameters = workflowParameters;
+		_workflowRepository = workflowRepository;
 
-            default:
-                throw new NotSupportedException($"Activity type {activity.GetType().Name} is not supported.");
-        }
-    }
+		AddActivity<RegistrationActivity>(RegistrationActivityPostProcessor);
+	}
 
-    private void PostProcessRegistrationActivity(RegistrationActivity registrationActivity)
-    {
-        if (registrationActivity.HasStateChanged)
-        {
-            ChangedActivityStates.Add(registrationActivity.ActivityState);
-        }
-    }
+	protected override async Task OnDataLoadAsync()
+	{
+		WorkflowState = await _workflowRepository.Load(_workflowParameters);
+	}
+
+	protected override async Task OnDataPersistAsync()
+	{
+		if (WorkflowState == null)
+		{
+			return;
+		}
+
+		await _workflowRepository.Persist(WorkflowState);
+	}
+
+	private void RegistrationActivityPostProcessor(RegistrationActivity activity)
+	{
+		
+	}
 }
 
 

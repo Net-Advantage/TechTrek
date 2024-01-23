@@ -1,6 +1,6 @@
 ﻿namespace Nabs.TechTrek.Persistence.Entities;
 
-public sealed class WeatherForecastCommentEntity : EntityBase<Guid>, ITenantEntity
+public sealed class WeatherForecastCommentEntity : EntityBase<Guid>, ITenantableEntity
 {
     public int WeatherForecastId { get; set; }
     public Guid UserId { get; set; }

@@ -1,0 +1,10 @@
+﻿global using Cocona;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using Nabs;
+global using Nabs.Scenarios;
+global using Nabs.Serialisation;
+global using Nabs.TechTrek.Persistence;
+global using Nabs.TechTrek.Persistence.Entities;
+global using Nabs.TechTrek.PersistenceCli;
+global using System.Text;

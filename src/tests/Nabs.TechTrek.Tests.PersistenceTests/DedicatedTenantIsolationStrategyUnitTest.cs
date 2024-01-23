@@ -1,10 +1,20 @@
 namespace Nabs.TechTrek.Tests.PersistenceTests;
 
 public class DedicatedTenantIsolationStrategyUnitTest(
-    ITestOutputHelper testOutputHelper, 
+    ITestOutputHelper testOutputHelper,
     DatabaseFixture fixture) 
     : DatabaseTestBase(testOutputHelper, fixture)
 {
+    protected override void BeforeTestRun()
+    {
+        ConfigureServices = (services, configuration) =>
+        {
+            services.AddPersistence(configuration);
+        };
+
+        base.BeforeTestRun();
+    }
+
     [Fact]
     public async Task RunTest()
     {

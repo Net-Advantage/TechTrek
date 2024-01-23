@@ -1,66 +1,79 @@
 <Project>
-	<PropertyGroup>
-		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-		<AspireVersion>8.0.0-preview.3.24059.2</AspireVersion>
-		<EfCoreVersion>8.0.1</EfCoreVersion>
-	</PropertyGroup>
-	<ItemGroup>
-		<!-- microsoft asp net dependencies -->
-		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
-		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
-		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
-		<!-- microsoft identity dependencies -->
-		<PackageVersion Include="Microsoft.Identity.Web" Version="2.16.1" />
-		<PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
-		<!-- microsoft extensions dependencies -->
-		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.1.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-		<!-- open telemetry dependencies -->
-		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.7.0" />
-		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0" />
-		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.0" />
-		<PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.3" />
-		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.0" />
-		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.7.0" />
-		<!-- efcore dependencies -->
-		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfCoreVersion)" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EfCoreVersion)" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Cosmos" Version="$(EfCoreVersion)" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EfCoreVersion)" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfCoreVersion)" />
-		<!-- aspire dependencies -->
-		<PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
-		<PackageVersion Include="Aspire.Hosting.Dapr" Version="$(AspireVersion)" />
-		<PackageVersion Include="Aspire.Hosting.Azure" Version="$(AspireVersion)" />
-		<PackageVersion Include="Aspire.Hosting.Azure.Provisioning" Version="$(AspireVersion)" />
-		<PackageVersion Include="Aspire.Azure.Security.KeyVault" Version="$(AspireVersion)" />
-		<PackageVersion Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="$(AspireVersion)" />
-		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="$(AspireVersion)" />
-		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Abstractions" Version="$(AspireVersion)" />
-		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="$(AspireVersion)" />
-		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Dns" Version="$(AspireVersion)" />
-		<!-- other dependencies -->
-		<PackageVersion Include="Dapr.AspNetCore" Version="1.12.0" />
-		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-		<PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
-		<PackageVersion Include="System.Reactive" Version="6.0.0" />
-		<PackageVersion Include="Cocona" Version="2.2.0" />
-		<PackageVersion Include="FluentValidation" Version="11.9.0" />
-		<!-- xUnit dependencies -->
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-		<PackageVersion Include="xunit" Version="2.6.5" />
-		<PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
-		<PackageVersion Include="coverlet.collector" Version="6.0.0" />
-		<PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
-		<PackageVersion Include="xunit.abstractions" Version="2.0.3" />
-		<PackageVersion Include="ReportGenerator" Version="5.2.0" />
-		<PackageVersion Include="FluentAssertions" Version="6.12.0" />
-	</ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AspireVersion>8.0.0-preview.3.24059.2</AspireVersion>
+    <EfCoreVersion>8.0.1</EfCoreVersion>
+    <NabsVersion>8.0.25</NabsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Nabs dependencies -->
+    <PackageVersion Include="Nabs" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.AzureConfiguration" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Identity.Web" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Persistence" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Reflection" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Resources" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Scenarios" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Serialisation" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Tests" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Tests.DatabaseTests" Version="$(NabsVersion)" />
+    <!-- microsoft asp net dependencies -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
+    <!-- microsoft identity dependencies -->
+    <PackageVersion Include="Microsoft.Identity.Web" Version="2.16.1" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <!-- microsoft extensions dependencies -->
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <!-- open telemetry dependencies -->
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.3" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.7.0" />
+    <!-- efcore dependencies -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EfCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Cosmos" Version="$(EfCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EfCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfCoreVersion)" />
+    <!-- aspire dependencies -->
+    <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Dapr" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Azure" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Azure.Provisioning" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Azure.Security.KeyVault" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Abstractions" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Dns" Version="$(AspireVersion)" />
+    <!-- other dependencies -->
+    <PackageVersion Include="Dapr.AspNetCore" Version="1.12.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+    <PackageVersion Include="System.Reactive" Version="6.0.0" />
+    <PackageVersion Include="Cocona" Version="2.2.0" />
+    <PackageVersion Include="FluentValidation" Version="11.9.0" />
+    <!-- xUnit dependencies -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageVersion Include="xunit" Version="2.6.6" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.0" />
+    <PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
+    <PackageVersion Include="xunit.extensibility.core" Version="2.6.2" />
+    <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
+    <PackageVersion Include="ReportGenerator" Version="5.2.0" />
+    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
+  </ItemGroup>
 </Project>

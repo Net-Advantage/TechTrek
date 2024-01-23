@@ -40,7 +40,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Core\Nabs.TechTrek.Core.Tests.Abstractions\Nabs.TechTrek.Core.Tests.Abstractions.csproj" />
 		<ProjectReference Include="..\..\Modules\Nabs.TechTrek.Modules.WeatherModule\Nabs.TechTrek.Modules.WeatherModule.csproj" />
 		<ProjectReference Include="..\..\Persistence\Nabs.TechTrek.Persistence\Nabs.TechTrek.Persistence.csproj" />
 	</ItemGroup>

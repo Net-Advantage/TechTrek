@@ -1,117 +1,162 @@
-﻿namespace RetailSample.ScenarioUnitTests;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Nabs.Tests;
+using Nabs.Tests.DatabaseTests;
+using Xunit.Abstractions;
 
-public sealed class NewUserWorkflowUnitTests
+namespace RetailSample.ScenarioUnitTests;
+
+public sealed class NewUserWorkflowTestFixture(
+	IMessageSink diagnosticMessageSink)
+		: DatabaseFixtureBase(diagnosticMessageSink)
 {
-    [Fact]
-    public async Task Run_ReturnsIsValidFalse()
-    {
-        // Arrange
-        var workflow = new NewUserWorkflow();
-        var activity = workflow.Activities.Keys.OfType<RegistrationActivity>()!.Single();
-        
-        // Assert Arranged
-        workflow.ChangedActivityStates.Should().BeEmpty();
-        workflow.Activities.Should().HaveCount(1);
-        workflow.WorkflowState.Should().NotBeNull();
-        workflow.ValidationResult.Should().BeNull();
+	protected override void ConfigureServices(IServiceCollection services)
+	{
+		services.AddUserUserManagementWorkflows();
+		services.AddRetailSamplePersistence(ConfigurationRoot);
+	}
+}
 
-        activity.ActivityState.Should().BeNull();
-        activity.ValidationResult.Should().BeNull();
-        activity.HasStateChanged.Should().BeFalse();
-        activity.InitialActivityState.Should().BeNull();
+public sealed class NewUserWorkflowUnitTests(
+	ITestOutputHelper testOutputHelper,
+	NewUserWorkflowTestFixture testFixture)
+	: DatabaseTestBase<NewUserWorkflowTestFixture>(testOutputHelper, testFixture)
+{
+	private NewUserWorkflow _workflow = default!;
 
-        // Act
-        await workflow.RunAsync();
+	protected override Task StartTest()
+	{
+		var workflowParameters = new NewUserWorkflowParameters
+		{
+			UserId = new Guid("f8df990e-48c4-426c-ae29-832b1dbc33d1")
+		};
 
-        // Assert
-        workflow.ChangedActivityStates.Should().HaveCount(1);
-        workflow.Activities.Should().HaveCount(1);
-        workflow.WorkflowState.Should().NotBeNull();
-        workflow.ValidationResult.IsValid.Should().BeFalse();
+		_workflow = TestFixture.ServiceScope.ServiceProvider.GetRequiredService<NewUserWorkflow>();
 
-        activity.ActivityState.Should().NotBeNull();
-        activity.HasStateChanged.Should().BeTrue();
-        activity.ValidationResult.IsValid.Should().BeFalse();
-    }
+		NewUserWorkflowRepository workflowRepository = default!;
+		_workflow = new NewUserWorkflow(workflowParameters, workflowRepository);
 
-    [Fact]
-    public async Task RunUpdate_ReturnsIsValidTrue()
-    {
-        // Arrange
-        var workflow = new NewUserWorkflow();
-        var activity = workflow.Activities.Keys.OfType<RegistrationActivity>()!.Single();
+		return Task.CompletedTask;
+	}
 
-        // Assert Arranged
-        workflow.ChangedActivityStates.Should().BeEmpty();
-        workflow.Activities.Should().HaveCount(1);
-        workflow.WorkflowState.Should().NotBeNull();
-        workflow.ValidationResult.Should().BeNull();
+	[Fact]
+	public async Task Run_ReturnsIsValidFalse()
+	{
+		// Arrange
+		var activity = _workflow.Activities.Keys.OfType<RegistrationActivity>()!.Single();
+		
+		// Assert Arranged
+		var changedActivityStates = _workflow.Activities.Where(a => a.Key.HasStateChanged);
+		changedActivityStates.Should().BeEmpty();
 
-        activity.ActivityState.Should().BeNull();
-        activity.ValidationResult.Should().BeNull();
-        activity.HasStateChanged.Should().BeFalse();
-        activity.InitialActivityState.Should().BeNull();
+		_workflow.Activities.Should().HaveCount(1);
+		_workflow.WorkflowState.Should().NotBeNull();
+		_workflow.ValidationResult.Should().BeNull();
 
-        // Act
-        await workflow.RunAsync();
+		activity.ActivityState.Should().BeNull();
+		activity.ValidationResult.Should().BeNull();
+		activity.HasStateChanged.Should().BeFalse();
+		activity.InitialActivityState.Should().BeNull();
 
-        activity.ActivityState = activity.ActivityState with
-        {
-            Username = "joe@joesengineering.com",
-            FirstName = "Joe",
-            LastName = "Soap"
-        };
+		// Act
+		await _workflow.RunAsync();
 
-        await activity.RunAsync();
+		// Assert
+		changedActivityStates = _workflow.Activities.Where(a => a.Key.HasStateChanged);
+		changedActivityStates.Should().HaveCount(1);
 
-        // Assert
-        workflow.ChangedActivityStates.Should().HaveCount(1);
-        workflow.Activities.Should().HaveCount(1);
-        workflow.WorkflowState.Should().NotBeNull();
-        workflow.ValidationResult.IsValid.Should().BeTrue();
+		_workflow.Activities.Should().HaveCount(1);
+		_workflow.WorkflowState.Should().NotBeNull();
+		_workflow.ValidationResult.IsValid.Should().BeFalse();
 
-        activity.ActivityState.Should().NotBeNull();
-        activity.HasStateChanged.Should().BeTrue();
-        activity.ValidationResult.IsValid.Should().BeTrue();
-    }
+		activity.ActivityState.Should().NotBeNull();
+		activity.HasStateChanged.Should().BeTrue();
+		activity.ValidationResult.IsValid.Should().BeFalse();
+	}
 
-    [Fact]
-    public async Task RunUpdateAfterStateChange_ReturnsIsValidTrue()
-    {
-        // Arrange
-        var workflow = new NewUserWorkflow();
-        var activity = workflow.Activities.Keys.OfType<RegistrationActivity>()!.Single();
+	[Fact]
+	public async Task RunUpdate_ReturnsIsValidTrue()
+	{
+		// Arrange
+		var activity = _workflow.Activities.Keys.OfType<RegistrationActivity>()!.Single();
 
-        // Assert Arranged
-        workflow.ChangedActivityStates.Should().BeEmpty();
-        workflow.Activities.Should().HaveCount(1);
-        workflow.WorkflowState.Should().NotBeNull();
-        workflow.ValidationResult.Should().BeNull();
+		// Assert Arranged
+		var changedActivityStates = _workflow.Activities.Where(a => a.Key.HasStateChanged);
+		changedActivityStates.Should().BeEmpty();
 
-        activity.ActivityState.Should().BeNull();
-        activity.ValidationResult.Should().BeNull();
-        activity.HasStateChanged.Should().BeFalse();
-        activity.InitialActivityState.Should().BeNull();
+		_workflow.Activities.Should().HaveCount(1);
+		_workflow.WorkflowState.Should().NotBeNull();
+		_workflow.ValidationResult.Should().BeNull();
 
-        // Act
-        var registrationActivityState = new RegistrationActivityState()
-        {
-            Id = new Guid("f8df990e-48c4-426c-ae29-832b1dbc33d1"),
-            Username = "joe@joesengineering.com",
-            FirstName = "Joe",
-            LastName = "Soap"
-        };
-        activity.InitialiseState(registrationActivityState);
-        await workflow.RunAsync();
+		activity.ActivityState.Should().BeNull();
+		activity.ValidationResult.Should().BeNull();
+		activity.HasStateChanged.Should().BeFalse();
+		activity.InitialActivityState.Should().BeNull();
 
-        // Assert
-        workflow.ChangedActivityStates.Should().HaveCount(1);
-        workflow.Activities.Should().HaveCount(1);
-        workflow.WorkflowState.Should().NotBeNull();
-        workflow.ValidationResult.IsValid.Should().BeTrue();
+		// Act
+		await _workflow.RunAsync();
 
-        activity.ActivityState.Should().NotBeNull();
-        activity.HasStateChanged.Should().BeTrue();
-        activity.ValidationResult.IsValid.Should().BeTrue();
-    }
+		activity.ActivityState = activity.ActivityState with
+		{
+			Username = "joe@joesengineering.com",
+			FirstName = "Joe",
+			LastName = "Soap"
+		};
+
+		await activity.RunAsync();
+
+		// Assert
+		changedActivityStates = _workflow.Activities.Where(a => a.Key.HasStateChanged);
+		changedActivityStates.Should().HaveCount(1);
+
+		_workflow.Activities.Should().HaveCount(1);
+		_workflow.WorkflowState.Should().NotBeNull();
+		_workflow.ValidationResult.IsValid.Should().BeTrue();
+
+		activity.ActivityState.Should().NotBeNull();
+		activity.HasStateChanged.Should().BeTrue();
+		activity.ValidationResult.IsValid.Should().BeTrue();
+	}
+
+	[Fact]
+	public async Task RunUpdateAfterStateChange_ReturnsIsValidTrue()
+	{
+		// Arrange
+		var activity = _workflow.Activities.Keys.OfType<RegistrationActivity>()!.Single();
+
+		// Assert Arranged
+		var changedActivityStates = _workflow.Activities.Where(a => a.Key.HasStateChanged);
+		changedActivityStates.Should().BeEmpty();
+
+		_workflow.Activities.Should().HaveCount(1);
+		_workflow.WorkflowState.Should().NotBeNull();
+		_workflow.ValidationResult.Should().BeNull();
+
+		activity.ActivityState.Should().BeNull();
+		activity.ValidationResult.Should().BeNull();
+		activity.HasStateChanged.Should().BeFalse();
+		activity.InitialActivityState.Should().BeNull();
+
+		// Act
+		var registrationActivityState = new RegistrationActivityState()
+		{
+			Id = new Guid("f8df990e-48c4-426c-ae29-832b1dbc33d1"),
+			Username = "joe@joesengineering.com",
+			FirstName = "Joe",
+			LastName = "Soap"
+		};
+		activity.InitialiseState(registrationActivityState);
+		await _workflow.RunAsync();
+
+		// Assert
+		changedActivityStates = _workflow.Activities.Where(a => a.Key.HasStateChanged);
+		changedActivityStates.Should().HaveCount(1);
+
+		_workflow.Activities.Should().HaveCount(1);
+		_workflow.WorkflowState.Should().NotBeNull();
+		_workflow.ValidationResult.IsValid.Should().BeTrue();
+
+		activity.ActivityState.Should().NotBeNull();
+		activity.HasStateChanged.Should().BeTrue();
+		activity.ValidationResult.IsValid.Should().BeTrue();
+	}
 }

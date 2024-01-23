@@ -9,7 +9,6 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
-		<PackageReference Include="Nabs.Identity.Web" />
 		<PackageReference Include="Nabs.Persistence" />
 		<PackageReference Include="Nabs.Scenarios" />
 	</ItemGroup>

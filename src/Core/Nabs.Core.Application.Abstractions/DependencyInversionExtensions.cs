@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
-namespace Nabs.TechTrek.Identity.Abstractions;
+namespace Nabs.Core.Application.Abstractions;
 
 public static class DependencyInversionExtensions
 {

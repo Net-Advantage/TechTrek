@@ -1,4 +1,4 @@
-﻿namespace Nabs.TechTrek.Core.ApplicationContext.Abstractions;
+﻿namespace RetailSample.Core.Abstractions;
 
 public sealed class ApplicationContext : IApplicationContext
 {

@@ -1,4 +1,4 @@
-﻿namespace Nabs.TechTrek.Identity.Abstractions;
+﻿namespace Nabs.Core.Application.Abstractions;
 
 public sealed class BearerTokenSettings
 {

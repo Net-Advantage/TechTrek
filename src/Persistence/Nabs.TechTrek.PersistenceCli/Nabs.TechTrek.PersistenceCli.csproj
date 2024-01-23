@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Cocona" />
+		<PackageReference Include="Nabs.Serialisation" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace Nabs.TechTrek.Core.ApplicationContext.Abstractions;
+﻿namespace Nabs.Core.Application.Abstractions;
 
 /// <summary>
 /// Described the tenant strategy of the application.

@@ -12,7 +12,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\Core\Nabs.TechTrek.Identity.Abstractions\Nabs.TechTrek.Identity.Abstractions.csproj" />
 		<ProjectReference Include="..\..\..\Core\Nabs.Ui.Shell\Nabs.Ui.Shell.csproj" />
 		<ProjectReference Include="..\..\..\Modules\Nabs.TechTrek.Clients.WeatherClients\Nabs.TechTrek.Clients.WeatherClients.csproj" />
 		<ProjectReference Include="..\..\..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
