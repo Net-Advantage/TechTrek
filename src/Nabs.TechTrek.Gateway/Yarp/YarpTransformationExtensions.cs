@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using Yarp.ReverseProxy.Transforms;
 using Yarp.ReverseProxy.Transforms.Builder;
 
@@ -30,41 +32,51 @@ public static class YarpTransformationExtensions
 		}
 	}
 
-	private static void HandleJwtBearerPolicy(TransformBuilderContext transformBuilderContext, BearerTokenSettings bearerTokenSettings)
-	{
-		//throw new NotImplementedException();
-	}
-
-	private static void HandleOpenIdConnectPolicy(
-				TransformBuilderContext transformBuilderContext,
-						BearerTokenSettings bearerTokenSettings)
+	private static void HandleJwtBearerPolicy(
+		TransformBuilderContext transformBuilderContext,
+		BearerTokenSettings bearerTokenSettings)
 	{
 		transformBuilderContext.AddRequestTransform(async transformContext =>
 		{
-			// AuthN and AuthZ will have already been completed after request routing.
-			var ticket = await transformContext.HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			var isAuthenticated = ticket.Principal?.Identity?.IsAuthenticated ?? false;
-
-			// Reject invalid requests
-			if (!isAuthenticated)
-			{
-				var response = transformContext.HttpContext.Response;
-				response.StatusCode = 401;
-				return;
-			}
-
-
-			string[] claimSubjects = ["emails", "name"];
-			var claimsToForward = ticket.Principal!.Claims
-				.Where(claim => claimSubjects.Contains(claim.Type))
-				.ToArray();
-
-			//TODO: DWS: Add more claims here.
-
-			var bearerToken = new BearerTokenFactory(bearerTokenSettings)
-				.GenerateTokenFromClaims(claimsToForward);
-
-			transformContext.ProxyRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+			string[] claimSubjects = [ClaimTypes.NameIdentifier];
+			await SetupAuthorisationHeader(transformContext, bearerTokenSettings, JwtBearerDefaults.AuthenticationScheme, claimSubjects);
 		});
+	}
+
+	private static void HandleOpenIdConnectPolicy(
+		TransformBuilderContext transformBuilderContext,
+		BearerTokenSettings bearerTokenSettings)
+	{
+		transformBuilderContext.AddRequestTransform(async transformContext =>
+		{
+			string[] claimSubjects = ["emails", "name"];
+			await SetupAuthorisationHeader(transformContext, bearerTokenSettings, CookieAuthenticationDefaults.AuthenticationScheme, claimSubjects);
+		});
+	}
+
+	private static async Task SetupAuthorisationHeader(
+		RequestTransformContext transformContext,
+		BearerTokenSettings bearerTokenSettings,
+		string authenticationScheme,
+		string[] claimSubjects)
+	{
+		var ticket = await transformContext.HttpContext.AuthenticateAsync(authenticationScheme);
+		var isAuthenticated = ticket.Principal?.Identity?.IsAuthenticated ?? false;
+
+		if (!isAuthenticated)
+		{
+			var response = transformContext.HttpContext.Response;
+			response.StatusCode = 401;
+			return;
+		}
+
+		var claimsToForward = ticket.Principal!.Claims
+			.Where(claim => claimSubjects.Contains(claim.Type))
+			.ToArray();
+
+		var bearerToken = new BearerTokenFactory(bearerTokenSettings)
+			.GenerateTokenFromClaims(claimsToForward);
+
+		transformContext.ProxyRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
 	}
 }

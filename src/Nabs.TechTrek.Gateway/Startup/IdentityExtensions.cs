@@ -60,7 +60,7 @@ public static class IdentityExtensions
 			})
 			.AddMicrosoftIdentityWebApp(azureAdSection);
 
-		builder.Services
+		_ = builder.Services
 			.AddAuthorization(options =>
 			{
 				options.AddPolicy("JwtBearerPolicy", policy =>
