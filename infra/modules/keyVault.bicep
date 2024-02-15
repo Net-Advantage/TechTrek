@@ -1,7 +1,7 @@
 param sharedConfig object
 
 resource keyVault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = {
-  name: sharedConfig.keyVaultName
+  name: 'kv-${sharedConfig.baseName}-${sharedConfig.location}-${sharedConfig.environment}'
   location: sharedConfig.location
   properties: {
     sku: {

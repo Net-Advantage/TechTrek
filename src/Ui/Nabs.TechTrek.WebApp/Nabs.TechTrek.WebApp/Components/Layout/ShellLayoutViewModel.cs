@@ -1,6 +1,4 @@
-﻿using Nabs.Ui.Shell;
-
-namespace Nabs.TechTrek.WebApp.Components.Layout;
+﻿namespace Nabs.TechTrek.WebApp.Components.Layout;
 
 public partial class ShellLayoutViewModel : ViewModelBase
 {

@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 		<InvariantGlobalization>true</InvariantGlobalization>
 	</PropertyGroup>
 
@@ -12,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" />
 		<ProjectReference Include="..\Modules\Nabs.TechTrek.Modules.WeatherModule\Nabs.TechTrek.Modules.WeatherModule.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
 	</ItemGroup>

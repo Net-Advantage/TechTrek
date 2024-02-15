@@ -44,6 +44,9 @@ csharp_style_prefer_local_over_anonymous_function = true:suggestion
 csharp_prefer_static_local_function = true:suggestion
 csharp_style_conditional_delegate_call = true:suggestion
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_prefer_index_operator = true:suggestion
+csharp_style_prefer_range_operator = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
 
 [*.{cs,vb}]
 #### Naming styles ####
@@ -101,7 +104,7 @@ dotnet_style_null_propagation = true:suggestion
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
 dotnet_style_prefer_auto_properties = true:silent
 dotnet_style_object_initializer = true:suggestion
-dotnet_style_prefer_collection_expression = true:suggestion
+dotnet_style_prefer_collection_expression = when_types_exactly_match:suggestion
 dotnet_style_collection_initializer = true:suggestion
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent

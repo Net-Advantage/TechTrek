@@ -1,7 +1,5 @@
 ﻿namespace Nabs.TechTrek;
 
-
-
 public static class Strings
 {
     public const string TechTrekStateStore = "statestore";

@@ -1,6 +1,3 @@
-using Aspire.Hosting.Dapr;
-using Nabs.TechTrek;
-
 var builder = DistributedApplication
 	.CreateBuilder(args);
 
@@ -16,9 +13,9 @@ var api = builder
 		AppProtocol = "http",
 		AppPort = 5289,
 		Config = "../Nabs.TechTrek.AppHost/DaprComponents/config.yaml"
-	});
-	//.WithReference(stateStore)
-	//.WithReference(pubSub);
+	})
+	.WithReference(stateStore)
+	.WithReference(pubSub);
 
 var ui = builder
 	.AddProject<Projects.Nabs_TechTrek_WebApp>(Strings.TechTrekWebApp)

@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
 		<ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>

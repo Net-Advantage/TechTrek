@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 		<IsAspireSharedProject>true</IsAspireSharedProject>
 	</PropertyGroup>
 

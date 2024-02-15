@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 		<IsAspireHost>true</IsAspireHost>
 	</PropertyGroup>
 
@@ -16,9 +15,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Nabs.TechTrek.Gateway\Nabs.TechTrek.Gateway.csproj" />
-		<ProjectReference Include="..\Nabs.TechTrek.WebApi\Nabs.TechTrek.WebApi.csproj" />
-		<ProjectReference Include="..\Ui\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj" ExcludeAssets="all" />
+		<ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" ReferenceOutputAssembly="true" />
+		<ProjectReference Include="..\Nabs.TechTrek.Gateway\Nabs.TechTrek.Gateway.csproj" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\Nabs.TechTrek.WebApi\Nabs.TechTrek.WebApi.csproj" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\Ui\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj" ExcludeAssets="all" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>

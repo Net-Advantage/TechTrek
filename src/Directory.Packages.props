@@ -1,12 +1,13 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <AspireVersion>8.0.0-preview.3.24059.2</AspireVersion>
+    <AspireVersion>8.0.0-preview.3.24105.21</AspireVersion>
     <EfCoreVersion>8.0.1</EfCoreVersion>
-    <NabsVersion>8.0.53</NabsVersion>
+    <NabsVersion>8.0.60</NabsVersion>
   </PropertyGroup>
   <ItemGroup>
     <!-- Nabs dependencies -->
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
     <PackageVersion Include="Nabs" Version="$(NabsVersion)" />
     <PackageVersion Include="Nabs.AzureConfiguration" Version="$(NabsVersion)" />
     <PackageVersion Include="Nabs.Identity.Web" Version="$(NabsVersion)" />

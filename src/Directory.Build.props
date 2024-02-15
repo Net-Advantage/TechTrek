@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<TargetFrameworkVersion>net8.0</TargetFrameworkVersion>
+		<TargetFramework>net8.0</TargetFramework>
 
 		<Copyright>Net Advantage Business Solutions</Copyright>
 
@@ -14,7 +14,6 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
-		<!--InvariantGlobalization>true</InvariantGlobalization-->
 	</PropertyGroup>
 
 

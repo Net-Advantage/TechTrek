@@ -1,29 +1,39 @@
-﻿@inherits ShellLayoutBase<ShellLayoutViewModel>
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inherits ShellLayoutBase<ShellLayoutViewModel>
 
 @if (ShellLayoutViewModel is null)
 {
-    <p>Loading ...</p>
-    return;
+	<p>Loading ...</p>
+	return;
 }
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+	<div class="sidebar">
+		<NavMenu />
+	</div>
 
-    <main>
-        <div class="top-row px-4">
-            @ShellLayoutViewModel.DisplayFullName
-        </div>
+	<main>
+		<div class="top-row px-4">
+			<CascadingAuthenticationState>
+				<AuthorizeView>
+					<Authorized>
+						<a href="authentication/logout" class="btn btn-primary">@ShellLayoutViewModel.DisplayFullName</a>
+					</Authorized>
+					<NotAuthorized>
+						<a href="authentication/login" class="btn btn-primary">@ShellLayoutViewModel.DisplayFullName</a>
+					</NotAuthorized>
+				</AuthorizeView>
+			</CascadingAuthenticationState>
+		</div>
 
-        <article class="content px-4">
-            <h1>@ShellLayoutViewModel.HeadingText</h1>
-            @Body
-        </article>
-    </main>
+		<article class="content px-4">
+			<h1>@ShellLayoutViewModel.HeadingText</h1>
+			@Body
+		</article>
+	</main>
 </div>
 
 <div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
+	An unhandled error has occurred.
+	<a href="" class="reload">Reload</a>
+	<a class="dismiss">🗙</a>
 </div>

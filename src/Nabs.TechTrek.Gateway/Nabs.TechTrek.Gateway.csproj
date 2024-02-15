@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>$(TargetFrameworkVersion)</TargetFramework>
 		<UserSecretsId>e226cf48-ae10-49a7-bbc3-01f7449ae737</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dapr.AspNetCore" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" />
 		<PackageReference Include="Microsoft.Identity.Web" />
@@ -16,6 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
 	</ItemGroup>
 
