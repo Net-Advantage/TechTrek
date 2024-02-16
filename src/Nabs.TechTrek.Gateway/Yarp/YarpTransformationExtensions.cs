@@ -16,8 +16,11 @@ public static class YarpTransformationExtensions
 			case "JwtBearerPolicy":
 				HandleJwtBearerPolicy(transformBuilderContext, bearerTokenSettings);
 				break;
-			default:
+			case "Default":
 				HandleOpenIdConnectPolicy(transformBuilderContext, bearerTokenSettings);
+				break;
+			default:
+				// Intentionally left blank
 				break;
 		}
 	}
@@ -29,7 +32,7 @@ public static class YarpTransformationExtensions
 		transformBuilderContext.AddRequestTransform(async transformContext =>
 		{
 			string[] claimSubjects = [ClaimTypes.NameIdentifier];
-			await SetupAuthorisationHeader(transformContext, bearerTokenSettings, JwtBearerDefaults.AuthenticationScheme, claimSubjects);
+			await CreateAuthorisationHeader(transformContext, bearerTokenSettings, JwtBearerDefaults.AuthenticationScheme, claimSubjects);
 		});
 	}
 
@@ -40,11 +43,11 @@ public static class YarpTransformationExtensions
 		transformBuilderContext.AddRequestTransform(async transformContext =>
 		{
 			string[] claimSubjects = ["emails", "name"];
-			await SetupAuthorisationHeader(transformContext, bearerTokenSettings, CookieAuthenticationDefaults.AuthenticationScheme, claimSubjects);
+			await CreateAuthorisationHeader(transformContext, bearerTokenSettings, OpenIdConnectDefaults.AuthenticationScheme, claimSubjects);
 		});
 	}
 
-	private static async Task SetupAuthorisationHeader(
+	private static async Task CreateAuthorisationHeader(
 		RequestTransformContext transformContext,
 		BearerTokenSettings bearerTokenSettings,
 		string authenticationScheme,

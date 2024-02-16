@@ -19,11 +19,11 @@
     <PackageVersion Include="Nabs.Tests" Version="$(NabsVersion)" />
     <PackageVersion Include="Nabs.Tests.DatabaseTests" Version="$(NabsVersion)" />
     <!-- microsoft asp net dependencies -->
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.2" />
     <!-- microsoft identity dependencies -->
-    <PackageVersion Include="Microsoft.Identity.Web" Version="2.16.1" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="2.17.0" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
     <!-- microsoft extensions dependencies -->
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.1.0" />
@@ -33,9 +33,9 @@
     <!-- open telemetry dependencies -->
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.7.0" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.3" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.7.0" />
     <!-- aspire dependencies -->
     <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
@@ -55,11 +55,11 @@
     <PackageVersion Include="System.Reactive" Version="6.0.0" />
     <PackageVersion Include="Cocona" Version="2.2.0" />
     <!-- xUnit dependencies -->
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageVersion Include="xunit" Version="2.6.6" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageVersion Include="xunit" Version="2.7.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
-    <PackageVersion Include="ReportGenerator" Version="5.2.0" />
+    <PackageVersion Include="ReportGenerator" Version="5.2.1" />
   </ItemGroup>
 </Project>
