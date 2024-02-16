@@ -1,10 +1,4 @@
-﻿using Google.Api;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Web;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+﻿
 
 namespace Nabs.TechTrek.Gateway.Startup;
 
@@ -16,7 +10,8 @@ public static class IdentityExtensions
 		var jwtBearerAuthenticationSection = builder.Configuration.GetSection("JwtBearerAuthentication");
 		
 
-		builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+		builder.Services
+			.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 			.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
 				var jwtBearerAuthenticationOptions = new JwtBearerAuthenticationOptions();

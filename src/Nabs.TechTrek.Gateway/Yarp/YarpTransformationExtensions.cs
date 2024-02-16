@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using Yarp.ReverseProxy.Transforms;
-using Yarp.ReverseProxy.Transforms.Builder;
-
-namespace Nabs.TechTrek.Gateway.Yarp;
+﻿namespace Nabs.TechTrek.Gateway.Yarp;
 
 public static class YarpTransformationExtensions
 {
@@ -24,10 +16,8 @@ public static class YarpTransformationExtensions
 			case "JwtBearerPolicy":
 				HandleJwtBearerPolicy(transformBuilderContext, bearerTokenSettings);
 				break;
-			case "Default":
-				HandleOpenIdConnectPolicy(transformBuilderContext, bearerTokenSettings);
-				break;
 			default:
+				HandleOpenIdConnectPolicy(transformBuilderContext, bearerTokenSettings);
 				break;
 		}
 	}

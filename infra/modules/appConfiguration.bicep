@@ -1,7 +1,7 @@
 param sharedConfig object
 
 resource appConfiguration 'Microsoft.AppConfiguration/configurationStores@2021-03-01-preview' = {
-  name: 'ac-techtrek-aueast-${sharedConfig.environment}'
+  name: sharedConfig.containerAppEnvironmentName
   location: sharedConfig.location
   sku: {
     name: 'Standard' // Update as needed

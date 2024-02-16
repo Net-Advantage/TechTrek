@@ -1,6 +1,4 @@
-﻿using Nabs.TechTrek.Gateway.Yarp;
-
-namespace Nabs.TechTrek.Gateway.Startup;
+﻿namespace Nabs.TechTrek.Gateway.Startup;
 
 public static class YarpStartupExtensions
 {

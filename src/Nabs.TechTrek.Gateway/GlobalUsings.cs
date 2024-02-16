@@ -1,0 +1,13 @@
+﻿global using Microsoft.AspNetCore.Authentication.Cookies;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+global using Microsoft.Identity.Web;
+global using Microsoft.IdentityModel.Tokens;
+global using Nabs.TechTrek.Gateway.Yarp;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using System.Text;
+global using Microsoft.AspNetCore.Authentication;
+global using System.Net.Http.Headers;
+global using Yarp.ReverseProxy.Transforms;
+global using Yarp.ReverseProxy.Transforms.Builder;
