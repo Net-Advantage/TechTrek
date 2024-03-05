@@ -1,3 +1,5 @@
+using Nabs.TechTrek.WebApp.Components;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder

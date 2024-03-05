@@ -6,7 +6,7 @@ public static class IdentityExtensions
 {
 	public static WebApplicationBuilder AddIdentity(this WebApplicationBuilder builder)
 	{
-		var azureAdSection = builder.Configuration.GetSection("AzureAd")!;
+		var azureAdSection = builder.Configuration.GetRequiredSection("AzureAd")!;
 		
 		builder.Services
 			.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
@@ -31,7 +31,7 @@ public static class IdentityExtensions
 
 	private static void SetupJwtBearerOptions(WebApplicationBuilder builder, JwtBearerOptions options)
 	{
-		var jwtBearerAuthenticationSection = builder.Configuration.GetSection("JwtBearerAuthentication")!;
+		var jwtBearerAuthenticationSection = builder.Configuration.GetRequiredSection("JwtBearerAuthentication")!;
 		var jwtBearerAuthenticationOptions = new JwtBearerAuthenticationOptions();
 		jwtBearerAuthenticationSection.Bind(jwtBearerAuthenticationOptions);
 
