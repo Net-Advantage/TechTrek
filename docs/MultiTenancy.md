@@ -12,6 +12,8 @@ Option | Application Isolation | Storage Isolation | Infrastructure | Descriptio
 
 Customers can choose which option they want to use. The option is chosen when the customer signs up for the service. The option can be changed at any time. However, the change will only take effect at the end of the current billing cycle. It also involves down-time as the application will need to be re-deployed and the data migrated. This is not a free service and will incur a cost.
 
+![Multi-Tenancy Diagram](images/Multi-Tenancy-Overview.png)
+
 Each option has some considerations for the customer:
 
 - __Option 1__. Only customers that do not have a requirement for data isolation should choose this option. This option is also ideal for customers who want to get started easily or trial the product.
