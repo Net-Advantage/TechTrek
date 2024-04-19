@@ -1,3 +1,7 @@
+using Aspire.Hosting;
+using Aspire.Hosting.Dapr;
+using Nabs.TechTrek;
+
 var builder = DistributedApplication
 	.CreateBuilder(args);
 

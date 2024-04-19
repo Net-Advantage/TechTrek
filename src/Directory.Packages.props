@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <AspireVersion>8.0.0-preview.4.24156.9</AspireVersion>
+    <AspireVersion>8.0.0-preview.5.24201.12</AspireVersion>
     <EfCoreVersion>8.0.1</EfCoreVersion>
     <NabsVersion>8.0.71</NabsVersion>
   </PropertyGroup>
@@ -9,35 +9,36 @@
     <!-- Nabs dependencies -->
     <PackageVersion Include="Nabs" Version="$(NabsVersion)" />
     <PackageVersion Include="Nabs.AzureConfiguration" Version="$(NabsVersion)" />
-    <PackageVersion Include="Nabs.Identity.Web" Version="$(NabsVersion)" />
-    <PackageVersion Include="Nabs.Persistence" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Identity.Web" Version="8.0.74" />
+    <PackageVersion Include="Nabs.Persistence" Version="8.0.74" />
     <PackageVersion Include="Nabs.Reflection" Version="$(NabsVersion)" />
     <PackageVersion Include="Nabs.Resources" Version="$(NabsVersion)" />
-    <PackageVersion Include="Nabs.Scenarios" Version="$(NabsVersion)" />
-    <PackageVersion Include="Nabs.Serialisation" Version="$(NabsVersion)" />
+    <PackageVersion Include="Nabs.Scenarios" Version="8.0.74" />
+    <PackageVersion Include="Nabs.Serialisation" Version="8.0.74" />
     <PackageVersion Include="Nabs.Tests" Version="$(NabsVersion)" />
     <PackageVersion Include="Nabs.Tests.DatabaseTests" Version="$(NabsVersion)" />
     <!-- microsoft asp net dependencies -->
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <!-- microsoft identity dependencies -->
-    <PackageVersion Include="Microsoft.Identity.Web" Version="2.17.2" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="2.17.5" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
     <!-- microsoft extensions dependencies -->
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.3.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.4.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <!-- open telemetry dependencies -->
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.7.0" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.1" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.3" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.7.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.0" />
     <!-- aspire dependencies -->
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Hosting.Dapr" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Hosting.Azure" Version="$(AspireVersion)" />
@@ -56,10 +57,10 @@
     <PackageVersion Include="Cocona" Version="2.2.0" />
     <!-- xUnit dependencies -->
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-    <PackageVersion Include="xunit" Version="2.7.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
+    <PackageVersion Include="xunit" Version="2.7.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.8" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
-    <PackageVersion Include="ReportGenerator" Version="5.2.3" />
+    <PackageVersion Include="ReportGenerator" Version="5.2.4" />
   </ItemGroup>
 </Project>
