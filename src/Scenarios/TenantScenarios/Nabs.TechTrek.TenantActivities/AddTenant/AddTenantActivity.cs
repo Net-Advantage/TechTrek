@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nabs.TechTrek.TenantPersistence
+namespace Nabs.TechTrek.TenantActivities.AddTenant
 {
-    internal class TechTrekTenantDbContext
+    internal class AddTenantActivity
     {
     }
 }

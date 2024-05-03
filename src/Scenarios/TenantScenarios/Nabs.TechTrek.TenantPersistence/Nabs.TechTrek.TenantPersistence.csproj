@@ -1,7 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+	<PropertyGroup>
 		<OutputType>Library</OutputType>
 	</PropertyGroup>
-	
+
+	<ItemGroup>
+		<PackageReference Include="Nabs.Persistence" />
+	</ItemGroup>
+
 </Project>

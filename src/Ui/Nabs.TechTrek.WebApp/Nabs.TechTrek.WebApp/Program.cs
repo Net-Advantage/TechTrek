@@ -1,5 +1,3 @@
-using Nabs.TechTrek.WebApp.Components;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder
@@ -7,8 +5,9 @@ builder
 
 builder
     .AddWeatherForecastClients();
+
 builder.Services
-.AddHttpContextAccessor();
+    .AddHttpContextAccessor();
 
 builder.Services.AddScoped<AuthenticationStateProvider, TechTrekAuthenticationStateProvider>();
 
