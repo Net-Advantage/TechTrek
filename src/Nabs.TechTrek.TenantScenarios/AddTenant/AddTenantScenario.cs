@@ -16,6 +16,11 @@ public sealed class AddTenantScenario
         await Task.CompletedTask;
         return result;
     }
+
+    protected override AddTenantResponse ProcessResult()
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public sealed record AddTenantRequest : IRequest<AddTenantResponse>, IProjection;
