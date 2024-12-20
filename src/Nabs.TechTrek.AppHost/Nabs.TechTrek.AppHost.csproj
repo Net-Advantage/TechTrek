@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<IsAspireHost>true</IsAspireHost>
@@ -14,15 +16,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" ReferenceOutputAssembly="true" />
+		<ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" ReferenceOutputAssembly="true" IsAspireProjectResource="false" />
 		<ProjectReference Include="..\Nabs.TechTrek.Gateway\Nabs.TechTrek.Gateway.csproj" ReferenceOutputAssembly="false" />
 		<ProjectReference Include="..\Nabs.TechTrek.WebApi\Nabs.TechTrek.WebApi.csproj" ReferenceOutputAssembly="false" />
 		<ProjectReference Include="..\Ui\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp\Nabs.TechTrek.WebApp.csproj" ExcludeAssets="all" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="DaprComponents\Aws\" />
-	  <Folder Include="DaprComponents\Azure\" />
+		<Folder Include="DaprComponents\Aws\" />
+		<Folder Include="DaprComponents\Azure\" />
 	</ItemGroup>
 
 </Project>
