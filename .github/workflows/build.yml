@@ -89,3 +89,7 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             publish_dir: ./${{ env.coverageReportPath }}
             destination_dir: coverage
+
+        - name: Publish coverage summary
+          run: cat ${{ coverageReportPath }}/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+          shell: bash
