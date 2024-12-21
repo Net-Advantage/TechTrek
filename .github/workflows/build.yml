@@ -1,7 +1,7 @@
 name: TechTrek Build
 
 env:
-    reportGeneratorPath: "./src/Nabs.TechTrek.sln"    
+    reportGeneratorPath: ./src/Nabs.TechTrek.sln
 
 on:
     push:
