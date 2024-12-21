@@ -3,6 +3,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 
 		<Copyright>Net Advantage Business Solutions</Copyright>
+		<ProductName>TechTrek</ProductName>
 
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -14,8 +15,10 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
 
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+	
 
 	<PropertyGroup>
 		<!--

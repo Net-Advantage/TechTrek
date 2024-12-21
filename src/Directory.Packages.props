@@ -6,6 +6,9 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- Nabs dependencies -->
+		<PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageVersion Include="Microsoft.AspNetCore.Authorization" Version="9.0.0" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
 		<PackageVersion Include="Nabs" Version="$(NabsVersion)" />
 		<PackageVersion Include="Nabs.ActivityFramework" Version="$(NabsVersion)" />
 		<PackageVersion Include="Nabs.AzureConfiguration" Version="$(NabsVersion)" />
@@ -66,5 +69,6 @@
 		<PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
 		<PackageVersion Include="ReportGenerator" Version="5.4.1" />
 		<PackageVersion Include="FluentAssertions" Version="7.0.0" />
+		<PackageVersion Include="Verify.Xunit" Version="28.6.1" />
 	</ItemGroup>
 </Project>

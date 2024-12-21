@@ -11,6 +11,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Core\Nabs.Application\Nabs.Application.csproj" />
+		<ProjectReference Include="..\Nabs.Authorization\Nabs.Authorization.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek\Nabs.TechTrek.csproj" />
 		<ProjectReference Include="..\Modules\Nabs.TechTrek.Modules.WeatherModule\Nabs.TechTrek.Modules.WeatherModule.csproj" />
 		<ProjectReference Include="..\Nabs.TechTrek.ServiceDefaults\Nabs.TechTrek.ServiceDefaults.csproj" />
