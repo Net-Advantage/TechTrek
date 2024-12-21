@@ -65,7 +65,7 @@ jobs:
           uses: dorny/test-reporter@v1
           with:
             name: Unit Tests
-            path: TestResults/test_results.trx
+            path: TestResults/testresults.trx
             reporter: dotnet-trx
           
         - name: Generate Code Coverage HTML Report
