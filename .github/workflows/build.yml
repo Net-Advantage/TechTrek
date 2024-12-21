@@ -1,12 +1,12 @@
 name: TechTrek Build
 
-env:
-    reportGeneratorPath: ./src/Nabs.TechTrek.sln
-
 on:
     push:
         branches: [ main ]
 
+
+env:
+    reportGeneratorPath: ./src/Nabs.TechTrek.sln
 
 jobs:
     build:
