@@ -219,6 +219,16 @@ for (i = 0, l = charts.length; i < l; i++) {
 
 var assemblies = [
   {
+    "name": "Nabs.Application",
+    "classes": [
+      { "name": "Nabs.Application.IApplicationContext", "rp": "Nabs.Application_IApplicationContext.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+    ]},
+  {
+    "name": "Nabs.Persistence",
+    "classes": [
+      { "name": "Nabs.Persistence.BaseDbContext", "rp": "Nabs.Persistence_BaseDbContext.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+    ]},
+  {
     "name": "Nabs.TechTrek",
     "classes": [
       { "name": "Nabs.TechTrek.Strings", "rp": "Nabs.TechTrek_Strings.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
