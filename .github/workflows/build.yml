@@ -59,7 +59,7 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: TestResults
-            path: TestResults/test_results.trx
+            path: TestResults/**/test_results.trx
 
         - name: Publish Test Annotations
           uses: dorny/test-reporter@v1
