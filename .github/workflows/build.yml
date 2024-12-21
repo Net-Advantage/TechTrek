@@ -35,15 +35,15 @@ jobs:
             ls -alh "${GITHUB_WORKSPACE}/src"
   
         - name: Setup .NET 9.0
-          uses: actions/setup-dotnet@v3
+          uses: actions/setup-dotnet@v4
           with:
             dotnet-version: '9.0.x'
 
-        - name: Install required Aspire workloads
-          run: |
-            dotnet workload update --source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" --skip-sign-check
-            dotnet workload install aspire --source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" --skip-sign-check 
-            # Add more as needed
+        # - name: Install required Aspire workloads
+        #   run: |
+        #     dotnet workload update --source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" --skip-sign-check
+        #     dotnet workload install aspire --source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" --skip-sign-check 
+        #     # Add more as needed
 
         - name: Restore dependencies using nuget.config
           run: dotnet restore src/Nabs.TechTrek.sln --configfile ./src/nuget.config
