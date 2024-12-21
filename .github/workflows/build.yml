@@ -43,17 +43,17 @@ jobs:
             dotnet-version: '9.0.x'
 
         - name: Restore dependencies using nuget.config
-          run: dotnet restore ${{ reportGeneratorPath }} --configfile ./src/nuget.config
+          run: dotnet restore ${{ env.reportGeneratorPath }} --configfile ./src/nuget.config
 
         - name: Build Solution
-          run: dotnet build ${{ reportGeneratorPath }} --configuration Release --no-restore
+          run: dotnet build ${{ env.reportGeneratorPath }} --configuration Release --no-restore
 
         - name: Reset the Test Scenario Databases
           shell: pwsh
           run: ./src/Persistence/Nabs.TechTrek.PersistenceCli/ResetDatabases.ps1
           
         - name: Run Solution Tests with code coverage
-          run: dotnet test ${{ reportGeneratorPath }} --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" --logger "trx;LogFileName=testresults.trx" --settings src/coverlet.runsettings
+          run: dotnet test ${{ env.reportGeneratorPath }} --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" --logger "trx;LogFileName=testresults.trx" --settings src/coverlet.runsettings
 
         - name: Install ReportGenerator
           run: dotnet tool install --global dotnet-reportgenerator-globaltool
