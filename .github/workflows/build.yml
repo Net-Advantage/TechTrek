@@ -72,8 +72,6 @@ jobs:
           run: reportgenerator -reports:**/TestResults/*/coverage.cobertura.xml -targetdir:coverage-report -reporttypes:Html
 
         - name: Generate Code Coverage Markdown GitHub Report
-          env:
-            PATH: ${{ env.PATH }}:$HOME/.dotnet/tools
           run: reportgenerator -reports:**/TestResults/*/coverage.cobertura.xml -targetdir:coverage-report -reporttypes:MarkdownSummaryGithub
 
         - name: Publish Coverage Report
