@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+	<Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" /> <!-- I tried to use CPM fro the version, but it does not work. -->
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
