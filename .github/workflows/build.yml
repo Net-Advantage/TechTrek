@@ -72,20 +72,20 @@ jobs:
             reporter: dotnet-trx
           
         - name: Generate Code Coverage HTML Report
-          run: reportgenerator -reports:**/TestResults/*/coverage.cobertura.xml -targetdir:${{ coverageReportPath }} -reporttypes:Html
+          run: reportgenerator -reports:**/TestResults/*/coverage.cobertura.xml -targetdir:${{ env.coverageReportPath }} -reporttypes:Html
 
         - name: Generate Code Coverage Markdown GitHub Report
-          run: reportgenerator -reports:**/TestResults/*/coverage.cobertura.xml -targetdir:${{ coverageReportPath }} -reporttypes:MarkdownSummaryGithub
+          run: reportgenerator -reports:**/TestResults/*/coverage.cobertura.xml -targetdir:${{ env.coverageReportPath }} -reporttypes:MarkdownSummaryGithub
 
         - name: Publish Coverage Report
           uses: actions/upload-artifact@v3
           with:
             name: code-coverage-report
-            path: ./${{ coverageReportPath }}/SummaryGithub.md
+            path: ./${{ env.coverageReportPath }}/SummaryGithub.md
 
         - name: Deploy to GitHub Pages
           uses: peaceiris/actions-gh-pages@v3
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./${{ coverageReportPath }}
+            publish_dir: ./${{ env.coverageReportPath }}
             destination_dir: coverage
