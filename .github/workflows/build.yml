@@ -74,7 +74,7 @@ jobs:
             path: TestResults/test_results.trx
 
         - name: Publish Test Annotations
-          uses: dorny/test-reporter@v2
+          uses: dorny/test-reporter@v1
           with:
             name: Unit Tests
             path: TestResults/test_results.trx
