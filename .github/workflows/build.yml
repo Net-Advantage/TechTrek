@@ -56,13 +56,7 @@ jobs:
           run: ./src/Persistence/Nabs.TechTrek.PersistenceCli/ResetDatabases.ps1
           
         - name: Run Solution Tests with code coverage
-          run: dotnet test src/Nabs.TechTrek.sln \
-            --configuration Release \
-            --no-restore \
-            --no-build \
-            --logger "trx;LogFileName=TestResults/testresults.trx" \
-            --logger "console;verbosity=detailed" \
-            --settings src/coverlet.runsettings
+          run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --logger "trx;LogFileName=TestResults/testresults.trx" --logger "console;verbosity=detailed" --settings src/coverlet.runsettings
 
         - name: Install ReportGenerator
           run: dotnet tool install --global dotnet-reportgenerator-globaltool
