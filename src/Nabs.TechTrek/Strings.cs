@@ -11,4 +11,11 @@ public static class Strings
     public const string TechTrekWebApi = "webapi";
     public const string TechTrekWebApp = "webapp";
     public const string TechTrekGateway = "gateway";
+
+    public static string ReverseString(this string input)
+    {
+        char[] charArray = input.ToCharArray();
+        Array.Reverse(charArray);
+        return new string(charArray);
+    }
 }

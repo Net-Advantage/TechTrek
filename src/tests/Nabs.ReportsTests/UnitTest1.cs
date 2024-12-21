@@ -1,3 +1,6 @@
+using FluentAssertions;
+using Nabs.TechTrek;
+
 namespace Nabs.ReportsTests
 {
     public class UnitTest1
@@ -5,7 +8,14 @@ namespace Nabs.ReportsTests
         [Fact]
         public void Test1()
         {
-            Assert.True(true);
+            Strings.TechTrekPubSub.Should().BeEquivalentTo("pubsub");
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            var reversed = Strings.TechTrekPubSub.ReverseString();
+            reversed.Should().BeEquivalentTo("busbup");
         }
     }
 }

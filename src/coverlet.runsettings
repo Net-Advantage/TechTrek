@@ -7,8 +7,6 @@
 					<Include>
 						<Include>[Nabs*]*</Include>
 						<!-- Include all types in MyApp namespace -->
-						<Include>[RetailSample*]*</Include>
-						<!-- Include all types in RetailSample namespace -->
 					</Include>
 					<Exclude>
 						<ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>

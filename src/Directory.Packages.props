@@ -65,5 +65,6 @@
 		<PackageVersion Include="coverlet.collector" Version="6.0.2" />
 		<PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
 		<PackageVersion Include="ReportGenerator" Version="5.4.1" />
+		<PackageVersion Include="FluentAssertions" Version="7.0.0" />
 	</ItemGroup>
 </Project>
