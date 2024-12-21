@@ -91,5 +91,5 @@ jobs:
             destination_dir: coverage
 
         - name: Publish coverage summary
-          run: cat ${{ coverageReportPath }}/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+          run: cat ${{ env.coverageReportPath }}/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
           shell: bash
