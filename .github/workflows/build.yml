@@ -50,7 +50,7 @@ jobs:
           run: ./src/Persistence/Nabs.TechTrek.PersistenceCli/ResetDatabases.ps1
           
         - name: Run Solution Tests with code coverage
-          run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" --logger "trx;LogFileName=TestResults/testresults.trx" --settings src/coverlet.runsettings
+          run: dotnet test src/Nabs.TechTrek.sln --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" --logger "trx;LogFileName=testresults.trx" --settings src/coverlet.runsettings
 
         - name: Install ReportGenerator
           run: dotnet tool install --global dotnet-reportgenerator-globaltool
@@ -59,13 +59,13 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: TestResults
-            path: TestResults/testresults.trx
+            path: testresults.trx
 
         - name: Publish Test Annotations
           uses: dorny/test-reporter@v1
           with:
             name: Unit Tests
-            path: ./**/TestResults/testresults.trx
+            path: ./**/testresults.trx
             reporter: dotnet-trx
           
         - name: Generate Code Coverage HTML Report
