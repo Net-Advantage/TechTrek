@@ -11,7 +11,6 @@ builder.Services.AddScoped<IApplicationContext>(sp =>
 	return ApplicationContextFactory.Invoke(sp);
 });
 
-builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddSingleton<DataLoader<TechTrekDbContext>>(sp =>
 {

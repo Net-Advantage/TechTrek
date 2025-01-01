@@ -1,6 +1,6 @@
 ﻿using TechTrek.Tenant.Persistence.Entities;
 
-namespace TechTrek.Tenant.Persistence.Tests;
+namespace TechTrek.Tenant.Activities.Tests;
 
 public class EntitiesUnitTests
 {

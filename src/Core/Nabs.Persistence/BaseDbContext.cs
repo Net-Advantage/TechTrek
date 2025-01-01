@@ -2,8 +2,8 @@
 
 public abstract class BaseDbContext(
     DbContextOptions options,
-    IApplicationContext applicationContext) 
+    IRequestContext requestContext) 
     : DbContext(options)
 {
-    public IApplicationContext ApplicationContext { get; } = applicationContext;
+    public IRequestContext RequestContext { get; } = requestContext;
 }

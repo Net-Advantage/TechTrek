@@ -1,16 +1,33 @@
-﻿namespace TechTrek.Tenant.Activities.Tests;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Nabs.Tests;
+using TechTrek.Tenant.Persistence;
 
-public class AddTenantActivityUnitTests
+namespace TechTrek.Tenant.Activities.Tests;
+
+
+public sealed class AddTenantActivityUnitTests : BaseTest<PersistenceTestFixture>
 {
+    private readonly TenantActivityFactory _tenantActivityFactory;
+    private readonly PersistenceTestFixture _testFixture;
+
+    public AddTenantActivityUnitTests(PersistenceTestFixture testFixture)
+    {
+        _testFixture = testFixture;
+
+        var dbContextFactory = _testFixture.ServiceProvider.GetRequiredService<IDbContextFactory<TenantDbContext>>();
+        _tenantActivityFactory = new TenantActivityFactory(dbContextFactory);
+    }
+
     [Fact]
     public void AddTenantActivityTest()
     {
         // Arrange
-        var addTenantActivity = new AddTenantActivity();
+
 
         // Act
 
         // Assert
-        addTenantActivity.Should().NotBeNull();
+        _tenantActivityFactory.Should().NotBeNull();
     }
 }

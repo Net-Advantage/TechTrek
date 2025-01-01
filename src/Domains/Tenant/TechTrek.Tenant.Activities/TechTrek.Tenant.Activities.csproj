@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TechTrek.Tenant.Dtos\TechTrek.Tenant.Dtos.csproj" />
+    <ProjectReference Include="..\TechTrek.Tenant.Persistence\TechTrek.Tenant.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

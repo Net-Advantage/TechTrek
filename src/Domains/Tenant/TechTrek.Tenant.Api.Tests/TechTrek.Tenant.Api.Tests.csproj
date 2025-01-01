@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="../../../Directory.Build.Tests.props" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Core\Nabs.Tests\Nabs.Tests.csproj" />
+		<ProjectReference Include="..\TechTrek.Tenant.Api\TechTrek.Tenant.Api.csproj" />
+	</ItemGroup>
+
+</Project>

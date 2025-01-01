@@ -1,6 +1,9 @@
-﻿namespace Nabs.Tests;
+﻿using Xunit;
 
-public class BaseTest
+namespace Nabs.Tests;
+
+public abstract class BaseTest<TTestFixture> : IClassFixture<TTestFixture>
+    where TTestFixture : BaseTestFixture
 {
 
 }

@@ -4,6 +4,7 @@ builder.AddServiceDefaults();
 
 builder.Services.AddNabsAuthorization();
 builder.Services.AddTransient<IApplicationContext, ApplicationContext>();
+builder.Services.AddTransient<IRequestContext, RequestContext>();
 
 builder.Services.AddDaprClient();
 

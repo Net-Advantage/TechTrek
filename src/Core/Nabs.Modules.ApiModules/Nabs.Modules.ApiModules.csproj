@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<ProjectReference Include="..\Nabs.Modules\Nabs.Modules.csproj" />
+	</ItemGroup>
+
+</Project>

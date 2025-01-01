@@ -7,9 +7,9 @@ public class ApplicationContextMiddleware(RequestDelegate next)
 {
     private readonly RequestDelegate _next = next;
 
-    public async Task InvokeAsync(HttpContext context, IApplicationContext applicationContext)
+    public async Task InvokeAsync(HttpContext context, IRequestContext requestContext)
     {
-        applicationContext.SetPrincipal(context.User);
+        requestContext.SetPrincipal(context.User);
         await _next(context);
     }
 }

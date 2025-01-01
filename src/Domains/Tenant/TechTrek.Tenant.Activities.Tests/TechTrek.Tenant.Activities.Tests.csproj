@@ -3,6 +3,19 @@
 	<Import Project="../../../Directory.Build.Tests.props" />
 
 	<ItemGroup>
+	  <Content Include="appsettings.Development.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\Core\Nabs.Tests\Nabs.Tests.csproj" />
 		<ProjectReference Include="..\TechTrek.Tenant.Activities\TechTrek.Tenant.Activities.csproj" />
 	</ItemGroup>
