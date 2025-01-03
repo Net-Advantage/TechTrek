@@ -1,34 +1,41 @@
-﻿namespace TechTrek.Tenant.Api;
+﻿using TechTrek.Tenant.Activities.Add;
+
+namespace TechTrek.Tenant.Api;
 
 public sealed class TenantGrain(
-        [PersistentState(stateName: "tenant", storageName: "tenants")]
-        IPersistentState<Dtos.Tenant> state,
-        TenantActivityFactory tenantActivityFactory)
+    [PersistentState(stateName: "tenant", storageName: "tenants")]
+    IPersistentState<TenantEntity> state)
     : Grain, ITenantGrain
 {
-    private readonly TenantActivityFactory _tenantActivityFactory = tenantActivityFactory;
-
-    public Task<Dtos.Tenant> Update(Dtos.Tenant tenant)
+    public async Task<Nabs.Application.Response<Dtos.Tenant>> Get()
     {
-        state.State = tenant;
-
-        return Task.FromResult(state.State);
+        var getTenantActivity = new GetTenantActivity(state.State);
+        await getTenantActivity.ExecuteAsync();
+        return getTenantActivity.State.Response!;
     }
 
-    public Task<Dtos.Tenant> Get()
+    public async Task<Nabs.Application.Response<Dtos.Tenant>> Add(Dtos.AddTenant addTenant)
     {
-        return Task.FromResult(state.State);
+        var updateTenantActivity = new AddTenantActivity(addTenant);
+        await updateTenantActivity.ExecuteAsync();
+        return updateTenantActivity.State.Response!;
+    }
+
+    public async Task<Nabs.Application.Response<Dtos.Tenant>> Update(Dtos.Tenant tenant)
+    {
+        var updateTenantActivity = new UpdateTenantActivity(tenant);
+        await updateTenantActivity.ExecuteAsync();
+        return updateTenantActivity.State.Response!;
     }
 
     public override async Task OnActivateAsync(CancellationToken cancellationToken)
     {
         if (state.State is null)
         {
-            var getActivity = _tenantActivityFactory.GetActivity();
-            var primaryKey = this.GetPrimaryKey();
-            var tenant = await getActivity.ExecuteAsync(primaryKey, cancellationToken);
-            state.State = tenant;
-        }
+            var entityQueryActivity = new EntityQueryActivity(this.GetPrimaryKey());
+            await entityQueryActivity.ExecuteAsync();
 
+            state.State = entityQueryActivity.State.Entity!;
+        }
     }
 }

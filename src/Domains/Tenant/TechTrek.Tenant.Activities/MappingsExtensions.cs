@@ -1,6 +1,4 @@
-﻿using TechTrek.Tenant.Persistence.Entities;
-
-namespace TechTrek.Tenant.Activities;
+﻿namespace TechTrek.Tenant.Activities;
 
 public static class MappingsExtensions
 {
@@ -10,6 +8,15 @@ public static class MappingsExtensions
         {
             Id = entity.Id,
             Name = entity.Name
+        };
+    }
+
+    public static TenantEntity ToEntity(this AddTenant dto)
+    {
+        return new TenantEntity
+        {
+            Id = Guid.NewGuid(),
+            Name = dto.Name
         };
     }
 

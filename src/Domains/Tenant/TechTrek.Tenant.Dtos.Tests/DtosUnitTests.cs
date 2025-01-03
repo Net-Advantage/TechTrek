@@ -6,7 +6,7 @@
         public void Test1()
         {
             // Arrange
-            var dto = new Tenant();
+            var dto = new AddTenant();
 
             // Act
 

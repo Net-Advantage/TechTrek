@@ -1,4 +1,6 @@
-﻿namespace TechTrek.Tenant.Persistence.Entities;
+﻿using Nabs.Application;
+
+namespace TechTrek.Tenant.Persistence.Entities;
 
 public sealed partial class TenantEntity : ObservableObject
 {
@@ -7,6 +9,9 @@ public sealed partial class TenantEntity : ObservableObject
 
     [ObservableProperty]
     private string _name = default!;
+
+    [ObservableProperty]
+    private TenantIsolationStrategy _isolationStrategy;
 }
 
 internal sealed class TenantEntityConfiguration : IEntityTypeConfiguration<TenantEntity>
@@ -23,6 +28,5 @@ internal sealed class TenantEntityConfiguration : IEntityTypeConfiguration<Tenan
             .Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(256);
-
     }
 }
