@@ -5,12 +5,15 @@
 			<DataCollector friendlyName="XPlat code coverage">
 				<Configuration>
 					<Include>
-						<Include>[Nabs*]*</Include>
 						<!-- Include all types in MyApp namespace -->
+						<Include>[Nabs*]*</Include>
+						<Include>[TechTrek*]*</Include>
 					</Include>
 					<Exclude>
 						<ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
 						<!-- Exclude code marked as generated -->
+						<ExcludeByExtension>./**/*.g.cs</ExcludeByExtension>
+						<ExcludeByFile>Orleans.CodeGenerator/**/*.g.cs</ExcludeByFile>
 					</Exclude>
 					<Threshold>80</Threshold>
 					<ThresholdType>line</ThresholdType>

@@ -6,22 +6,17 @@ public sealed class UpdateTenantActivity
 {
     public UpdateTenantActivity(Dtos.Tenant tenant)
     {
-        State.Request = new Request<Dtos.Tenant>(tenant);
+        State.In = tenant;
 
-        AddValidator<UpdateTenantValidation>(s => s.Request!);
-        AddStep(MapEntity);
+        AddValidator<UpdateTenantValidation>(s => s.In);
+        AddMapper<UpdateTenantMapper>();
         AddValidator<UpdateTenantEntityValidation>(s => s.Entity!);
-        AddStep(Finalise);
-    }
-
-    private void MapEntity()
-    {
-        State.Entity = State.Request!.RequestDto.ToEntity();
+        AddAction(Finalise);
     }
 
     public void Finalise()
     {
         var dto = State.Entity!.ToDto();
-        State.Response = new Response<Dtos.Tenant>(dto);
+        State.Out = dto;
     }
 }

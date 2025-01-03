@@ -5,15 +5,15 @@ public sealed class AddTenantActivity
 {
     public AddTenantActivity(AddTenant addTenant)
     {
-        State.Request = new Request<AddTenant>(addTenant);
+        State.In = addTenant;
 
-        AddValidator<AddTenantValidation>(s => s.Request!.RequestDto);
-        AddStep(Finalise);
+        AddValidator<AddTenantValidation>(s => s.In!);
+        AddMapper<AddTenantMapper>();
+        AddAction(Finalise);
     }
 
     public void Finalise()
     {
-        State.Entity = State.Request!.RequestDto.ToEntity();
-        State.Response = new Response<Dtos.Tenant>(State.Entity!.ToDto());
+        State.Out = State.Entity!.ToDto();
     }
 }

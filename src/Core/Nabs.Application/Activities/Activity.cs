@@ -1,21 +1,25 @@
-﻿using FluentValidation;
+﻿using Ardalis.Result;
+using Ardalis.Result.FluentValidation;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Nabs.Application.Activities;
 
 public abstract class Activity<TActivityState>
     where TActivityState : class, IActivityState, new()
 {
-    private readonly List<int> _steps = new();
+    private readonly List<int> _steps = [];
     private readonly Dictionary<int, (IValidator validator, Func<TActivityState, object> objectToValidate)> _validatorSteps = [];
+    private readonly Dictionary<int, IMapper<TActivityState>> _mapperSteps = [];
     private readonly Dictionary<int, IUnitOfWork<TActivityState>> _unitOfWorkSteps = [];
     private readonly Dictionary<int, Func<Task>> _functionSteps = [];
     private readonly Dictionary<int, Action> _actionSteps = [];
 
-    public TActivityState State { get; set; } = new();
+    protected TActivityState State { get; } = new();
 
-    public Task ExecuteAsync()
+    public async Task<Result<TActivityState>> ExecuteAsync()
     {
         foreach (var step in _steps)
         {
@@ -31,18 +35,24 @@ public abstract class Activity<TActivityState>
                 var validationResult = validator.Validate(validationContext);
                 if (!validationResult.IsValid)
                 {
-
+                    var result = Result<TActivityState>.Invalid(validationResult.AsErrors());
+                    return result;
                 }
+            }
+            else if (_mapperSteps.ContainsKey(step))
+            {
+                var mapper = _mapperSteps[step];
+                mapper.Map(State);
             }
             else if (_unitOfWorkSteps.ContainsKey(step))
             {
                 var unitOfWork = _unitOfWorkSteps[step];
-                unitOfWork.Run(State);
+                await unitOfWork.RunAsync(State);
             }
             else if (_functionSteps.ContainsKey(step))
             {
                 var function = _functionSteps[step];
-                function();
+                await function();
             }
             else if (_actionSteps.ContainsKey(step))
             {
@@ -51,7 +61,7 @@ public abstract class Activity<TActivityState>
             }
         }
 
-        return Task.CompletedTask;
+        return State;
     }
 
     protected void AddValidator<T>(Func<TActivityState, object> action)
@@ -61,6 +71,15 @@ public abstract class Activity<TActivityState>
         _steps.Add(step);
         var instance = Activator.CreateInstance<T>();
         _validatorSteps.Add(step, (instance, action));
+    }
+
+    protected void AddMapper<T>()
+        where T : class, IMapper<TActivityState>, new()
+    {
+        var step = _steps.Count + 1;
+        _steps.Add(step);
+        var instance = Activator.CreateInstance<T>();
+        _mapperSteps.Add(step, instance);
     }
 
     protected void AddUnitOfWork<T>()
@@ -74,6 +93,7 @@ public abstract class Activity<TActivityState>
                                         .Contains("IDbContextFactory", StringComparison.OrdinalIgnoreCase));
 
         var dbContextFactoryType = dbContextFactoryParameter.ParameterType;
+        // We are going to use the service discovery to get the instance of the DbContextFactory
         var dbContextFactory = IoC.ServiceProvider.GetRequiredService(dbContextFactoryType);
 
         var step = _steps.Count + 1;
@@ -81,14 +101,14 @@ public abstract class Activity<TActivityState>
         _unitOfWorkSteps.Add(step, (T)Activator.CreateInstance(typeof(T), dbContextFactory)!);
     }
 
-    protected void AddStep(Func<Task> function)
+    protected void AddFunction(Func<Task> function)
     {
         var step = _steps.Count + 1;
         _steps.Add(step);
         _functionSteps.Add(step, function);
     }
 
-    protected void AddStep(Action action)
+    protected void AddAction(Action action)
     {
         var step = _steps.Count + 1;
         _steps.Add(step);

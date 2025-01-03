@@ -1,18 +1,7 @@
-﻿using TechTrek.Tenant.Activities.Add;
+﻿namespace TechTrek.Tenant.Activities.Tests;
 
-namespace TechTrek.Tenant.Activities.Tests;
-
-public sealed class AddTenantActivityUnitTests : BaseTest<PersistenceTestFixture>
+public sealed class AddTenantActivityUnitTests
 {
-    private readonly PersistenceTestFixture _testFixture;
-
-    public AddTenantActivityUnitTests(PersistenceTestFixture testFixture)
-    {
-        _testFixture = testFixture;
-
-        var dbContextFactory = _testFixture.ServiceProvider.GetRequiredService<IDbContextFactory<TenantDbContext>>();
-    }
-
     [Fact]
     public async Task AddTenantActivityTest()
     {
@@ -24,10 +13,10 @@ public sealed class AddTenantActivityUnitTests : BaseTest<PersistenceTestFixture
         var addTenantActivity = new AddTenantActivity(requestDto);
 
         // Act
-        await addTenantActivity.ExecuteAsync();
+        var result = await addTenantActivity.ExecuteAsync();
 
         // Assert
-        addTenantActivity.State.Response.Should().NotBeNull();
-        addTenantActivity.State.Response!.ResponseDto.Name.Should().Be("Test Tenant");
+        result.Value.Out.Should().NotBeNull();
+        result.Value.Out!.Name.Should().Be("Test Tenant");
     }
 }

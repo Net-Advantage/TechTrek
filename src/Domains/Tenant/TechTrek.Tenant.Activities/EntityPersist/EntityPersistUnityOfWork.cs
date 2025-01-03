@@ -6,7 +6,7 @@ public sealed class EntityPersistUnityOfWork(
 {
     private readonly IDbContextFactory<TenantDbContext> _dbContextFactory = dbContextFactory;
 
-    public async Task Run(EntityPersistState activityState)
+    public async Task RunAsync(EntityPersistState activityState)
     {
         if (activityState.Entity is null)
         {

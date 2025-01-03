@@ -1,14 +1,10 @@
-﻿using FluentValidation.Results;
-
-namespace TechTrek.Tenant.Activities.Add;
+﻿namespace TechTrek.Tenant.Activities.Add;
 
 public sealed class AddTenantState 
-    : IActivityState<AddTenant, Dtos.Tenant>
+    : IActivityState
 {
-    public Request<AddTenant>? Request { get; set; }
-    public Response<Dtos.Tenant>? Response { get; set; }
-
-    public List<ValidationResult> ValidationResults { get; } = [];
+    public AddTenant? In { get; set; }
+    public Dtos.Tenant? Out { get; set; }
 
     internal TenantEntity? Entity { get; set; }
 }

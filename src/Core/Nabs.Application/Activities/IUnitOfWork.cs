@@ -8,6 +8,6 @@ public interface IUnitOfWork
 public interface IUnitOfWork<TActivityState>
     where TActivityState : class, IActivityState, new()
 {
-    Task Run(TActivityState activityState);
+    Task RunAsync(TActivityState activityState);
 }
 

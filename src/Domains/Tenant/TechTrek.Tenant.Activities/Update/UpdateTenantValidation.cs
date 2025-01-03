@@ -1,6 +1,6 @@
 ﻿namespace TechTrek.Tenant.Activities.Update;
 
-public sealed class UpdateTenantValidation : AbstractValidator<Dtos.AddTenant>
+internal sealed class UpdateTenantValidation : AbstractValidator<Dtos.AddTenant>
 {
     public UpdateTenantValidation()
     {

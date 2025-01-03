@@ -1,4 +1,4 @@
-﻿using TechTrek.Tenant.Activities.Add;
+﻿using Ardalis.Result;
 
 namespace TechTrek.Tenant.Api;
 
@@ -7,25 +7,25 @@ public sealed class TenantGrain(
     IPersistentState<TenantEntity> state)
     : Grain, ITenantGrain
 {
-    public async Task<Nabs.Application.Response<Dtos.Tenant>> Get()
+    public async Task<Result<Dtos.Tenant>> Get()
     {
         var getTenantActivity = new GetTenantActivity(state.State);
-        await getTenantActivity.ExecuteAsync();
-        return getTenantActivity.State.Response!;
+        var result = await getTenantActivity.ExecuteAsync();
+        return result.Value.Out!;
     }
 
-    public async Task<Nabs.Application.Response<Dtos.Tenant>> Add(Dtos.AddTenant addTenant)
+    public async Task<Result<Dtos.Tenant>> Add(Dtos.AddTenant addTenant)
     {
         var updateTenantActivity = new AddTenantActivity(addTenant);
-        await updateTenantActivity.ExecuteAsync();
-        return updateTenantActivity.State.Response!;
+        var result = await updateTenantActivity.ExecuteAsync();
+        return result.Value.Out!;
     }
 
-    public async Task<Nabs.Application.Response<Dtos.Tenant>> Update(Dtos.Tenant tenant)
+    public async Task<Result<Dtos.Tenant>> Update(Dtos.Tenant tenant)
     {
         var updateTenantActivity = new UpdateTenantActivity(tenant);
-        await updateTenantActivity.ExecuteAsync();
-        return updateTenantActivity.State.Response!;
+        var result = await updateTenantActivity.ExecuteAsync();
+        return result.Value.Out!;
     }
 
     public override async Task OnActivateAsync(CancellationToken cancellationToken)
@@ -33,9 +33,9 @@ public sealed class TenantGrain(
         if (state.State is null)
         {
             var entityQueryActivity = new EntityQueryActivity(this.GetPrimaryKey());
-            await entityQueryActivity.ExecuteAsync();
+            var result = await entityQueryActivity.ExecuteAsync();
 
-            state.State = entityQueryActivity.State.Entity!;
+            state.State = result.Value.Entity!;
         }
     }
 }

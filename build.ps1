@@ -22,7 +22,7 @@ if (Test-Path $coverageReportPath) {
 
 dotnet restore $solutionName --configfile ./src/nuget.config
 dotnet build $solutionName --configuration Release --no-restore
-dotnet test $solutionName --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" --logger "trx;LogFileName=TestResults/testresults.trx" --settings src/coverlet.runsettings
+dotnet test $solutionName --configuration Release --no-restore --no-build --logger "console;verbosity=detailed" --logger "trx;LogFileName=TestResults/testresults.trx" --collect:"XPlat Code Coverage" --settings src/coverlet.runsettings
 
 dotnet tool install --global dotnet-reportgenerator-globaltool
 

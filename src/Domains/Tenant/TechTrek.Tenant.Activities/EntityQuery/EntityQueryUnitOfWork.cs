@@ -6,7 +6,7 @@ public class EntityQueryUnitOfWork(
 {
     private readonly IDbContextFactory<TenantDbContext> _dbContextFactory = dbContextFactory;
 
-    public async Task Run(EntityQueryState activityState)
+    public async Task RunAsync(EntityQueryState activityState)
     {
         await using var dbContext = _dbContextFactory.CreateDbContext();
 
